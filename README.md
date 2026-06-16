@@ -31,7 +31,9 @@ pip install colorama
 
 # Ejecuta el juego
 python cyberdex.py
-🎮 Controles
+```
+
+## 🎮 Controles
 1 - Aceptar misión
 
 2 - Entrenar habilidades
@@ -43,12 +45,13 @@ python cyberdex.py
 5 - Salir
 
 🗺️ Servidores y contraseñas
-Servidor	Dificultad	Pista	Contraseña
-MegaCorp Alpha	★☆☆☆☆	La mascota del CEO es un gato llamado	michifu
-DarkNet Vault	★★☆☆☆	El número de la bestia sin el 6 final	666
-CyberDyne Systems	★★★☆☆	Año de Blade Runner	2019
-NeoTokyo Grid	★★★★☆	Código postal de Shibuya	1500042
-A.I. Core	★★★★★	Fibonacci posición 13	233
+| Servidor | Dificultad | Pista | Contraseña |
+| :--- | :---: | :--- | :--- |
+| MegaCorp Alpha | ★☆☆☆☆ | La mascota del CEO es un gato llamado | michifu |
+| DarkNet Vault | ★★☆☆☆ | El número de la bestia sin el 6 final | 666 |
+| CyberDyne Systems | ★★★☆☆ | Año de Blade Runner | 2019 |
+| NeoTokyo Grid | ★★★★☆ | Código postal de Shibuya | 1500042 |
+| A.I. Core | ★★★★★ | Fibonacci posición 13 | 233 |   
 🤝 ¿Cómo colaborar?
 Haz un Fork del proyecto
 
