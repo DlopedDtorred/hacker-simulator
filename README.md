@@ -53,7 +53,7 @@ python cyberdex.py
 | NeoTokyo Grid | ★★★★☆ | Código postal de Shibuya | 1500042 |
 | A.I. Core | ★★★★★ | Fibonacci posición 13 | 233 |   
 
-🤝 ¿Cómo colaborar?
+## 🤝 ¿Cómo colaborar?
 Haz un Fork del proyecto
 
 Crea tu rama (git checkout -b feature/NuevaCaracteristica)
@@ -64,11 +64,7 @@ Push a la rama (git push origin feature/NuevaCaracteristica)
 
 Abre un Pull Request
 
-📄 Licencia
+## 📄 Licencia
 MIT License - Ver LICENSE para más detalles.
 
-⭐ ¡No olvides darle una estrella al repo si te gusta!
-
-text
-
----
+## ⭐ ¡No olvides darle una estrella al repo si te gusta
