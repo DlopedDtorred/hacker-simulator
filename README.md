@@ -44,7 +44,7 @@ python cyberdex.py
 
 5 - Salir
 
-🗺️ Servidores y contraseñas
+# 🗺️ Servidores y contraseñas
 | Servidor | Dificultad | Pista | Contraseña |
 | :--- | :---: | :--- | :--- |
 | MegaCorp Alpha | ★☆☆☆☆ | La mascota del CEO es un gato llamado | michifu |
