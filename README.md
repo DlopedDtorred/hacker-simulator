@@ -52,6 +52,7 @@ python cyberdex.py
 | CyberDyne Systems | ★★★☆☆ | Año de Blade Runner | 2019 |
 | NeoTokyo Grid | ★★★★☆ | Código postal de Shibuya | 1500042 |
 | A.I. Core | ★★★★★ | Fibonacci posición 13 | 233 |   
+
 🤝 ¿Cómo colaborar?
 Haz un Fork del proyecto
 
