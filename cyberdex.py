@@ -224,8 +224,8 @@ def header():
 {Fore.GREEN}║  {Fore.CYAN}██╔══██║██╔══██║██║     ██╔═██╗ ██╔══╝  ██╔══██╗{Fore.GREEN}║
 {Fore.GREEN}║  {Fore.CYAN}██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██║  ██║{Fore.GREEN}║
 {Fore.GREEN}║  {Fore.CYAN}╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝{Fore.GREEN}║
-{Fore.GREEN}║     {Fore.YELLOW}HACKER SIMULATOR 2077 v{VERSION}{Fore.GREEN}     ║
-{Fore.GREEN}║     {Fore.WHITE}by DlopedDtorred{Fore.GREEN}                         ║
+{Fore.GREEN}║     {Fore.YELLOW}HACKER SIMULATOR 2077 v{VERSION}{Fore.GREEN}           ║
+{Fore.GREEN}║     {Fore.WHITE}by DlopedDtorred{Fore.GREEN}                            ║
 {Fore.GREEN}╚═══════════════════════════════════════════╝{Style.RESET_ALL}
 """)
 
