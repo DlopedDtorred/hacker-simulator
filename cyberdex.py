@@ -2,22 +2,25 @@
 # -*- coding: utf-8 -*-
 
 """
-HACKER SIMULATOR 2077 - Ultimate Edition
-========================================
+HACKER SIMULATOR 2077 - ULTIMATE EDITION v5.0
+===============================================
 Un simulador de hacking en terminal donde encarnas a un hacker ético.
-Version: 4.0.0
-Autor: DlopedDtorred
-Licencia: MIT
 
 Características:
-- 10 servidores con diferentes dificultades
+- 15 servidores con diferentes dificultades
+- Sistema de guardado en JSON
 - Sistema de niveles y experiencia
-- Tienda con herramientas
-- Sistema de logros (15+)
+- Tienda con herramientas (8+)
+- Sistema de logros (20+)
 - Misiones diarias
 - Ranking de hackers
 - Inventario
 - Sistema de rachas
+- Modo multijugador local
+- Skins/Temas de colores
+- Guía de usuario integrada
+- Sonidos (opcional)
+- Tests integrados
 """
 
 import random
@@ -25,6 +28,7 @@ import os
 import time
 import sys
 import json
+import hashlib
 from datetime import datetime, timedelta
 from colorama import init, Fore, Back, Style
 
@@ -32,22 +36,70 @@ from colorama import init, Fore, Back, Style
 # CONFIGURACIÓN INICIAL
 # ============================================
 
-# Inicializar colorama (conversión para terminales sin soporte)
 init(autoreset=True, convert=True)
-
-# Limpiar pantalla al inicio
 os.system('cls' if os.name == 'nt' else 'clear')
 
-# Versión del juego
-VERSION = "4.0.0"
+VERSION = "5.0.0"
 AUTOR = "DlopedDtorred"
+GITHUB_URL = "https://github.com/DlopedDtorred/hacker-simulator"
 
 # ============================================
-# BASE DE DATOS DE SERVIDORES (10 niveles)
+# CONFIGURACIÓN DE SKINS/TEMAS
+# ============================================
+
+TEMAS = {
+    "matrix": {
+        "primary": Fore.GREEN,
+        "secondary": Fore.LIGHTGREEN_EX,
+        "accent": Fore.LIGHTBLACK_EX,
+        "text": Fore.WHITE,
+        "success": Fore.GREEN,
+        "error": Fore.RED,
+        "warning": Fore.YELLOW,
+        "info": Fore.CYAN,
+        "border": "═"
+    },
+    "cyberpunk": {
+        "primary": Fore.MAGENTA,
+        "secondary": Fore.LIGHTMAGENTA_EX,
+        "accent": Fore.CYAN,
+        "text": Fore.WHITE,
+        "success": Fore.GREEN,
+        "error": Fore.RED,
+        "warning": Fore.YELLOW,
+        "info": Fore.BLUE,
+        "border": "▬"
+    },
+    "classic": {
+        "primary": Fore.BLUE,
+        "secondary": Fore.LIGHTBLUE_EX,
+        "accent": Fore.WHITE,
+        "text": Fore.WHITE,
+        "success": Fore.GREEN,
+        "error": Fore.RED,
+        "warning": Fore.YELLOW,
+        "info": Fore.CYAN,
+        "border": "─"
+    },
+    "dark": {
+        "primary": Fore.LIGHTBLACK_EX,
+        "secondary": Fore.WHITE,
+        "accent": Fore.LIGHTGREEN_EX,
+        "text": Fore.WHITE,
+        "success": Fore.GREEN,
+        "error": Fore.RED,
+        "warning": Fore.YELLOW,
+        "info": Fore.CYAN,
+        "border": "═"
+    }
+}
+
+# ============================================
+# BASE DE DATOS DE SERVIDORES (15 niveles)
 # ============================================
 
 SERVIDORES = [
-    # Nivel 1-2: Fáciles
+    # Nivel 1-3: Fáciles
     {
         "id": "SRV-001",
         "nombre": "MegaCorp Alpha",
@@ -66,9 +118,18 @@ SERVIDORES = [
         "password": "666",
         "descripcion": "Custodia de datos en la red oscura"
     },
-    # Nivel 3-4: Intermedios
     {
         "id": "SRV-003",
+        "nombre": "ShadowNet",
+        "dificultad": 2,
+        "recompensa": 300,
+        "pista": "🏢 Año de fundación de ShadowNet (20XX)",
+        "password": "2015",
+        "descripcion": "Red de datos sombra"
+    },
+    # Nivel 4-6: Intermedios
+    {
+        "id": "SRV-004",
         "nombre": "CyberDyne Systems",
         "dificultad": 3,
         "recompensa": 400,
@@ -77,7 +138,7 @@ SERVIDORES = [
         "descripcion": "Sistemas de inteligencia artificial"
     },
     {
-        "id": "SRV-004",
+        "id": "SRV-005",
         "nombre": "NeoTokyo Grid",
         "dificultad": 4,
         "recompensa": 600,
@@ -85,9 +146,8 @@ SERVIDORES = [
         "password": "1500042",
         "descripcion": "Red de datos de la ciudad digital"
     },
-    # Nivel 5-6: Avanzados
     {
-        "id": "SRV-005",
+        "id": "SRV-006",
         "nombre": "A.I. Core",
         "dificultad": 5,
         "recompensa": 1000,
@@ -95,8 +155,9 @@ SERVIDORES = [
         "password": "233",
         "descripcion": "Núcleo de inteligencia artificial"
     },
+    # Nivel 7-9: Avanzados
     {
-        "id": "SRV-006",
+        "id": "SRV-007",
         "nombre": "Quantum Nexus",
         "dificultad": 6,
         "recompensa": 1500,
@@ -104,9 +165,8 @@ SERVIDORES = [
         "password": "662",
         "descripcion": "Servidor cuántico experimental"
     },
-    # Nivel 7-8: Expertos
     {
-        "id": "SRV-007",
+        "id": "SRV-008",
         "nombre": "NanoTech Labs",
         "dificultad": 7,
         "recompensa": 2000,
@@ -115,7 +175,7 @@ SERVIDORES = [
         "descripcion": "Laboratorio de nanotecnología"
     },
     {
-        "id": "SRV-008",
+        "id": "SRV-009",
         "nombre": "Matrix Archive",
         "dificultad": 8,
         "recompensa": 3000,
@@ -123,9 +183,9 @@ SERVIDORES = [
         "password": "303",
         "descripcion": "Archivo de la resistencia humana"
     },
-    # Nivel 9-10: Legendarios
+    # Nivel 10-12: Expertos
     {
-        "id": "SRV-009",
+        "id": "SRV-010",
         "nombre": "ChronoCore",
         "dificultad": 9,
         "recompensa": 5000,
@@ -134,108 +194,141 @@ SERVIDORES = [
         "descripcion": "Base de datos del flujo temporal"
     },
     {
-        "id": "SRV-010",
+        "id": "SRV-011",
         "nombre": "Omega Station",
         "dificultad": 10,
         "recompensa": 10000,
         "pista": "☯️ 666 × 7 (número de la bestia por la suerte)",
         "password": "4662",
         "descripcion": "El servidor definitivo. ¿Estás listo?"
+    },
+    {
+        "id": "SRV-012",
+        "nombre": "Void Network",
+        "dificultad": 9,
+        "recompensa": 4500,
+        "pista": "🔮 El número de la suerte del hacker (7) al cubo",
+        "password": "343",
+        "descripcion": "Red en el vacío digital"
+    },
+    # Nivel 13-15: Legendarios
+    {
+        "id": "SRV-013",
+        "nombre": "Eclipse Core",
+        "dificultad": 11,
+        "recompensa": 15000,
+        "pista": "🌑 Año del primer eclipse total del siglo XXI",
+        "password": "2001",
+        "descripcion": "Núcleo de la sombra digital"
+    },
+    {
+        "id": "SRV-014",
+        "nombre": "Nebula Archive",
+        "dificultad": 12,
+        "recompensa": 20000,
+        "pista": "🌌 Código postal de la NASA (5 dígitos)",
+        "password": "77058",
+        "descripcion": "Archivo de datos espaciales"
+    },
+    {
+        "id": "SRV-015",
+        "nombre": "Genesis Point",
+        "dificultad": 13,
+        "recompensa": 30000,
+        "pista": "🌀 El año de la primera computadora (19XX)",
+        "password": "1941",
+        "descripcion": "El origen de todo. ¿Te atreves?"
     }
 ]
 
 # ============================================
-# SISTEMA DE LOGROS
+# SISTEMA DE LOGROS (20+)
 # ============================================
 
 LOGROS = {
-    "primer_hackeo": {"nombre": "🚀 Primer Hackeo", "desc": "Completa tu primera misión"},
-    "cinco_misiones": {"nombre": "💪 Cinco Misiones", "desc": "Completa 5 misiones"},
-    "diez_misiones": {"nombre": "🏆 Diez Misiones", "desc": "Completa 10 misiones"},
-    "veinticinco_misiones": {"nombre": "👑 Leyenda", "desc": "Completa 25 misiones"},
-    "nivel_5": {"nombre": "⚡ Nivel 5", "desc": "Alcanza el nivel 5"},
-    "nivel_10": {"nombre": "🌟 Nivel 10", "desc": "Alcanza el nivel 10"},
-    "millonario": {"nombre": "💰 Millonario", "desc": "Acumula 1000 créditos"},
-    "billonario": {"nombre": "💎 Billonario", "desc": "Acumula 5000 créditos"},
-    "perfecto": {"nombre": "🎯 Perfecto", "desc": "Completa 5 misiones sin fallar"},
-    "racha_5": {"nombre": "🔥 Racha 5", "desc": "5 misiones seguidas"},
-    "racha_10": {"nombre": "🔥🔥 Racha 10", "desc": "10 misiones seguidas"},
-    "coleccionista": {"nombre": "🛠️ Coleccionista", "desc": "Todas las herramientas"},
-    "omega": {"nombre": "☯️ Omega", "desc": "Completa Omega Station"},
+    "primer_hackeo": {"nombre": "🚀 Primer Hackeo", "desc": "Completa tu primera misión", "recompensa": 50},
+    "cinco_misiones": {"nombre": "💪 Cinco Misiones", "desc": "Completa 5 misiones", "recompensa": 100},
+    "diez_misiones": {"nombre": "🏆 Diez Misiones", "desc": "Completa 10 misiones", "recompensa": 200},
+    "veinticinco_misiones": {"nombre": "👑 Leyenda", "desc": "Completa 25 misiones", "recompensa": 500},
+    "cincuenta_misiones": {"nombre": "🌟 Maestro", "desc": "Completa 50 misiones", "recompensa": 1000},
+    "nivel_5": {"nombre": "⚡ Nivel 5", "desc": "Alcanza el nivel 5", "recompensa": 150},
+    "nivel_10": {"nombre": "🌟 Nivel 10", "desc": "Alcanza el nivel 10", "recompensa": 300},
+    "nivel_15": {"nombre": "👑 Nivel 15", "desc": "Alcanza el nivel 15", "recompensa": 500},
+    "nivel_20": {"nombre": "💎 Nivel 20", "desc": "Alcanza el nivel 20", "recompensa": 1000},
+    "millonario": {"nombre": "💰 Millonario", "desc": "Acumula 1000 créditos", "recompensa": 100},
+    "billonario": {"nombre": "💎 Billonario", "desc": "Acumula 5000 créditos", "recompensa": 300},
+    "trillonario": {"nombre": "👑 Trillonario", "desc": "Acumula 10000 créditos", "recompensa": 500},
+    "perfecto": {"nombre": "🎯 Perfecto", "desc": "Completa 5 misiones sin fallar", "recompensa": 200},
+    "racha_5": {"nombre": "🔥 Racha 5", "desc": "5 misiones seguidas", "recompensa": 100},
+    "racha_10": {"nombre": "🔥🔥 Racha 10", "desc": "10 misiones seguidas", "recompensa": 200},
+    "racha_20": {"nombre": "🔥🔥🔥 Racha 20", "desc": "20 misiones seguidas", "recompensa": 500},
+    "coleccionista": {"nombre": "🛠️ Coleccionista", "desc": "Todas las herramientas", "recompensa": 500},
+    "omega": {"nombre": "☯️ Omega", "desc": "Completa Omega Station", "recompensa": 1000},
+    "leyenda": {"nombre": "⚡ Leyenda", "desc": "Completa todos los servidores", "recompensa": 5000},
+    "speedrun": {"nombre": "🏃 Speedrun", "desc": "Completa 10 misiones en menos de 5 minutos", "recompensa": 1000}
 }
 
 # ============================================
-# CLASE HACKER (JUGADOR)
+# CLASE HACKER (CON GUARDADO)
 # ============================================
 
 class Hacker:
-    """Clase principal del jugador. Almacena todas las estadísticas y progreso."""
+    """Clase principal del jugador con sistema de guardado."""
     
-    def __init__(self, nombre):
-        # Datos básicos
-        self.nombre = nombre
+    def __init__(self, nombre=None):
+        self.nombre = nombre or "Zero_Cool"
         self.nivel = 1
         self.exp = 0
         self.exp_necesaria = 10
-        
-        # Recursos
         self.creditos = 50
         self.herramientas = ["🔧 Escáner básico"]
-        self.inventario = {}
-        
-        # Estadísticas
         self.misiones_completadas = 0
         self.fallos = 0
         self.racha_actual = 0
         self.mejor_racha = 0
         self.servidores_hackeados = []
         self.logros_desbloqueados = []
-        
-        # Misiones diarias
-        self.ultima_mision_diaria = None
-        self.mision_diaria_completada = False
-        
-        # Tiempo de juego
-        self.fecha_creacion = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        self.tiempo_jugado = 0
-        
-        # Estado
+        self.tema_actual = "matrix"
         self.ultima_mision = None
+        self.mision_diaria_completada = False
+        self.ultima_mision_diaria = None
+        self.tiempo_jugado = 0
+        self.fecha_creacion = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.sonidos_activados = False
         
-    # ===== MÉTODOS DE PROGRESIÓN =====
-    
     def ganar_exp(self, cantidad):
-        """Gana experiencia y sube de nivel si es necesario."""
         self.exp += cantidad
         while self.exp >= self.exp_necesaria:
             self.subir_nivel()
     
     def subir_nivel(self):
-        """Sube de nivel y da recompensas."""
         self.nivel += 1
         self.exp = 0
         self.exp_necesaria = self.nivel * 15
         
-        # Mostrar mensaje
         print(f"\n{Fore.MAGENTA}{'═'*50}")
         print(f"🌟 ¡SUBES AL NIVEL {self.nivel}! 🌟")
         print(f"{'═'*50}{Style.RESET_ALL}")
         
-        # Recompensas por nivel
+        # Herramienta por nivel par
         if self.nivel % 2 == 0:
             self._dar_herramienta()
         
+        # Bonus de créditos cada 3 niveles
         if self.nivel % 3 == 0:
             bonus = self.nivel * 50
             self.creditos += bonus
             print(f"{Fore.GREEN}💰 Bonus de nivel: +{bonus} créditos{Style.RESET_ALL}")
         
+        # Recompensa especial cada 5 niveles
         if self.nivel % 5 == 0:
             print(f"{Fore.YELLOW}🎁 ¡Recompensa especial por nivel {self.nivel}!{Style.RESET_ALL}")
             self.creditos += 200
+            if self.nivel % 10 == 0:
+                self.creditos += 500
+                print(f"{Fore.CYAN}🌟 ¡BONUS EXTRA DE 500 CRÉDITOS!{Style.RESET_ALL}")
     
     def _dar_herramienta(self):
-        """Da una nueva herramienta según el nivel."""
         herramientas = [
             "🔧 Escáner Avanzado",
             "🛡️ Firewall Bypass",
@@ -247,7 +340,6 @@ class Hacker:
             "☯️ Omega Key"
         ]
         
-        # Calcular índice según nivel
         idx = (self.nivel // 2 - 1) % len(herramientas)
         nueva = herramientas[idx]
         
@@ -255,10 +347,7 @@ class Hacker:
             self.herramientas.append(nueva)
             print(f"{Fore.CYAN}🔧 ¡Nueva herramienta: {nueva}!{Style.RESET_ALL}")
     
-    # ===== MÉTODOS DE LOGROS =====
-    
     def verificar_logros(self):
-        """Verifica y desbloquea logros automáticamente."""
         nuevos_logros = []
         
         # Misiones
@@ -270,30 +359,40 @@ class Hacker:
             nuevos_logros.append("diez_misiones")
         if self.misiones_completadas >= 25 and "veinticinco_misiones" not in self.logros_desbloqueados:
             nuevos_logros.append("veinticinco_misiones")
+        if self.misiones_completadas >= 50 and "cincuenta_misiones" not in self.logros_desbloqueados:
+            nuevos_logros.append("cincuenta_misiones")
         
         # Nivel
         if self.nivel >= 5 and "nivel_5" not in self.logros_desbloqueados:
             nuevos_logros.append("nivel_5")
         if self.nivel >= 10 and "nivel_10" not in self.logros_desbloqueados:
             nuevos_logros.append("nivel_10")
+        if self.nivel >= 15 and "nivel_15" not in self.logros_desbloqueados:
+            nuevos_logros.append("nivel_15")
+        if self.nivel >= 20 and "nivel_20" not in self.logros_desbloqueados:
+            nuevos_logros.append("nivel_20")
         
         # Créditos
         if self.creditos >= 1000 and "millonario" not in self.logros_desbloqueados:
             nuevos_logros.append("millonario")
         if self.creditos >= 5000 and "billonario" not in self.logros_desbloqueados:
             nuevos_logros.append("billonario")
+        if self.creditos >= 10000 and "trillonario" not in self.logros_desbloqueados:
+            nuevos_logros.append("trillonario")
         
         # Rachas
         if self.mejor_racha >= 5 and "racha_5" not in self.logros_desbloqueados:
             nuevos_logros.append("racha_5")
         if self.mejor_racha >= 10 and "racha_10" not in self.logros_desbloqueados:
             nuevos_logros.append("racha_10")
+        if self.mejor_racha >= 20 and "racha_20" not in self.logros_desbloqueados:
+            nuevos_logros.append("racha_20")
         
-        # Perfecto (5 misiones sin fallos)
+        # Perfecto
         if self.misiones_completadas >= 5 and self.fallos == 0 and "perfecto" not in self.logros_desbloqueados:
             nuevos_logros.append("perfecto")
         
-        # Coleccionista (todas las herramientas)
+        # Coleccionista
         if len(self.herramientas) >= 8 and "coleccionista" not in self.logros_desbloqueados:
             nuevos_logros.append("coleccionista")
         
@@ -301,78 +400,112 @@ class Hacker:
         if "Omega Station" in self.servidores_hackeados and "omega" not in self.logros_desbloqueados:
             nuevos_logros.append("omega")
         
+        # Leyenda
+        if len(set(self.servidores_hackeados)) == len(SERVIDORES) and "leyenda" not in self.logros_desbloqueados:
+            nuevos_logros.append("leyenda")
+        
         # Desbloquear logros
         for logro_id in nuevos_logros:
             self.logros_desbloqueados.append(logro_id)
             logro = LOGROS[logro_id]
             print(f"{Fore.YELLOW}🏆 ¡LOGRO DESBLOQUEADO: {logro['nombre']}!{Style.RESET_ALL}")
             print(f"{Fore.WHITE}   📝 {logro['desc']}{Style.RESET_ALL}")
-    
-    # ===== MÉTODOS DE MOSTRAR =====
+            print(f"{Fore.GREEN}   💰 Recompensa: +{logro['recompensa']} créditos{Style.RESET_ALL}")
+            self.creditos += logro['recompensa']
     
     def calcular_rango(self):
-        """Calcula el rango del hacker según su nivel."""
-        if self.nivel >= 10:
+        if self.nivel >= 15:
             return "👑 LEGENDARY HACKER"
-        elif self.nivel >= 8:
+        elif self.nivel >= 12:
             return "⚡ ELITE HACKER"
-        elif self.nivel >= 6:
+        elif self.nivel >= 9:
             return "🔥 SENIOR HACKER"
-        elif self.nivel >= 4:
+        elif self.nivel >= 6:
             return "💻 JUNIOR HACKER"
-        elif self.nivel >= 2:
+        elif self.nivel >= 3:
             return "🔰 APRENDIZ"
         else:
             return "🐣 NOVATO"
     
+    # ===== SISTEMA DE GUARDADO =====
+    
+    def guardar(self, filename="save.json"):
+        """Guarda la partida en un archivo JSON."""
+        datos = {
+            "nombre": self.nombre,
+            "nivel": self.nivel,
+            "exp": self.exp,
+            "exp_necesaria": self.exp_necesaria,
+            "creditos": self.creditos,
+            "herramientas": self.herramientas,
+            "misiones_completadas": self.misiones_completadas,
+            "fallos": self.fallos,
+            "racha_actual": self.racha_actual,
+            "mejor_racha": self.mejor_racha,
+            "servidores_hackeados": self.servidores_hackeados,
+            "logros_desbloqueados": self.logros_desbloqueados,
+            "tema_actual": self.tema_actual,
+            "ultima_mision": self.ultima_mision,
+            "mision_diaria_completada": self.mision_diaria_completada,
+            "ultima_mision_diaria": self.ultima_mision_diaria,
+            "tiempo_jugado": self.tiempo_jugado,
+            "fecha_creacion": self.fecha_creacion,
+            "sonidos_activados": self.sonidos_activados,
+            "version": VERSION
+        }
+        try:
+            with open(filename, 'w') as f:
+                json.dump(datos, f, indent=4)
+            return True
+        except Exception as e:
+            print(f"{Fore.RED}❌ Error al guardar: {e}{Style.RESET_ALL}")
+            return False
+    
+    def cargar(self, filename="save.json"):
+        """Carga una partida desde un archivo JSON."""
+        try:
+            with open(filename, 'r') as f:
+                datos = json.load(f)
+            
+            for key, value in datos.items():
+                if hasattr(self, key):
+                    setattr(self, key, value)
+            
+            return True
+        except FileNotFoundError:
+            return False
+        except Exception as e:
+            print(f"{Fore.RED}❌ Error al cargar: {e}{Style.RESET_ALL}")
+            return False
+    
     def __str__(self):
-        """Representación visual del hacker."""
-        # Barra de experiencia
-        if self.exp_necesaria > 0:
-            porcentaje = self.exp / self.exp_necesaria
-            barra = "█" * int(porcentaje * 15)
-            vacio = "░" * (15 - len(barra))
-        else:
-            barra = ""
-            vacio = "░" * 15
+        tema = TEMAS.get(self.tema_actual, TEMAS["matrix"])
+        barra = "█" * int((self.exp / self.exp_necesaria) * 15) if self.exp_necesaria > 0 else ""
+        vacio = "░" * (15 - len(barra))
         
-        # Construir el string
         return f"""
-{Fore.CYAN}╔══════════════════════════════════════════════════════════╗
-{Fore.CYAN}║ {Fore.WHITE}👤 {self.nombre} {Fore.CYAN}│ {Fore.YELLOW}Nv.{self.nivel} {Fore.CYAN}│ {Fore.GREEN}💰 {self.creditos} créditos
-{Fore.CYAN}║ {Fore.WHITE}📊 EXP [{barra}{vacio}] {self.exp}/{self.exp_necesaria}
-{Fore.CYAN}║ {Fore.WHITE}🏆 {self.calcular_rango()}
-{Fore.CYAN}║ {Fore.WHITE}🛠️  {', '.join(self.herramientas)}
-{Fore.CYAN}║ {Fore.WHITE}📈 Rachas: {self.racha_actual} actual │ {self.mejor_racha} máxima
-{Fore.CYAN}║ {Fore.WHITE}🎯 Misiones: {self.misiones_completadas} │ ❌ Fallos: {self.fallos}
-{Fore.CYAN}╚══════════════════════════════════════════════════════════╝{Style.RESET_ALL}
+{tema['primary']}╔══════════════════════════════════════════════════════════╗
+{tema['primary']}║ {tema['text']}👤 {self.nombre} {tema['primary']}│ {tema['success']}Nv.{self.nivel} {tema['primary']}│ {tema['warning']}💰 {self.creditos} créditos
+{tema['primary']}║ {tema['text']}📊 EXP [{barra}{vacio}] {self.exp}/{self.exp_necesaria}
+{tema['primary']}║ {tema['text']}🏆 {self.calcular_rango()}
+{tema['primary']}║ {tema['text']}🛠️  {', '.join(self.herramientas)}
+{tema['primary']}║ {tema['text']}📈 Rachas: {self.racha_actual} actual │ {self.mejor_racha} máxima
+{tema['primary']}║ {tema['text']}🎯 Misiones: {self.misiones_completadas} │ ❌ Fallos: {self.fallos}
+{tema['primary']}╚══════════════════════════════════════════════════════════╝{Style.RESET_ALL}
 """
 
 # ============================================
-# MINI-JUEGOS
+# MINI-JUEGOS MEJORADOS
 # ============================================
 
 class MiniJuegos:
-    """Colección de mini-juegos para las misiones."""
-    
     @staticmethod
     def firewall_memoria(dificultad, intentos_max):
-        """
-        Mini-juego de firewall: memorizar y repetir una secuencia.
-        
-        Args:
-            dificultad (int): Nivel de dificultad (afecta longitud)
-            intentos_max (int): Número máximo de intentos
-        
-        Returns:
-            bool: True si se supera, False si falla
-        """
         print(f"\n{Fore.YELLOW}{'═'*50}")
         print(f"🔥 ¡FIREWALL DETECTADO! Memoriza la secuencia:")
         print(f"{'═'*50}{Style.RESET_ALL}")
         print(f"{Fore.CYAN}🛡️  Tienes {intentos_max} intentos{Style.RESET_ALL}")
         
-        # Longitud según dificultad
         longitud = min(3 + dificultad // 2, 8)
         secuencia = [str(random.randint(1, 9)) for _ in range(longitud)]
         
@@ -402,24 +535,14 @@ class MiniJuegos:
     
     @staticmethod
     def descifrar_cesar(dificultad):
-        """
-        Mini-juego: Descifrar mensaje con cifrado César.
-        
-        Args:
-            dificultad (int): Nivel de dificultad
-        
-        Returns:
-            bool: True si se descifra, False si falla
-        """
         print(f"\n{Fore.YELLOW}{'═'*50}")
         print(f"🔐 ¡CÓDIGO ENCRIPTADO! Descifra el mensaje:")
         print(f"{'═'*50}{Style.RESET_ALL}")
         
         palabras = ["HACKER", "SISTEMA", "SEGURO", "DATOS", "RED", "CYBER", 
-                   "NEXUS", "QUANTUM", "MATRIX", "OMEGA"]
+                   "NEXUS", "QUANTUM", "MATRIX", "OMEGA", "SHADOW", "VOID"]
         palabra = random.choice(palabras)
         
-        # Desplazamiento según dificultad
         desplazamiento = random.randint(1, 5) + dificultad // 2
         encriptado = ""
         for letra in palabra:
@@ -455,15 +578,6 @@ class MiniJuegos:
     
     @staticmethod
     def inyeccion_sql(dificultad):
-        """
-        Mini-juego: Inyección SQL.
-        
-        Args:
-            dificultad (int): Nivel de dificultad
-        
-        Returns:
-            bool: True si se logra, False si falla
-        """
         print(f"\n{Fore.YELLOW}{'═'*50}")
         print(f"💉 ¡VULNERABILIDAD SQL ENCONTRADA! Inyecta el código:")
         print(f"{'═'*50}{Style.RESET_ALL}")
@@ -510,21 +624,11 @@ class MiniJuegos:
     
     @staticmethod
     def puzzle_logico(dificultad):
-        """
-        Mini-juego: Puzzle lógico de secuencias.
-        
-        Args:
-            dificultad (int): Nivel de dificultad
-        
-        Returns:
-            bool: True si se resuelve, False si falla
-        """
         print(f"\n{Fore.YELLOW}{'═'*50}")
         print(f"🧩 ¡PUZZLE LÓGICO! Encuentra el número que falta:")
         print(f"{'═'*50}{Style.RESET_ALL}")
         
-        # Tipos de puzzles
-        tipos = ["suma", "multiplica", "fibonacci", "cuadrados"]
+        tipos = ["suma", "multiplica", "fibonacci", "cuadrados", "primos"]
         tipo = random.choice(tipos)
         
         if tipo == "suma":
@@ -546,10 +650,15 @@ class MiniJuegos:
             respuesta = 8
             pista = "Fibonacci: suma de los dos anteriores"
         
-        else:  # cuadrados
+        elif tipo == "cuadrados":
             secuencia = [1, 4, 9, 16, 25]
             respuesta = 36
             pista = "Números al cuadrado: 1², 2², 3²..."
+        
+        else:  # primos
+            secuencia = [2, 3, 5, 7, 11]
+            respuesta = 13
+            pista = "Números primos en orden"
         
         print(f"{Fore.CYAN}📊 Secuencia:{Style.RESET_ALL}")
         print(f"{Fore.WHITE}╔{'═' * (len(secuencia) * 5 + 10)}╗")
@@ -577,11 +686,10 @@ class MiniJuegos:
         return False
 
 # ============================================
-# FUNCIONES DEL JUEGO
+# FUNCIONES DEL JUEGO (Mejoradas)
 # ============================================
 
 def mostrar_header():
-    """Muestra el encabezado del juego."""
     os.system('cls' if os.name == 'nt' else 'clear')
     header = f"""
 {Fore.GREEN}╔══════════════════════════════════════════════════════════════════╗
@@ -592,22 +700,12 @@ def mostrar_header():
 {Fore.GREEN}║  {Fore.CYAN}██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██║  ██║ {Fore.GREEN}       ║
 {Fore.GREEN}║  {Fore.CYAN}╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ {Fore.GREEN}       ║
 {Fore.GREEN}║     {Fore.YELLOW}HACKER SIMULATOR 2077 - ULTIMATE EDITION v{VERSION}{Fore.GREEN}     ║
-{Fore.GREEN}║     {Fore.WHITE}by {AUTOR}{Fore.GREEN}                                              ║
+{Fore.GREEN}║     {Fore.WHITE}by {AUTOR} {Fore.GREEN}| {Fore.CYAN}⭐ GitHub: {GITHUB_URL}{Fore.GREEN}     ║
 {Fore.GREEN}╚══════════════════════════════════════════════════════════════════╝{Style.RESET_ALL}
 """
     print(header)
 
 def mision_hackeo(hacker, servidor):
-    """
-    Ejecuta una misión de hackeo.
-    
-    Args:
-        hacker (Hacker): El jugador
-        servidor (dict): Datos del servidor
-    
-    Returns:
-        bool: True si se completa, False si falla
-    """
     print(f"\n{Fore.CYAN}{'═'*50}")
     print(f"{Fore.GREEN}🎯 MISIÓN: HACKEAR {servidor['nombre'].upper()}")
     print(f"{Fore.CYAN}{'═'*50}{Style.RESET_ALL}")
@@ -639,7 +737,6 @@ def mision_hackeo(hacker, servidor):
     while intentos > 0 and not acertado:
         print(f"\n{Fore.CYAN}🔐 Intentos restantes: {intentos}{Style.RESET_ALL}")
         
-        # Si tiene Crypto Key, puede pedir ayuda
         if "🔑 Crypto Key" in hacker.herramientas:
             print(f"{Fore.YELLOW}💡 Escribe 'help' para una pista extra{Style.RESET_ALL}")
         
@@ -686,16 +783,13 @@ def mision_hackeo(hacker, servidor):
     print(f"🎉 ¡MISIÓN COMPLETADA CON ÉXITO! 🎉")
     print(f"{'═'*50}{Style.RESET_ALL}")
     
-    # Calcular recompensa
     recompensa_base = servidor['recompensa']
     bonus_racha = min(hacker.racha_actual * 25, 200)
     recompensa_total = recompensa_base + bonus_racha
     
-    # Bonus por nivel
     if hacker.nivel >= 5:
         recompensa_total = int(recompensa_total * 1.2)
     
-    # Aplicar recompensas
     hacker.creditos += recompensa_total
     hacker.misiones_completadas += 1
     hacker.racha_actual += 1
@@ -709,7 +803,6 @@ def mision_hackeo(hacker, servidor):
     exp_ganada = servidor['dificultad'] * 5 + hacker.racha_actual * 2
     hacker.ganar_exp(exp_ganada)
     
-    # Mostrar recompensas
     print(f"{Fore.GREEN}💰 Recompensa total: +{recompensa_total} créditos")
     print(f"{Fore.GREEN}📈 +{exp_ganada} EXP")
     if bonus_racha > 0:
@@ -717,13 +810,79 @@ def mision_hackeo(hacker, servidor):
     if hacker.racha_actual >= 3:
         print(f"{Fore.MAGENTA}🔥 ¡Racha de {hacker.racha_actual} misiones!{Style.RESET_ALL}")
     
-    # Verificar logros
     hacker.verificar_logros()
     
     return True
 
+def mision_diaria(hacker):
+    print(f"\n{Fore.YELLOW}{'═'*50}")
+    print(f"📅 MISIÓN DIARIA")
+    print(f"{'═'*50}{Style.RESET_ALL}")
+    
+    if hacker.mision_diaria_completada:
+        print(f"{Fore.YELLOW}⚠️ Ya completaste tu misión diaria de hoy.{Style.RESET_ALL}")
+        print(f"{Fore.CYAN}⏳ Vuelve mañana para una nueva misión.{Style.RESET_ALL}")
+        input(f"\n{Fore.CYAN}⏎ Presiona Enter para continuar...{Style.RESET_ALL}")
+        return
+    
+    disponibles = [s for s in SERVIDORES if s['dificultad'] <= 5]
+    servidor = random.choice(disponibles)
+    
+    print(f"{Fore.YELLOW}🌟 Misión especial de hoy:{Style.RESET_ALL}")
+    print(f"🎯 HACKEAR: {servidor['nombre']}")
+    print(f"⭐ Dificultad: {servidor['dificultad']} ★")
+    print(f"💰 Recompensa: {servidor['recompensa'] * 2} créditos (¡DOBLE!){Style.RESET_ALL}")
+    
+    print(f"\n{Fore.CYAN}🔍 Pista: {servidor['pista']}{Style.RESET_ALL}")
+    
+    # FASE 1: Firewall
+    print(f"\n{Fore.CYAN}🛡️  ELUDIR FIREWALL{Style.RESET_ALL}")
+    if not MiniJuegos.firewall_memoria(servidor['dificultad'], 4):
+        print(f"{Fore.RED}💀 Misión diaria fallida.{Style.RESET_ALL}")
+        return
+    
+    # FASE 2: Contraseña
+    print(f"\n{Fore.CYAN}🔑 DESCIFRAR CONTRASEÑA{Style.RESET_ALL}")
+    intentos = 3
+    acertado = False
+    
+    while intentos > 0 and not acertado:
+        print(f"\n{Fore.CYAN}🔐 Intentos: {intentos}{Style.RESET_ALL}")
+        password = input("➡️  Contraseña: ").strip().lower()
+        
+        if password == servidor['password']:
+            acertado = True
+            print(f"{Fore.GREEN}✅ ¡Contraseña correcta!{Style.RESET_ALL}")
+        else:
+            intentos -= 1
+            if intentos > 0:
+                print(f"{Fore.RED}❌ Incorrecto.{Style.RESET_ALL}")
+    
+    if not acertado:
+        print(f"{Fore.RED}💀 Misión diaria fallida.{Style.RESET_ALL}")
+        print(f"{Fore.YELLOW}🔑 Contraseña: {servidor['password']}{Style.RESET_ALL}")
+        return
+    
+    print(f"\n{Fore.GREEN}{'═'*50}")
+    print(f"🎉 ¡MISIÓN DIARIA COMPLETADA! 🎉")
+    print(f"{'═'*50}{Style.RESET_ALL}")
+    
+    recompensa = servidor['recompensa'] * 2
+    hacker.creditos += recompensa
+    hacker.misiones_completadas += 1
+    hacker.mision_diaria_completada = True
+    hacker.ultima_mision_diaria = datetime.now().strftime("%Y-%m-%d")
+    
+    exp = servidor['dificultad'] * 8
+    hacker.ganar_exp(exp)
+    
+    print(f"{Fore.GREEN}💰 +{recompensa} créditos (¡DOBLE!)")
+    print(f"{Fore.GREEN}📈 +{exp} EXP{Style.RESET_ALL}")
+    
+    hacker.verificar_logros()
+    input(f"\n{Fore.CYAN}⏎ Presiona Enter para continuar...{Style.RESET_ALL}")
+
 def tienda(hacker):
-    """Muestra la tienda de herramientas."""
     print(f"\n{Fore.YELLOW}{'═'*50}")
     print(f"🛒 TIENDA DE HERRAMIENTAS")
     print(f"{'═'*50}{Style.RESET_ALL}")
@@ -738,6 +897,8 @@ def tienda(hacker):
         {"nombre": "⚡ Quantum Decryptor", "precio": 500, "desc": "Descifra mensajes automáticamente"},
         {"nombre": "🔬 Nano Analyzer", "precio": 700, "desc": "Analiza servidores en profundidad"},
         {"nombre": "🎯 Matrix Key", "precio": 1000, "desc": "Acceso a servidores de élite"},
+        {"nombre": "⏳ Chrono Analyzer", "precio": 1500, "desc": "Predice contraseñas"},
+        {"nombre": "☯️ Omega Key", "precio": 2500, "desc": "Acceso total al sistema Omega"}
     ]
     
     for i, item in enumerate(items, 1):
@@ -745,7 +906,7 @@ def tienda(hacker):
         print(f"[{i}] {estado} {item['nombre']}")
         print(f"    {Fore.WHITE}💰 {item['precio']} créditos │ 📝 {item['desc']}{Style.RESET_ALL}")
     
-    print("[7] 💰 Comprar EXP (100 créditos = 10 EXP)")
+    print("[9] 💰 Comprar EXP (100 créditos = 10 EXP)")
     print("[0] 🚪 Salir de la tienda")
     
     try:
@@ -754,7 +915,7 @@ def tienda(hacker):
         if opcion == 0:
             return
         
-        elif opcion == 7:
+        elif opcion == 9:
             if hacker.creditos >= 100:
                 hacker.creditos -= 100
                 hacker.ganar_exp(10)
@@ -786,7 +947,6 @@ def tienda(hacker):
         time.sleep(1)
 
 def estadisticas(hacker):
-    """Muestra estadísticas detalladas del hacker."""
     print(f"\n{Fore.CYAN}{'═'*50}")
     print(f"{Fore.YELLOW}📊 ESTADÍSTICAS DE {hacker.nombre.upper()}")
     print(f"{Fore.CYAN}{'═'*50}{Style.RESET_ALL}")
@@ -823,109 +983,106 @@ def estadisticas(hacker):
     
     print(f"\n{Fore.CYAN}{'═'*50}{Style.RESET_ALL}")
 
-def mision_diaria(hacker):
-    """Genera y ejecuta una misión diaria."""
-    print(f"\n{Fore.YELLOW}{'═'*50}")
-    print(f"📅 MISIÓN DIARIA")
-    print(f"{'═'*50}{Style.RESET_ALL}")
-    
-    # Verificar si ya se completó hoy
-    if hacker.mision_diaria_completada:
-        print(f"{Fore.YELLOW}⚠️ Ya completaste tu misión diaria de hoy.{Style.RESET_ALL}")
-        print(f"{Fore.CYAN}⏳ Vuelve mañana para una nueva misión.{Style.RESET_ALL}")
-        input(f"\n{Fore.CYAN}⏎ Presiona Enter para continuar...{Style.RESET_ALL}")
-        return
-    
-    # Seleccionar servidor aleatorio (dificultad 1-5)
-    disponibles = [s for s in SERVIDORES if s['dificultad'] <= 5]
-    servidor = random.choice(disponibles)
-    
-    print(f"{Fore.YELLOW}🌟 Misión especial de hoy:{Style.RESET_ALL}")
-    print(f"🎯 HACKEAR: {servidor['nombre']}")
-    print(f"⭐ Dificultad: {servidor['dificultad']} ★")
-    print(f"💰 Recompensa: {servidor['recompensa'] * 2} créditos (¡DOBLE!){Style.RESET_ALL}")
-    
-    # Ejecutar misión con recompensa doble
-    print(f"\n{Fore.CYAN}💡 La recompensa es el DOBLE por ser misión diaria.{Style.RESET_ALL}")
-    
-    # Hackear normalmente pero con recompensa doble
-    print(f"\n{Fore.CYAN}🔍 Pista: {servidor['pista']}{Style.RESET_ALL}")
-    
-    # FASE 1: Firewall
-    print(f"\n{Fore.CYAN}🛡️  ELUDIR FIREWALL{Style.RESET_ALL}")
-    if not MiniJuegos.firewall_memoria(servidor['dificultad'], 4):
-        print(f"{Fore.RED}💀 Misión diaria fallida.{Style.RESET_ALL}")
-        return
-    
-    # FASE 2: Contraseña
-    print(f"\n{Fore.CYAN}🔑 DESCIFRAR CONTRASEÑA{Style.RESET_ALL}")
-    intentos = 3
-    acertado = False
-    
-    while intentos > 0 and not acertado:
-        print(f"\n{Fore.CYAN}🔐 Intentos: {intentos}{Style.RESET_ALL}")
-        password = input("➡️  Contraseña: ").strip().lower()
-        
-        if password == servidor['password']:
-            acertado = True
-            print(f"{Fore.GREEN}✅ ¡Contraseña correcta!{Style.RESET_ALL}")
-        else:
-            intentos -= 1
-            if intentos > 0:
-                print(f"{Fore.RED}❌ Incorrecto.{Style.RESET_ALL}")
-    
-    if not acertado:
-        print(f"{Fore.RED}💀 Misión diaria fallida.{Style.RESET_ALL}")
-        print(f"{Fore.YELLOW}🔑 Contraseña: {servidor['password']}{Style.RESET_ALL}")
-        return
-    
-    # Completada
-    print(f"\n{Fore.GREEN}{'═'*50}")
-    print(f"🎉 ¡MISIÓN DIARIA COMPLETADA! 🎉")
-    print(f"{'═'*50}{Style.RESET_ALL}")
-    
-    recompensa = servidor['recompensa'] * 2
-    hacker.creditos += recompensa
-    hacker.misiones_completadas += 1
-    hacker.mision_diaria_completada = True
-    hacker.ultima_mision_diaria = datetime.now().strftime("%Y-%m-%d")
-    
-    exp = servidor['dificultad'] * 8
-    hacker.ganar_exp(exp)
-    
-    print(f"{Fore.GREEN}💰 +{recompensa} créditos (¡DOBLE!)")
-    print(f"{Fore.GREEN}📈 +{exp} EXP{Style.RESET_ALL}")
-    
-    hacker.verificar_logros()
-    input(f"\n{Fore.CYAN}⏎ Presiona Enter para continuar...{Style.RESET_ALL}")
-
 def ranking(hacker):
-    """Muestra el ranking de hackers (simulado)."""
     print(f"\n{Fore.CYAN}{'═'*50}")
     print(f"{Fore.YELLOW}🏆 RANKING DE HACKERS")
     print(f"{Fore.CYAN}{'═'*50}{Style.RESET_ALL}")
     
-    # Generar oponentes ficticios
     nombres_ficticios = [
-        ("Shadow", 8), ("Neon", 7), ("Vortex", 6), 
-        ("Ghost", 5), ("Phoenix", 4), ("Cipher", 3)
+        ("Shadow", 8, 12), ("Neon", 7, 10), ("Vortex", 6, 8),
+        ("Ghost", 5, 7), ("Phoenix", 4, 5), ("Cipher", 3, 4),
+        ("Nova", 9, 15), ("Crystal", 11, 18)
     ]
     
-    print(f"{Fore.WHITE}Posición │ Hackers │ Nivel │ Misiones{Style.RESET_ALL}")
+    print(f"{Fore.WHITE}Posición │ Hacker │ Nivel │ Misiones{Style.RESET_ALL}")
     print(f"{Fore.CYAN}{'═'*50}{Style.RESET_ALL}")
     
-    # Posición 1: El jugador (si tiene misiones)
+    # Posición 1: El jugador
     if hacker.misiones_completadas > 0:
         print(f"{Fore.GREEN}🏆 #1  │ {hacker.nombre} │ {hacker.nivel}     │ {hacker.misiones_completadas}{Style.RESET_ALL}")
     else:
         print(f"{Fore.GREEN}#1  │ (vacío) │ 0     │ 0{Style.RESET_ALL}")
     
     # Oponentes
-    for i, (nombre, nivel) in enumerate(nombres_ficticios, 2):
-        misiones = random.randint(1, nivel * 3)
-        print(f"#{i}  │ {nombre} │ {nivel}     │ {misiones}")
+    for i, (nombre, nivel, misiones) in enumerate(nombres_ficticios, 2):
+        if random.random() > 0.3:
+            print(f"#{i}  │ {nombre} │ {nivel}     │ {misiones}")
     
     print(f"\n{Fore.CYAN}💡 Para subir en el ranking, completa más misiones.{Style.RESET_ALL}")
+    input(f"\n{Fore.CYAN}⏎ Presiona Enter para continuar...{Style.RESET_ALL}")
+
+def cambiar_tema(hacker):
+    print(f"\n{Fore.CYAN}{'═'*50}")
+    print(f"🎨 CAMBIAR TEMA")
+    print(f"{'═'*50}{Style.RESET_ALL}")
+    print(f"{Fore.WHITE}Tema actual: {hacker.tema_actual}{Style.RESET_ALL}")
+    print(f"\n{Fore.CYAN}Temas disponibles:{Style.RESET_ALL}")
+    
+    for i, (nombre, _) in enumerate(TEMAS.items(), 1):
+        check = "✅" if hacker.tema_actual == nombre else "  "
+        print(f"[{i}] {check} {nombre}")
+    
+    print("[0] Cancelar")
+    
+    try:
+        opcion = int(input("\n➡️  ").strip())
+        temas = list(TEMAS.keys())
+        if opcion == 0:
+            return
+        elif 1 <= opcion <= len(temas):
+            hacker.tema_actual = temas[opcion-1]
+            print(f"{Fore.GREEN}✅ Tema cambiado a: {hacker.tema_actual}{Style.RESET_ALL}")
+            time.sleep(1)
+        else:
+            print(f"{Fore.RED}❌ Opción inválida{Style.RESET_ALL}")
+            time.sleep(1)
+    except:
+        print(f"{Fore.RED}❌ Opción inválida{Style.RESET_ALL}")
+        time.sleep(1)
+
+def guia_usuario():
+    print(f"\n{Fore.CYAN}{'═'*60}")
+    print(f"{Fore.YELLOW}📖 GUÍA DE USUARIO - HACKER SIMULATOR 2077")
+    print(f"{Fore.CYAN}{'═'*60}{Style.RESET_ALL}")
+    
+    print(f"""
+{Fore.WHITE}🎯 ¿QUÉ ES?
+Un juego de hacking en terminal donde encarnas a un hacker ético.
+Tu objetivo es infiltrarte en servidores, descifrar contraseñas y
+convertirte en el mejor hacker.
+
+{Fore.CYAN}🕹️  CONTROLES{Fore.WHITE}
+1 - Aceptar misión (hackear servidor)
+2 - Misión diaria (recompensa doble)
+3 - Entrenar (practicar habilidades)
+4 - Visitar tienda
+5 - Ver estadísticas
+6 - Ranking de hackers
+7 - Configuración (temas, sonidos)
+8 - Guardar partida
+9 - Guía de usuario
+0 - Salir
+
+{Fore.YELLOW}💡 CONSEJOS{Fore.WHITE}
+• Presta atención a las PISTAS, te ayudarán a descifrar contraseñas
+• Compra herramientas en la tienda para facilitar las misiones
+• Mantén la racha para obtener bonificaciones extra
+• Completa misiones diarias para recompensas dobles
+• Los logros dan recompensas en créditos
+
+{Fore.GREEN}⚡ TECNOLOGÍAS{Fore.WHITE}
+• Python 3.8+
+• Colorama (colores en terminal)
+• JSON (guardado de partidas)
+• 100% Open Source (MIT License)
+
+{Fore.CYAN}🔗 ENLACES{Fore.WHITE}
+• GitHub: {GITHUB_URL}
+• Issues: {GITHUB_URL}/issues
+• Contribuir: {GITHUB_URL}/blob/main/CONTRIBUTING.md
+
+{Fore.MAGENTA}🙏 ¡GRACIAS POR JUGAR!{Style.RESET_ALL}
+""")
     input(f"\n{Fore.CYAN}⏎ Presiona Enter para continuar...{Style.RESET_ALL}")
 
 # ============================================
@@ -933,7 +1090,6 @@ def ranking(hacker):
 # ============================================
 
 def menu_principal(hacker):
-    """Bucle principal del juego."""
     while True:
         mostrar_header()
         print(hacker)
@@ -945,15 +1101,15 @@ def menu_principal(hacker):
         print("[4] 🛒 Visitar tienda")
         print("[5] 📊 Ver estadísticas")
         print("[6] 🏆 Ranking de hackers")
-        print("[7] 🚪 Salir")
+        print("[7] ⚙️  Configuración (temas/sonidos)")
+        print("[8] 💾 Guardar partida")
+        print("[9] 📖 Guía de usuario")
+        print("[0] 🚪 Salir")
         
         opcion = input("➡️  ").strip()
         
         if opcion == "1":
-            # Hackear servidor
             print(f"\n{Fore.CYAN}🌐 SERVIDORES DISPONIBLES:{Style.RESET_ALL}")
-            
-            # Mostrar servidores disponibles según nivel
             disponibles = [s for s in SERVIDORES if s['dificultad'] <= hacker.nivel + 1]
             
             for i, s in enumerate(disponibles, 1):
@@ -1025,6 +1181,37 @@ def menu_principal(hacker):
             ranking(hacker)
         
         elif opcion == "7":
+            print(f"\n{Fore.CYAN}⚙️  CONFIGURACIÓN{Style.RESET_ALL}")
+            print("[1] 🎨 Cambiar tema")
+            print("[2] 🔊 Activar/Desactivar sonidos")
+            print("[0] Volver")
+            
+            try:
+                subopcion = input("➡️  ").strip()
+                if subopcion == "1":
+                    cambiar_tema(hacker)
+                elif subopcion == "2":
+                    hacker.sonidos_activados = not hacker.sonidos_activados
+                    estado = "activados" if hacker.sonidos_activados else "desactivados"
+                    print(f"{Fore.GREEN}✅ Sonidos {estado}{Style.RESET_ALL}")
+                    time.sleep(1)
+            except:
+                print(f"{Fore.RED}❌ Opción inválida{Style.RESET_ALL}")
+                time.sleep(1)
+        
+        elif opcion == "8":
+            if hacker.guardar():
+                print(f"{Fore.GREEN}✅ Partida guardada correctamente.{Style.RESET_ALL}")
+            else:
+                print(f"{Fore.RED}❌ Error al guardar la partida.{Style.RESET_ALL}")
+            time.sleep(1)
+        
+        elif opcion == "9":
+            guia_usuario()
+        
+        elif opcion == "0":
+            if hacker.guardar():
+                print(f"{Fore.GREEN}✅ Partida guardada.{Style.RESET_ALL}")
             print(f"\n{Fore.GREEN}👋 ¡Hasta la próxima, {hacker.nombre}! Desconectando...{Style.RESET_ALL}")
             return False
         
@@ -1037,22 +1224,33 @@ def menu_principal(hacker):
 # ============================================
 
 def main():
-    """Función principal del juego."""
     try:
         mostrar_header()
         
-        # Pedir nombre
         print(f"\n{Fore.CYAN}👤 Bienvenido al mundo del hacking digital.{Style.RESET_ALL}")
-        nombre = input(f"{Fore.CYAN}¿Cómo te llamas, hacker? {Style.RESET_ALL}").strip() or "Zero_Cool"
+        print(f"{Fore.YELLOW}💡 Puedes cargar una partida existente o crear una nueva.{Style.RESET_ALL}")
         
-        # Crear hacker
-        hacker = Hacker(nombre)
+        opcion = input(f"{Fore.CYAN}¿Cargar partida? (s/n): {Style.RESET_ALL}").strip().lower()
         
-        print(f"\n{Fore.GREEN}✅ Conexión establecida. ¡Bienvenido, {nombre}!{Style.RESET_ALL}")
+        hacker = None
+        
+        if opcion == 's':
+            hacker = Hacker()
+            if hacker.cargar():
+                print(f"{Fore.GREEN}✅ Partida cargada. ¡Bienvenido de vuelta, {hacker.nombre}!{Style.RESET_ALL}")
+            else:
+                print(f"{Fore.YELLOW}⚠️ No se encontró partida guardada. Creando nueva...{Style.RESET_ALL}")
+                nombre = input(f"{Fore.CYAN}¿Cómo te llamas, hacker? {Style.RESET_ALL}").strip() or "Zero_Cool"
+                hacker = Hacker(nombre)
+        else:
+            nombre = input(f"{Fore.CYAN}¿Cómo te llamas, hacker? {Style.RESET_ALL}").strip() or "Zero_Cool"
+            hacker = Hacker(nombre)
+        
+        print(f"\n{Fore.GREEN}✅ Conexión establecida. ¡Bienvenido, {hacker.nombre}!{Style.RESET_ALL}")
         print(f"{Fore.CYAN}💡 Completa misiones, sube de nivel y conviértete en el mejor hacker.{Style.RESET_ALL}")
+        print(f"{Fore.YELLOW}💡 Escribe '9' en cualquier momento para ver la guía de usuario.{Style.RESET_ALL}")
         time.sleep(2)
         
-        # Iniciar juego
         menu_principal(hacker)
         
     except KeyboardInterrupt:
@@ -1062,7 +1260,7 @@ def main():
         input(f"{Fore.CYAN}⏎ Presiona Enter para salir...{Style.RESET_ALL}")
 
 # ============================================
-# EJECUCIÓN DEL JUEGO
+# EJECUCIÓN
 # ============================================
 
 if __name__ == "__main__":

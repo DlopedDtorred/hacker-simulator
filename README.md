@@ -1,70 +1,177 @@
-# 🖥️ HACKER SIMULATOR 2077
+# 🖥️ HACKER SIMULATOR 2077 - ULTIMATE EDITION
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Stars](https://img.shields.io/github/stars/DlopedDtorred/hacker-simulator)](https://github.com/DlopedDtorred/hacker-simulator)
+[![Issues](https://img.shields.io/github/issues/DlopedDtorred/hacker-simulator)](https://github.com/DlopedDtorred/hacker-simulator/issues)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Contributors](https://img.shields.io/github/contributors/DlopedDtorred/hacker-simulator)](https://github.com/DlopedDtorred/hacker-simulator/graphs/contributors)
+
+<p align="center">
+  <img src="logo.png" width="300" alt="Hacker Simulator 2077 Logo">
+</p>
 
 ## 🎯 ¿Qué es esto?
 
-Un simulador de hacking en terminal donde encarnas a un hacker ético. 
-Tu misión: infiltrarte en servidores, descifrar contraseñas, evadir firewalls 
-y convertirte en el mejor hacker del submundo digital.
+**Hacker Simulator 2077** es un juego de hacking en terminal donde encarnas a un hacker ético. Tu misión es infiltrarte en servidores, evadir firewalls, descifrar contraseñas y convertirte en el mejor hacker del submundo digital.
 
-## ✨ Características
+### 🎮 Características Principales
 
-- 🔐 **5 servidores únicos** con diferentes dificultades
-- 🧩 **Mini-juego de firewall** con secuencias de memoria
-- 🏆 **Sistema de niveles y rango**
-- 📈 **Rachas y bonificaciones** por misiones consecutivas
-- 🛒 **Tienda de herramientas** con 3 ítems especiales
-- 🎨 **Interfaz visual** con colores y ASCII art
+- 🔐 **15 servidores únicos** con diferentes dificultades
+- 🧩 **4 mini-juegos**: Firewall, Criptografía, SQL Injection, Puzzles
+- 🏆 **20+ logros** con recompensas
+- 📈 **Sistema de rachas** con bonificaciones
+- 🛒 **8 herramientas** para comprar en la tienda
+- 📅 **Misiones diarias** con recompensa doble
+- 💾 **Sistema de guardado** en JSON
+- 🎨 **4 temas visuales** (Matrix, Cyberpunk, Classic, Dark)
+- 🏆 **Ranking de hackers**
+- 📖 **Guía de usuario integrada**
+- 🔊 **Sonidos** (opcional)
+- 🔓 **100% Open Source** (MIT License)
 
 ## 🚀 Instalación
 
+### Requisitos
+- Python 3.8+
+- pip (gestor de paquetes)
+
+### Pasos
+
 ```bash
-# Clona el repositorio
+# 1. Clona el repositorio
 git clone https://github.com/DlopedDtorred/hacker-simulator.git
 cd hacker-simulator
 
-# Instala dependencias
+# 2. Crea y activa un entorno virtual (opcional pero recomendado)
+python -m venv venv
+source venv/bin/activate  # En Windows: venv\Scripts\activate
+
+# 3. Instala las dependencias
 pip install colorama
 
-# Ejecuta el juego
+# 4. Ejecuta el juego
 python cyberdex.py
-```
+🎮 Guía Rápida
+Comandos Básicos
+Comando	Acción
+1	Hackear servidor
+2	Misión diaria
+3	Entrenar
+4	Tienda
+5	Estadísticas
+6	Ranking
+7	Configuración
+8	Guardar partida
+9	Guía de usuario
+0	Salir
+Consejos para Principiantes
+Lee las pistas - Cada servidor tiene una pista que te ayuda a descifrar la contraseña
 
-## 🎮 Controles
-1 - Aceptar misión
+Compra herramientas - La tienda tiene herramientas que facilitan las misiones
 
-2 - Entrenar habilidades
+Mantén la racha - Las misiones consecutivas dan bonificaciones extra
 
-3 - Visitar tienda
+Misiones diarias - Dan el doble de recompensa, ¡no las desperdicies!
 
-4 - Ver estadísticas
+Logros - Desbloquea logros para obtener créditos extra
 
-5 - Salir
+📊 Servidores y Contraseñas
+ID	Servidor	Dificultad	Pista	Contraseña
+SRV-001	MegaCorp Alpha	★☆☆☆☆	🐱 La mascota del CEO se llama... (empieza por M)	michifu
+SRV-002	DarkNet Vault	★★☆☆☆	👿 El número de la bestia sin el 6 final	666
+SRV-003	ShadowNet	★★☆☆☆	🏢 Año de fundación de ShadowNet (20XX)	2015
+SRV-004	CyberDyne Systems	★★★☆☆	🎬 ¿Año de Blade Runner? (20XX)	2019
+SRV-005	NeoTokyo Grid	★★★★☆	🇯🇵 Código postal de Shibuya	1500042
+SRV-006	A.I. Core	★★★★★	🔢 Fibonacci posición 13	233
+SRV-007	Quantum Nexus	★★★★★★	⚛️ Constante de Planck (3 dígitos)	662
+SRV-008	NanoTech Labs	★★★★★★★	🔬 Número atómico del carbono	6
+SRV-009	Matrix Archive	★★★★★★★★	🎬 Número de habitación de Neo	303
+SRV-010	ChronoCore	★★★★★★★★★	⏳ Año del descubrimiento del ADN	1953
+SRV-011	Omega Station	★★★★★★★★★★	☯️ 666 × 7	4662
+🛠️ Herramientas Disponibles
+Herramienta	Precio	Descripción
+🔧 Escáner Avanzado	100	+2 intentos en contraseñas
+🛡️ Firewall Bypass	200	Firewalls -1 dificultad
+🔑 Crypto Key	300	Revela pistas extra
+⚡ Quantum Decryptor	500	Descifra mensajes automáticamente
+🔬 Nano Analyzer	700	Analiza servidores en profundidad
+🎯 Matrix Key	1000	Acceso a servidores de élite
+⏳ Chrono Analyzer	1500	Predice contraseñas
+☯️ Omega Key	2500	Acceso total al sistema Omega
+🤝 ¿Cómo Colaborar?
+¡Las contribuciones son bienvenidas! Revisa nuestra guía de contribución.
 
-# 🗺️ Servidores y contraseñas
-| Servidor | Dificultad | Pista | Contraseña |
-| :--- | :---: | :--- | :--- |
-| MegaCorp Alpha | ★☆☆☆☆ | La mascota del CEO es un gato llamado | michifu |
-| DarkNet Vault | ★★☆☆☆ | El número de la bestia sin el 6 final | 666 |
-| CyberDyne Systems | ★★★☆☆ | Año de Blade Runner | 2019 |
-| NeoTokyo Grid | ★★★★☆ | Código postal de Shibuya | 1500042 |
-| A.I. Core | ★★★★★ | Fibonacci posición 13 | 233 |   
+Áreas para contribuir
+Servidores - Añadir nuevos servidores con pistas creativas
 
-## 🤝 ¿Cómo colaborar?
-Haz un Fork del proyecto
+Mini-juegos - Crear nuevos mini-juegos para entrenamiento
 
-Crea tu rama (git checkout -b feature/NuevaCaracteristica)
+Herramientas - Añadir herramientas a la tienda
 
-Haz commit de tus cambios (git commit -m 'Añade nueva característica')
+Logros - Expandir el sistema de logros
 
-Push a la rama (git push origin feature/NuevaCaracteristica)
+Documentación - Mejorar el README y la guía
 
-Abre un Pull Request
+Traducciones - Traducir el juego a otros idiomas
 
-## 📄 Licencia
-MIT License - Ver LICENSE para más detalles.
+Sonidos - Añadir efectos de sonido
 
-## ⭐ ¡No olvides darle una estrella al repo si te gusta
+Issues recomendados para empezar
+🟢 [good first issue] Añadir un nuevo servidor
+
+🟢 [good first issue] Añadir un nuevo mini-juego
+
+🟡 [medium] Mejorar el sistema de guardado
+
+🔴 [hard] Modo multijugador local
+
+📸 Capturas de Pantalla
+<p align="center"> <img src="screenshot1.png" width="400" alt="Menu principal"> <img src="screenshot2.png" width="400" alt="Misión de hackeo"> </p>
+Próximamente: capturas de pantalla
+
+📚 Documentación
+Guía de Usuario
+
+Guía de Contribución
+
+API de Desarrollador
+
+🎯 Roadmap
+v5.0 (Actual)
+✅ 15 servidores
+
+✅ 20+ logros
+
+✅ Sistema de guardado
+
+✅ Misiones diarias
+
+✅ 4 temas visuales
+
+v6.0 (Próximo)
+⬜ Modo multijugador local
+
+⬜ Más mini-juegos
+
+⬜ Sistema de clanes
+
+⬜ Eventos especiales
+
+⬜ Versión web (JavaScript)
+
+📄 Licencia
+Este proyecto está bajo la Licencia MIT - ver el archivo LICENSE para más detalles.
+
+🙏 Agradecimientos
+Comunidad Open Source
+
+Todos los contribuidores
+
+Usuarios que reportan bugs y sugieren mejoras
+
+⭐ Apóyanos
+Si te gusta el proyecto, ¡dale una estrella en GitHub!
+
+<p align="center"> <a href="https://github.com/DlopedDtorred/hacker-simulator"> <img src="https://img.shields.io/github/stars/DlopedDtorred/hacker-simulator?style=social" alt="GitHub stars"> </a> </p>
+¡Feliz hacking! 🚀
