@@ -52,7 +52,10 @@ pip install colorama
 
 # 4. Ejecuta el juego
 python cyberdex.py
-🎮 Guía Rápida
+
+```
+
+# 🎮 Guía Rápida
 Comandos Básicos
 Comando	Acción
 1	Hackear servidor
@@ -76,7 +79,7 @@ Misiones diarias - Dan el doble de recompensa, ¡no las desperdicies!
 
 Logros - Desbloquea logros para obtener créditos extra
 
-📊 Servidores y Contraseñas
+# 📊 Servidores y Contraseñas
 ID	Servidor	Dificultad	Pista	Contraseña
 SRV-001	MegaCorp Alpha	★☆☆☆☆	🐱 La mascota del CEO se llama... (empieza por M)	michifu
 SRV-002	DarkNet Vault	★★☆☆☆	👿 El número de la bestia sin el 6 final	666
@@ -89,7 +92,7 @@ SRV-008	NanoTech Labs	★★★★★★★	🔬 Número atómico del carbono	6
 SRV-009	Matrix Archive	★★★★★★★★	🎬 Número de habitación de Neo	303
 SRV-010	ChronoCore	★★★★★★★★★	⏳ Año del descubrimiento del ADN	1953
 SRV-011	Omega Station	★★★★★★★★★★	☯️ 666 × 7	4662
-🛠️ Herramientas Disponibles
+# 🛠️ Herramientas Disponibles
 Herramienta	Precio	Descripción
 🔧 Escáner Avanzado	100	+2 intentos en contraseñas
 🛡️ Firewall Bypass	200	Firewalls -1 dificultad
@@ -99,7 +102,7 @@ Herramienta	Precio	Descripción
 🎯 Matrix Key	1000	Acceso a servidores de élite
 ⏳ Chrono Analyzer	1500	Predice contraseñas
 ☯️ Omega Key	2500	Acceso total al sistema Omega
-🤝 ¿Cómo Colaborar?
+# 🤝 ¿Cómo Colaborar?
 ¡Las contribuciones son bienvenidas! Revisa nuestra guía de contribución.
 
 Áreas para contribuir
@@ -126,18 +129,18 @@ Issues recomendados para empezar
 
 🔴 [hard] Modo multijugador local
 
-📸 Capturas de Pantalla
+# 📸 Capturas de Pantalla
 <p align="center"> <img src="screenshot1.png" width="400" alt="Menu principal"> <img src="screenshot2.png" width="400" alt="Misión de hackeo"> </p>
 Próximamente: capturas de pantalla
 
-📚 Documentación
+# 📚 Documentación
 Guía de Usuario
 
 Guía de Contribución
 
 API de Desarrollador
 
-🎯 Roadmap
+# 🎯 Roadmap
 v5.0 (Actual)
 ✅ 15 servidores
 
@@ -160,17 +163,17 @@ v6.0 (Próximo)
 
 ⬜ Versión web (JavaScript)
 
-📄 Licencia
+# 📄 Licencia
 Este proyecto está bajo la Licencia MIT - ver el archivo LICENSE para más detalles.
 
-🙏 Agradecimientos
+# 🙏 Agradecimientos
 Comunidad Open Source
 
 Todos los contribuidores
 
 Usuarios que reportan bugs y sugieren mejoras
 
-⭐ Apóyanos
+# ⭐ Apóyanos
 Si te gusta el proyecto, ¡dale una estrella en GitHub!
 
 <p align="center"> <a href="https://github.com/DlopedDtorred/hacker-simulator"> <img src="https://img.shields.io/github/stars/DlopedDtorred/hacker-simulator?style=social" alt="GitHub stars"> </a> </p>

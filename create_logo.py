@@ -1,4 +1,3 @@
-```python
 #!/usr/bin/env python3
 """
 Generador de logo para Hacker Simulator 2077
