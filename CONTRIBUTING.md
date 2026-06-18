@@ -3,13 +3,13 @@
 ¡Gracias por tu interés en contribuir a Hacker Simulator 2077! 🎉
 
 ## 📋 Tabla de Contenidos
-- [Código de Conducta](#código-de-conducta)
-- [Cómo Empezar](#cómo-empezar)
-- [Áreas de Contribución](#áreas-de-contribución)
-- [Proceso de PR](#proceso-de-pr)
-- [Estilo de Código](#estilo-de-código)
-- [Reportar Bugs](#reportar-bugs)
-- [Sugerir Mejoras](#sugerir-mejoras)
+- [Código de Conducta](##código-de-conducta)
+- [Cómo Empezar](##cómo-empezar)
+- [Áreas de Contribución](##áreas-de-contribución)
+- [Proceso de PR](##proceso-de-pr)
+- [Estilo de Código](##estilo-de-código)
+- [Reportar Bugs](##reportar-bugs)
+- [Sugerir Mejoras](##sugerir-mejoras)
 
 ## 📜 Código de Conducta
 
@@ -40,11 +40,12 @@ Sube tus cambios:
 bash
 git push origin feature/nueva-caracteristica
 Abre un Pull Request
+``` 
 
 ## 🎯 Áreas de Contribución
-1. Servidores (Fácil)
+### 1. Servidores (Fácil)
 Añadir servidores en SERVIDORES:
-
+```bash
 python
 {
     "id": "SRV-XXX",
@@ -55,34 +56,40 @@ python
     "password": "contraseña",
     "descripcion": "Breve descripción"
 }
-2. Mini-juegos (Media)
+```
+### 2. Mini-juegos (Media)
 Añadir en la clase MiniJuegos:
-
+```bash
 python
 @staticmethod
 def nuevo_juego(dificultad):
     # Lógica del juego
     return True/False
-3. Herramientas (Fácil)
+```
+### 3. Herramientas (Fácil)
 Añadir en tienda():
 
+```bash
 python
 {"nombre": "🔧 Nueva Herramienta", "precio": 100, "desc": "Descripción"}
-4. Logros (Fácil)
+```
+### 4. Logros (Fácil)
 Añadir en LOGROS:
 
+```bash
 python
 "id_logro": {"nombre": "🏆 Nombre", "desc": "Descripción", "recompensa": 100}
-5. Documentación (Fácil)
+``` 
+### 5. Documentación (Fácil)
 Mejorar README.md
 
 Crear guías en docs/
 
 Traducir a otros idiomas
 
-6. Tests (Media)
+### 6. Tests (Media)
 Crear tests en tests/:
-
+```bash
 python
 import unittest
 from cyberdex import *
@@ -91,6 +98,7 @@ class TestHacker(unittest.TestCase):
     def test_crear_hacker(self):
         h = Hacker("Test")
         self.assertEqual(h.nombre, "Test")
+``` 
 ## 🔄 Proceso de PR
 Asegúrate de que tu código funciona:
 
