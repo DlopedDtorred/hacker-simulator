@@ -78,20 +78,6 @@ Mantén la racha - Las misiones consecutivas dan bonificaciones extra
 Misiones diarias - Dan el doble de recompensa, ¡no las desperdicies!
 
 Logros - Desbloquea logros para obtener créditos extra
-
-# 📊 Servidores y Contraseñas
-ID	Servidor	Dificultad	Pista	Contraseña
-SRV-001	MegaCorp Alpha	★☆☆☆☆	🐱 La mascota del CEO se llama... (empieza por M)	michifu
-SRV-002	DarkNet Vault	★★☆☆☆	👿 El número de la bestia sin el 6 final	666
-SRV-003	ShadowNet	★★☆☆☆	🏢 Año de fundación de ShadowNet (20XX)	2015
-SRV-004	CyberDyne Systems	★★★☆☆	🎬 ¿Año de Blade Runner? (20XX)	2019
-SRV-005	NeoTokyo Grid	★★★★☆	🇯🇵 Código postal de Shibuya	1500042
-SRV-006	A.I. Core	★★★★★	🔢 Fibonacci posición 13	233
-SRV-007	Quantum Nexus	★★★★★★	⚛️ Constante de Planck (3 dígitos)	662
-SRV-008	NanoTech Labs	★★★★★★★	🔬 Número atómico del carbono	6
-SRV-009	Matrix Archive	★★★★★★★★	🎬 Número de habitación de Neo	303
-SRV-010	ChronoCore	★★★★★★★★★	⏳ Año del descubrimiento del ADN	1953
-SRV-011	Omega Station	★★★★★★★★★★	☯️ 666 × 7	4662
 # 🛠️ Herramientas Disponibles
 Herramienta	Precio	Descripción
 🔧 Escáner Avanzado	100	+2 intentos en contraseñas
