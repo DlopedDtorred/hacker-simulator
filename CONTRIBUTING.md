@@ -1,159 +1,131 @@
-# Guía para Colaboradores
+# Contributor Guide
 
-¡Gracias por tu interés en contribuir a Hacker Simulator 2077! 🎉
+## 📜 Code of Conduct
 
-## 📋 Tabla de Contenidos
-- [Código de Conducta](##código-de-conducta)
-- [Cómo Empezar](##cómo-empezar)
-- [Áreas de Contribución](##áreas-de-contribución)
-- [Proceso de PR](##proceso-de-pr)
-- [Estilo de Código](##estilo-de-código)
-- [Reportar Bugs](##reportar-bugs)
-- [Sugerir Mejoras](##sugerir-mejoras)
+Please be respectful to other contributors. We welcome everyone regardless of experience level.
 
-## 📜 Código de Conducta
+---
 
-Por favor, sé respetuoso con otros colaboradores. Aceptamos a todos independientemente de su nivel de experiencia.
+## 🚀 How to Start
 
-## 🚀 Cómo Empezar
+1. **Fork the repository**
+2. **Clone your fork:**
 
-1. **Fork del repositorio**
-2. **Clona tu fork:**
 ```bash
-git clone https://github.com/tu-usuario/hacker-simulator.git
+git clone https://github.com/your-username/hacker-simulator.git
 cd hacker-simulator
-Instala las dependencias:
-
+```
+### Install dependencies:
+```bash
 bash
 pip install colorama
-Crea una rama para tu feature:
+```
+### Create a branch:
 
-bash
-git checkout -b feature/nueva-caracteristica
-Haz tus cambios y haz commit:
+```bash
+git checkout -b feature/new-feature
+```
+### Make your changes
 
-bash
+#### Commit:
+
+```bash
 git add .
-git commit -m "Añade nueva característica"
-Sube tus cambios:
-
-bash
-git push origin feature/nueva-caracteristica
-Abre un Pull Request
+git commit -m "Add new feature"
 ``` 
+### Push:
 
-## 🎯 Áreas de Contribución
-### 1. Servidores (Fácil)
-Añadir servidores en SERVIDORES:
+```bash
+git push origin feature/new-feature
+```
+### Open a Pull Request
+
+## 🎯 Contribution Areas
+### 1. Servers (Easy)
+Add servers in SERVERS:
 ```bash
 python
 {
     "id": "SRV-XXX",
-    "nombre": "Nombre del Servidor",
-    "dificultad": 1-13,
-    "recompensa": 100-30000,
-    "pista": "Pista útil para la contraseña",
-    "password": "contraseña",
-    "descripcion": "Breve descripción"
+    "name": "Server Name",
+    "difficulty": 1-20,
+    "reward": 100-200000,
+    "clue_es": "Spanish clue",
+    "clue_en": "English clue",
+    "password": "password",
+    "desc_es": "Spanish description",
+    "desc_en": "English description"
 }
 ```
-### 2. Mini-juegos (Media)
-Añadir en la clase MiniJuegos:
+### 2. Mini-games (Medium)
+Add in MiniGames class:
 ```bash
 python
 @staticmethod
-def nuevo_juego(dificultad):
-    # Lógica del juego
+def new_game(difficulty, lang="es"):
+    # Game logic
     return True/False
 ```
-### 3. Herramientas (Fácil)
-Añadir en tienda():
-
+### 3. Tools (Easy)
+Add in shop():
 ```bash
 python
-{"nombre": "🔧 Nueva Herramienta", "precio": 100, "desc": "Descripción"}
+{"name": "🔧 New Tool", "price": 100, "desc_es": "ES Description", "desc_en": "EN Description"}
 ```
-### 4. Logros (Fácil)
-Añadir en LOGROS:
-
+### 4. Achievements (Easy)
+Add in ACHIEVEMENTS:
 ```bash
 python
-"id_logro": {"nombre": "🏆 Nombre", "desc": "Descripción", "recompensa": 100}
-``` 
-### 5. Documentación (Fácil)
-Mejorar README.md
+"id": {
+    "name_es": "🏆 Spanish Name",
+    "name_en": "🏆 English Name",
+    "desc_es": "Spanish description",
+    "desc_en": "English description",
+    "reward": 100
+}
+```
+### 5. Translations (Easy)
+Add new language in TEXT dictionary.
 
-Crear guías en docs/
+### 6. Documentation (Easy)
+Improve README.md
 
-Traducir a otros idiomas
+Create guides in docs/
 
-### 6. Tests (Media)
-Crear tests en tests/:
-```bash
-python
-import unittest
-from cyberdex import *
+## 📝 Code Style
+Follow PEP 8 for Python
 
-class TestHacker(unittest.TestCase):
-    def test_crear_hacker(self):
-        h = Hacker("Test")
-        self.assertEqual(h.nombre, "Test")
-``` 
-## 🔄 Proceso de PR
-Asegúrate de que tu código funciona:
+Use comments in English
 
-Ejecuta python cyberdex.py y prueba
+Descriptive names
 
-Verifica que no haya errores
+Max 80 characters per line
 
-Actualiza la documentación:
+## 🐛 Reporting Bugs
+Create an issue with:
 
-README.md si es necesario
+Bug description
 
-Añade comentarios en el código
+Steps to reproduce
 
-Envía el PR:
+Expected behavior
 
-Título descriptivo
+Screenshot (if applicable)
 
-Descripción de los cambios
+## 💡 Suggesting Improvements
+Create an issue with:
 
-Issue relacionado (si existe)
+Improvement description
 
-## 📝 Estilo de Código
-Sigue PEP 8 para Python
+Benefit to the project
 
-Usa comentarios en inglés
+Example code (optional)
 
-Nombres descriptivos
-
-Máximo 80 caracteres por línea
-
-## 🐛 Reportar Bugs
-Crea un issue con:
-
-Descripción del bug
-
-Pasos para reproducirlo
-
-Comportamiento esperado
-
-Captura de pantalla (si aplica)
-
-## 💡 Sugerir Mejoras
-Crea un issue con:
-
-Descripción de la mejora
-
-Beneficio para el proyecto
-
-Código de ejemplo (opcional)
-
-## 🏆 Reconocimiento
-Todos los colaboradores serán listados en:
+## 🏆 Recognition
+All contributors will be listed in:
 
 Contributors
 
 README.md
 
-¡Gracias por hacer que Hacker Simulator 2077 sea mejor! 🚀
+Thanks for making Hacker Simulator 2077 better! 🚀

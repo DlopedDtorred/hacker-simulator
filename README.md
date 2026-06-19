@@ -5,162 +5,181 @@
 [![Stars](https://img.shields.io/github/stars/DlopedDtorred/hacker-simulator)](https://github.com/DlopedDtorred/hacker-simulator)
 [![Issues](https://img.shields.io/github/issues/DlopedDtorred/hacker-simulator)](https://github.com/DlopedDtorred/hacker-simulator/issues)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Contributors](https://img.shields.io/github/contributors/DlopedDtorred/hacker-simulator)](https://github.com/DlopedDtorred/hacker-simulator/graphs/contributors)
 
 <p align="center">
   <img src="logo.png" width="300" alt="Hacker Simulator 2077 Logo">
 </p>
 
-## 🎯 ¿Qué es esto?
+## 🌍 Multi-Language Support
 
-**Hacker Simulator 2077** es un juego de hacking en terminal donde encarnas a un hacker ético. Tu misión es infiltrarte en servidores, evadir firewalls, descifrar contraseñas y convertirte en el mejor hacker del submundo digital.
+🇪🇸 **Español** | 🇬🇧 **English**
 
-### 🎮 Características Principales
+When starting the game for the first time, you can choose your language. The game will save your preference.
 
-- 🔐 **15 servidores únicos** con diferentes dificultades
-- 🧩 **4 mini-juegos**: Firewall, Criptografía, SQL Injection, Puzzles
-- 🏆 **20+ logros** con recompensas
-- 📈 **Sistema de rachas** con bonificaciones
-- 🛒 **8 herramientas** para comprar en la tienda
-- 📅 **Misiones diarias** con recompensa doble
-- 💾 **Sistema de guardado** en JSON
-- 🎨 **4 temas visuales** (Matrix, Cyberpunk, Classic, Dark)
-- 🏆 **Ranking de hackers**
-- 📖 **Guía de usuario integrada**
-- 🔊 **Sonidos** (opcional)
+---
+
+## 🎯 What is this?
+
+**Hacker Simulator 2077** is a terminal-based hacking game where you play as an ethical hacker. Your mission is to infiltrate servers, evade firewalls, crack passwords, and become the best hacker in the digital underworld.
+
+---
+
+## ✨ Features
+
+- 🔐 **20 unique servers** with different difficulties
+- 🧩 **4 mini-games**: Firewall, Cryptography, SQL Injection, Logic Puzzles
+- 🏆 **25+ achievements** with rewards
+- 📈 **Streak system** with bonuses
+- 🛒 **9 tools** to purchase
+- 📅 **Daily missions** with double rewards
+- 💾 **Save/Load system** in JSON
+- 🎨 **4 visual themes** (Matrix, Cyberpunk, Classic, Dark)
+- 🏆 **Hacker ranking system**
+- 📖 **Integrated user guide**
+- 🌍 **Spanish/English** multi-language support
+- 🗑️ **Delete account** option (with confirmation)
 - 🔓 **100% Open Source** (MIT License)
 
-## 🚀 Instalación
+---
 
-### Requisitos
+## 🚀 Installation
+
+### Requirements
 - Python 3.8+
-- pip (gestor de paquetes)
+- pip
 
-### Pasos
+### Steps
 
 ```bash
-# 1. Clona el repositorio
+# 1. Clone the repository
 git clone https://github.com/DlopedDtorred/hacker-simulator.git
 cd hacker-simulator
 
-# 2. Crea y activa un entorno virtual (opcional pero recomendado)
+# 2. Create and activate a virtual environment (optional but recommended)
 python -m venv venv
-source venv/bin/activate  # En Windows: venv\Scripts\activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# 3. Instala las dependencias
+# 3. Install dependencies
 pip install colorama
 
-# 4. Ejecuta el juego
+# 4. Run the game
 python cyberdex.py
 
-```
+``` 
+## 🎮 Quick Guide
+| Key | Action |
+|:---:|--------|
+| **1** | Hack server |
+| **2** | Daily mission (**DOUBLE** reward) |
+| **3** | Train |
+| **4** | Shop |
+| **5** | Statistics |
+| **6** | Ranking |
+| **7** | Settings |
+| **8** | Save game |
+| **9** | User guide |
+| **0** | Exit |
+## Tips for Beginners
+Read the clues - Each server has a clue to help you crack the password
 
-# 🎮 Guía Rápida
-Comandos Básicos
-Comando	Acción
-1	Hackear servidor
-2	Misión diaria
-3	Entrenar
-4	Tienda
-5	Estadísticas
-6	Ranking
-7	Configuración
-8	Guardar partida
-9	Guía de usuario
-0	Salir
-Consejos para Principiantes
-Lee las pistas - Cada servidor tiene una pista que te ayuda a descifrar la contraseña
+Buy tools - The shop has tools that make missions easier
 
-Compra herramientas - La tienda tiene herramientas que facilitan las misiones
+Keep your streak - Consecutive missions give extra bonuses
 
-Mantén la racha - Las misiones consecutivas dan bonificaciones extra
+Daily missions - Give double rewards, don't waste them!
 
-Misiones diarias - Dan el doble de recompensa, ¡no las desperdicies!
+Achievements - Unlock achievements for extra credits
 
-Logros - Desbloquea logros para obtener créditos extra
-# 🛠️ Herramientas Disponibles
-Herramienta	Precio	Descripción
-🔧 Escáner Avanzado	100	+2 intentos en contraseñas
-🛡️ Firewall Bypass	200	Firewalls -1 dificultad
-🔑 Crypto Key	300	Revela pistas extra
-⚡ Quantum Decryptor	500	Descifra mensajes automáticamente
-🔬 Nano Analyzer	700	Analiza servidores en profundidad
-🎯 Matrix Key	1000	Acceso a servidores de élite
-⏳ Chrono Analyzer	1500	Predice contraseñas
-☯️ Omega Key	2500	Acceso total al sistema Omega
-# 🤝 ¿Cómo Colaborar?
-¡Las contribuciones son bienvenidas! Revisa nuestra guía de contribución.
+## 🛠️ Tools Available
+| Tool | Price | Description |
+|------|-------|-------------|
+| 🔧 Advanced Scanner | 100 | +2 password attempts |
+| 🛡️ Firewall Bypass | 200 | Firewalls -1 difficulty |
+| 🔑 Crypto Key | 300 | Reveals extra clues |
+| ⚡ Quantum Decryptor | 500 | Auto-decrypts messages |
+| 🔬 Nano Analyzer | 700 | Analyzes servers in depth |
+| 🎯 Matrix Key | 1000 | Access to elite servers |
+| ⏳ Chrono Analyzer | 1500 | Predicts passwords |
+| ☯️ Omega Key | 2500 | Full access to Omega system |
+| 🌀 Void Key | 5000 | Void access |
+## 🏆 Achievements
+The game includes 25+ achievements that you unlock by completing certain objectives. Each achievement gives you extra credits.
 
-Áreas para contribuir
-Servidores - Añadir nuevos servidores con pistas creativas
+## 🤝 How to Contribute?
+Contributions are welcome! Check our contribution guide.
 
-Mini-juegos - Crear nuevos mini-juegos para entrenamiento
+Areas to contribute
+Servers - Add new servers with creative clues
 
-Herramientas - Añadir herramientas a la tienda
+Mini-games - Create new mini-games
 
-Logros - Expandir el sistema de logros
+Tools - Add tools to the shop
 
-Documentación - Mejorar el README y la guía
+Achievements - Expand the achievement system
 
-Traducciones - Traducir el juego a otros idiomas
+Documentation - Improve the README and guides
 
-Sonidos - Añadir efectos de sonido
+Translations - Add more languages
 
-Issues recomendados para empezar
-🟢 [good first issue] Añadir un nuevo servidor
+Recommended issues to start
+🟢 [good first issue] Add a new server
 
-🟢 [good first issue] Añadir un nuevo mini-juego
+🟢 [good first issue] Add a new mini-game
 
-🟡 [medium] Mejorar el sistema de guardado
+🟡 [medium] Improve the save system
 
-🔴 [hard] Modo multijugador local
+🔴 [hard] Local multiplayer mode
 
-# 📸 Capturas de Pantalla
-<p align="center"> <img src="screenshot1.png" width="400" alt="Menu principal"> <img src="screenshot2.png" width="400" alt="Misión de hackeo"> </p>
-Próximamente: capturas de pantalla
+## 📸 Screenshots
+<p align="center"> <img src="screenshot1.png" width="400" alt="Main menu"> <img src="screenshot2.png" width="400" alt="Hack mission"> </p>
+Screenshots coming soon
 
-# 📚 Documentación
-Guía de Usuario
+## 📚 Documentation
+User Guide
 
-Guía de Contribución
+Contribution Guide
 
-API de Desarrollador
+## 🎯 Roadmap
+v10.0 (Current)
+✅ 20 servers
 
-# 🎯 Roadmap
-v5.0 (Actual)
-✅ 15 servidores
+✅ 25+ achievements
 
-✅ 20+ logros
+✅ Save/Load system
 
-✅ Sistema de guardado
+✅ Daily missions
 
-✅ Misiones diarias
+✅ 4 visual themes
 
-✅ 4 temas visuales
+✅ Multi-language (Spanish/English)
 
-v6.0 (Próximo)
-⬜ Modo multijugador local
+✅ Delete account
 
-⬜ Más mini-juegos
+✅ All features working
 
-⬜ Sistema de clanes
+v11.0 (Next)
+⬜ Local multiplayer mode
 
-⬜ Eventos especiales
+⬜ More mini-games
 
-⬜ Versión web (JavaScript)
+⬜ Clan system
 
-# 📄 Licencia
-Este proyecto está bajo la Licencia MIT - ver el archivo LICENSE para más detalles.
+⬜ Special events
 
-# 🙏 Agradecimientos
-Comunidad Open Source
+⬜ Web version (JavaScript)
 
-Todos los contribuidores
+## 📄 License
+This project is under the MIT License - see the LICENSE file for more details.
 
-Usuarios que reportan bugs y sugieren mejoras
+## 🙏 Acknowledgments
+Open Source Community
 
-# ⭐ Apóyanos
-Si te gusta el proyecto, ¡dale una estrella en GitHub!
+All contributors
+
+Users who report bugs and suggest improvements
+
+## ⭐ Support Us
+If you like the project, give it a star on GitHub!
 
 <p align="center"> <a href="https://github.com/DlopedDtorred/hacker-simulator"> <img src="https://img.shields.io/github/stars/DlopedDtorred/hacker-simulator?style=social" alt="GitHub stars"> </a> </p>
-¡Feliz hacking! 🚀
+Happy hacking! 🚀

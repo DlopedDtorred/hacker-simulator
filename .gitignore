@@ -1,35 +1,38 @@
-Entornos virtuales
+# Virtual environments
 .venv/
 venv/
 env/
 ENV/
 
-Python
-pycache/
+# Python
+__pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-Editores
+# Editors
 .idea/
 .vscode/
 *.iml
 .DS_Store
 
-Archivos locales
+# Local files
 .env
 *.log
 *.db
 *.sqlite
 save.json
+config.json
 
-Tests
+# Tests
 .pytest_cache/
 .coverage
 htmlcov/
 
-Empaquetado
+# Packaging
 *.egg-info/
 dist/
 build/
 
+# Logo generator (don't upload)
+create_logo.py

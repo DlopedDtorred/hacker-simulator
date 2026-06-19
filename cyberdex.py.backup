@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """
-HACKER SIMULATOR 2077 - ULTIMATE EDITION v10.0
-================================================
-Terminal hacking game with multi-language support.
+HACKER SIMULATOR 2077 - ULTIMATE EDITION v9.0
+===============================================
+Terminal hacking game - Simple number menu (no arrow keys required)
 """
 
 import random
@@ -22,7 +22,7 @@ from colorama import init, Fore, Back, Style
 init(autoreset=True, convert=True)
 os.system('cls' if os.name == 'nt' else 'clear')
 
-VERSION = "10.0.0"
+VERSION = "9.0.0"
 AUTHOR = "DlopedDtorred"
 GITHUB_URL = "https://github.com/DlopedDtorred/hacker-simulator"
 CONFIG_FILE = "config.json"
@@ -40,16 +40,12 @@ def load_config():
         return None
 
 def save_config(language, name="Zero_Cool"):
-    config = {
-        "language": language,
-        "name": name,
-        "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    }
+    config = {"language": language, "name": name, "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
     with open(CONFIG_FILE, 'w') as f:
         json.dump(config, f, indent=4)
 
 def first_time_setup():
-    """First-time setup - only appears once"""
+    """First-time setup"""
     os.system('cls' if os.name == 'nt' else 'clear')
     
     print(f"""
@@ -59,8 +55,7 @@ def first_time_setup():
 {Fore.CYAN}╚══════════════════════════════════════════════════════════════════╝{Style.RESET_ALL}
     """)
     
-    # Language selection
-    print(f"\n{Fore.CYAN}📝 Select your language / Selecciona tu idioma:{Style.RESET_ALL}")
+    print(f"\n{Fore.CYAN}📝 Select your language:{Style.RESET_ALL}")
     print("[1] 🇪🇸 Español")
     print("[2] 🇬🇧 English")
     
@@ -74,35 +69,31 @@ def first_time_setup():
                 language = "en"
                 break
             else:
-                print(f"{Fore.RED}❌ Invalid option / Opción inválida{Style.RESET_ALL}")
+                print(f"{Fore.RED}❌ Invalid option{Style.RESET_ALL}")
         except:
             pass
     
-    # Name input
-    print(f"\n{Fore.CYAN}👤 Enter your hacker name / Introduce tu nombre:{Style.RESET_ALL}")
+    print(f"\n{Fore.CYAN}👤 Enter your hacker name:{Style.RESET_ALL}")
     name = input("➡️  ").strip() or "Zero_Cool"
     
     save_config(language, name)
     
-    print(f"\n{Fore.GREEN}✅ Configuration saved! / Configuración guardada!{Style.RESET_ALL}")
-    print(f"{Fore.GREEN}✅ Welcome / Bienvenido, {name}!{Style.RESET_ALL}")
+    print(f"\n{Fore.GREEN}✅ Configuration saved! Welcome, {name}!{Style.RESET_ALL}")
     time.sleep(1.5)
     
     return language, name
 
 def get_text(lang="es"):
-    """Get text dictionary for selected language"""
     if lang == "es":
         return TEXTO_ES
     else:
         return TEXTO_EN
 
 # ============================================
-# TEXT DICTIONARIES (Spanish and English)
+# TEXT DICTIONARIES
 # ============================================
 
 TEXTO_ES = {
-    # Menu
     "menu_hack": "🌐 Hackear servidor",
     "menu_daily": "📅 Misión diaria (¡DOBLE!)",
     "menu_train": "🛠️ Entrenar",
@@ -114,7 +105,6 @@ TEXTO_ES = {
     "menu_guide": "📖 Guía",
     "menu_exit": "🚪 Salir",
     
-    # Settings
     "settings": "⚙️ AJUSTES",
     "change_theme": "🎨 Cambiar tema",
     "change_language": "🌍 Cambiar idioma",
@@ -123,15 +113,12 @@ TEXTO_ES = {
     "themes": "🎨 SELECCIONAR TEMA",
     "current_theme": "Tema actual: {}",
     "language_changed": "✅ Idioma cambiado. Reinicia el juego para aplicar.",
-    "theme_changed": "✅ Tema cambiado a: {}",
     
-    # Delete Account
     "delete_warning": "⚠️ ¡ADVERTENCIA! Esto ELIMINARÁ PERMANENTEMENTE todos tus datos.",
     "confirm_delete": "¿Estás SEGURO? (escribe 'ELIMINAR' para confirmar): ",
     "deleted": "🗑️ Cuenta eliminada permanentemente.",
     "delete_cancelled": "❌ Eliminación cancelada.",
     
-    # Common
     "welcome": "👤 Bienvenido al mundo del hacking digital.",
     "connection": "✅ Conexión establecida. ¡Bienvenido, {}!",
     "guide_hint": "💡 Escribe '9' para la guía.",
@@ -143,8 +130,8 @@ TEXTO_ES = {
     "no_credits": "❌ Sin créditos",
     "purchased": "✅ ¡Comprado!",
     "already_have": "⚠️ Ya la tienes",
+    "theme_changed": "✅ Tema cambiado a: {}",
     
-    # Servers
     "servers": "🌐 SERVIDORES DISPONIBLES:",
     "max_level": "💡 Nivel máx: {}",
     "choose_server": "➡️ Elige: ",
@@ -179,21 +166,18 @@ TEXTO_ES = {
     "extra_protection": "⚠️ Protección adicional...",
     "discovered": "💀 Descubierto.",
     
-    # Daily
     "daily_mission": "📅 MISIÓN DIARIA",
     "already_done": "⚠️ Ya completaste la de hoy.",
     "today_mission": "🌟 Misión de hoy:",
     "double_reward": "💰 Recompensa: {} créditos (¡DOBLE!)",
     "daily_complete": "🎉 ¡MISIÓN DIARIA COMPLETADA!",
     
-    # Shop
     "shop": "🛒 TIENDA DE HERRAMIENTAS",
     "your_tools": "🛠️ Tus herramientas: {}",
     "buy_exp": "💰 Comprar EXP (100 créditos = 10 EXP)",
     "exit_shop": "🚪 Salir",
     "exp_gained": "✅ +10 EXP",
     
-    # Stats
     "stats": "📊 ESTADÍSTICAS DE {}",
     "progress": "📈 Progreso:",
     "level": "  • Nivel: {}",
@@ -213,12 +197,10 @@ TEXTO_ES = {
     "achievements": "🏆 Logros ({}/{}):",
     "no_achievements": "  • Ninguno",
     
-    # Ranking
     "ranking": "🏆 RANKING DE HACKERS",
     "position": "Posición │ Hacker │ Nivel │ Misiones",
     "rank_up": "💡 Completa misiones para subir.",
     
-    # Training
     "training": "🛠️ ENTRENAMIENTO",
     "firewall": "Firewall",
     "cryptography": "Criptografía",
@@ -226,7 +208,6 @@ TEXTO_ES = {
     "puzzles": "Puzzles",
     "keep_practicing": "💪 Sigue practicando",
     
-    # Guide
     "guide": "📖 GUÍA DE USUARIO",
     "guide_text": """
 🎯 ¿QUÉ ES?
@@ -266,7 +247,6 @@ y descifra contraseñas usando pistas.
 }
 
 TEXTO_EN = {
-    # Menu
     "menu_hack": "🌐 Hack server",
     "menu_daily": "📅 Daily mission (DOUBLE!)",
     "menu_train": "🛠️ Train",
@@ -278,7 +258,6 @@ TEXTO_EN = {
     "menu_guide": "📖 Guide",
     "menu_exit": "🚪 Exit",
     
-    # Settings
     "settings": "⚙️ SETTINGS",
     "change_theme": "🎨 Change theme",
     "change_language": "🌍 Change language",
@@ -287,15 +266,12 @@ TEXTO_EN = {
     "themes": "🎨 SELECT THEME",
     "current_theme": "Current theme: {}",
     "language_changed": "✅ Language changed. Restart the game to apply.",
-    "theme_changed": "✅ Theme changed to: {}",
     
-    # Delete Account
     "delete_warning": "⚠️ WARNING! This will PERMANENTLY DELETE all your data.",
     "confirm_delete": "Are you SURE? (type 'DELETE' to confirm): ",
     "deleted": "🗑️ Account permanently deleted.",
     "delete_cancelled": "❌ Deletion cancelled.",
     
-    # Common
     "welcome": "👤 Welcome to the world of digital hacking.",
     "connection": "✅ Connection established. Welcome, {}!",
     "guide_hint": "💡 Type '9' for the guide.",
@@ -307,8 +283,8 @@ TEXTO_EN = {
     "no_credits": "❌ Not enough credits",
     "purchased": "✅ Purchased!",
     "already_have": "⚠️ You already have it",
+    "theme_changed": "✅ Theme changed to: {}",
     
-    # Servers
     "servers": "🌐 AVAILABLE SERVERS:",
     "max_level": "💡 Max level: {}",
     "choose_server": "➡️ Choose: ",
@@ -343,21 +319,18 @@ TEXTO_EN = {
     "extra_protection": "⚠️ Extra protection...",
     "discovered": "💀 Discovered.",
     
-    # Daily
     "daily_mission": "📅 DAILY MISSION",
     "already_done": "⚠️ You already completed today's mission.",
     "today_mission": "🌟 Today's mission:",
     "double_reward": "💰 Reward: {} credits (DOUBLE!)",
     "daily_complete": "🎉 DAILY MISSION COMPLETED!",
     
-    # Shop
     "shop": "🛒 TOOL SHOP",
     "your_tools": "🛠️ Your tools: {}",
     "buy_exp": "💰 Buy EXP (100 credits = 10 EXP)",
     "exit_shop": "🚪 Exit",
     "exp_gained": "✅ +10 EXP",
     
-    # Stats
     "stats": "📊 STATISTICS OF {}",
     "progress": "📈 Progress:",
     "level": "  • Level: {}",
@@ -377,12 +350,10 @@ TEXTO_EN = {
     "achievements": "🏆 Achievements ({}/{}):",
     "no_achievements": "  • None",
     
-    # Ranking
     "ranking": "🏆 HACKER RANKING",
     "position": "Position │ Hacker │ Level │ Missions",
     "rank_up": "💡 Complete missions to rank up.",
     
-    # Training
     "training": "🛠️ TRAINING",
     "firewall": "Firewall",
     "cryptography": "Cryptography",
@@ -390,7 +361,6 @@ TEXTO_EN = {
     "puzzles": "Puzzles",
     "keep_practicing": "💪 Keep practicing",
     
-    # Guide
     "guide": "📖 USER GUIDE",
     "guide_text": """
 🎯 WHAT IS IT?
@@ -444,7 +414,7 @@ def get_theme(name):
     return THEMES.get(name, THEMES["matrix"])
 
 # ============================================
-# DATA - 20 SERVERS WITH LOGICAL CLUES
+# DATA
 # ============================================
 
 SERVERS = [
@@ -457,44 +427,44 @@ SERVERS = [
      "clue_en": "👿 The number of the beast without the final 6 (three digits)",
      "password": "666", "desc_es": "Custodia en red oscura", "desc_en": "Dark web custody"},
     {"id": "SRV-003", "name": "ShadowNet", "difficulty": 2, "reward": 300,
-     "clue_es": "🏢 Fundado en el año del estreno de 'El Hobbit' (2015)",
-     "clue_en": "🏢 Founded in the year 'The Hobbit' premiered (2015)",
+     "clue_es": "🏢 Fundado en el año del estreno de 'El Hobbit' (20XX)",
+     "clue_en": "🏢 Founded in the year 'The Hobbit' premiered (20XX)",
      "password": "2015", "desc_es": "Red de datos sombra", "desc_en": "Shadow data network"},
     {"id": "SRV-004", "name": "CyberDyne Systems", "difficulty": 3, "reward": 400,
-     "clue_es": "🎬 Blade Runner se estrenó en 2019 (año de la película)",
-     "clue_en": "🎬 Blade Runner was released in 2019 (the movie year)",
+     "clue_es": "🎬 Blade Runner se estrenó en el año de la película de culto (20XX)",
+     "clue_en": "🎬 Blade Runner was released in the cult movie year (20XX)",
      "password": "2019", "desc_es": "Sistemas de IA", "desc_en": "AI systems"},
     {"id": "SRV-005", "name": "NeoTokyo Grid", "difficulty": 4, "reward": 600,
-     "clue_es": "🇯🇵 Código postal de Shibuya: 150-0042 (sin guión)",
-     "clue_en": "🇯🇵 Shibuya postal code: 150-0042 (without dash)",
+     "clue_es": "🇯🇵 Código postal de Shibuya (empieza por 15 y termina en 42)",
+     "clue_en": "🇯🇵 Shibuya postal code (starts with 15 and ends with 42)",
      "password": "1500042", "desc_es": "Red de ciudad digital", "desc_en": "Digital city network"},
     {"id": "SRV-006", "name": "A.I. Core", "difficulty": 5, "reward": 1000,
-     "clue_es": "🔢 Fibonacci: 1,1,2,3,5,8,13... el número en la posición 13 es 233",
-     "clue_en": "🔢 Fibonacci: 1,1,2,3,5,8,13... the number at position 13 is 233",
+     "clue_es": "🔢 Fibonacci: 1,1,2,3,5,8,13... el número en la posición 13",
+     "clue_en": "🔢 Fibonacci: 1,1,2,3,5,8,13... the number at position 13",
      "password": "233", "desc_es": "Núcleo de IA", "desc_en": "AI Core"},
     {"id": "SRV-007", "name": "Quantum Nexus", "difficulty": 6, "reward": 1500,
-     "clue_es": "⚛️ Constante de Planck: 6.626... (primeros 3 dígitos: 662)",
-     "clue_en": "⚛️ Planck constant: 6.626... (first 3 digits: 662)",
+     "clue_es": "⚛️ Constante de Planck: 6.626... (primeros 3 dígitos)",
+     "clue_en": "⚛️ Planck constant: 6.626... (first 3 digits)",
      "password": "662", "desc_es": "Servidor cuántico", "desc_en": "Quantum server"},
     {"id": "SRV-008", "name": "NanoTech Labs", "difficulty": 7, "reward": 2000,
      "clue_es": "🔬 El carbono es el elemento número 6 de la tabla periódica",
      "clue_en": "🔬 Carbon is element number 6 on the periodic table",
      "password": "6", "desc_es": "Laboratorio nanotecnológico", "desc_en": "Nanotech lab"},
     {"id": "SRV-009", "name": "Matrix Archive", "difficulty": 8, "reward": 3000,
-     "clue_es": "🎬 La habitación de Neo en 'The Matrix' es la 303",
-     "clue_en": "🎬 Neo's room in 'The Matrix' is 303",
+     "clue_es": "🎬 La habitación de Neo en 'The Matrix' es la número 303",
+     "clue_en": "🎬 Neo's room in 'The Matrix' is number 303",
      "password": "303", "desc_es": "Archivo de la resistencia", "desc_en": "Resistance archive"},
     {"id": "SRV-010", "name": "ChronoCore", "difficulty": 9, "reward": 5000,
-     "clue_es": "⏳ El ADN fue descubierto en 1953",
-     "clue_en": "⏳ DNA was discovered in 1953",
+     "clue_es": "⏳ El ADN fue descubierto en 1953 (año del descubrimiento)",
+     "clue_en": "⏳ DNA was discovered in 1953 (the year of discovery)",
      "password": "1953", "desc_es": "Base de datos temporal", "desc_en": "Temporal database"},
     {"id": "SRV-011", "name": "Omega Station", "difficulty": 10, "reward": 10000,
-     "clue_es": "☯️ 666 (número de la bestia) × 7 (número de la suerte) = 4662",
-     "clue_en": "☯️ 666 (number of the beast) × 7 (lucky number) = 4662",
+     "clue_es": "☯️ 666 (número de la bestia) × 7 (número de la suerte)",
+     "clue_en": "☯️ 666 (number of the beast) × 7 (lucky number)",
      "password": "4662", "desc_es": "El servidor definitivo", "desc_en": "The ultimate server"},
     {"id": "SRV-012", "name": "Void Network", "difficulty": 9, "reward": 4500,
-     "clue_es": "🔮 7 (número de la suerte) elevado al cubo = 343",
-     "clue_en": "🔮 7 (lucky number) cubed = 343",
+     "clue_es": "🔮 7 (número de la suerte) elevado al cubo",
+     "clue_en": "🔮 7 (lucky number) cubed",
      "password": "343", "desc_es": "Red en el vacío digital", "desc_en": "Digital void network"},
     {"id": "SRV-013", "name": "Eclipse Core", "difficulty": 11, "reward": 15000,
      "clue_es": "🌑 El primer eclipse total del siglo XXI fue en 2001",
@@ -521,18 +491,14 @@ SERVERS = [
      "clue_en": "🔥 The Phoenix series was revived in 2002",
      "password": "2002", "desc_es": "Protocolo de resurrección", "desc_en": "Resurrection protocol"},
     {"id": "SRV-019", "name": "Eternal Archive", "difficulty": 18, "reward": 100000,
-     "clue_es": "∞ El símbolo del infinito es un 8 acostado",
-     "clue_en": "∞ The infinity symbol is a sideways 8",
+     "clue_es": "∞ El símbolo del infinito es un 8 acostado (8)",
+     "clue_en": "∞ The infinity symbol is a sideways 8 (8)",
      "password": "8", "desc_es": "Archivo eterno", "desc_en": "Eternal archive"},
     {"id": "SRV-020", "name": "Omega Point", "difficulty": 20, "reward": 200000,
-     "clue_es": "☯️ 666 × 666 = 443556",
-     "clue_en": "☯️ 666 × 666 = 443556",
+     "clue_es": "☯️ 666 × 666 = ?",
+     "clue_en": "☯️ 666 × 666 = ?",
      "password": "443556", "desc_es": "El punto final de todo", "desc_en": "The final point"}
 ]
-
-# ============================================
-# ACHIEVEMENTS (25+)
-# ============================================
 
 ACHIEVEMENTS = {
     "first_hack": {"name_es": "🚀 Primer Hackeo", "name_en": "🚀 First Hack", "desc_es": "Completa tu primera misión", "desc_en": "Complete your first mission", "reward": 50},
@@ -883,8 +849,8 @@ def show_header():
 {Fore.GREEN}║  {Fore.CYAN}██╔══██║██╔══██║██║     ██╔═██╗ ██╔══╝  ██╔══██╗ {Fore.GREEN}       ║
 {Fore.GREEN}║  {Fore.CYAN}██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██║  ██║ {Fore.GREEN}       ║
 {Fore.GREEN}║  {Fore.CYAN}╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ {Fore.GREEN}       ║
-{Fore.GREEN}║     {Fore.YELLOW}HACKER SIMULATOR 2077 - ULTIMATE EDITION v{VERSION}{Fore.GREEN}║
-{Fore.GREEN}║     {Fore.WHITE}by {AUTHOR} {Fore.GREEN}| {Fore.CYAN}⭐ {GITHUB_URL}{Fore.GREEN}║
+{Fore.GREEN}║     {Fore.YELLOW}HACKER SIMULATOR 2077 - ULTIMATE EDITION v{VERSION}{Fore.GREEN} ║
+{Fore.GREEN}║     {Fore.WHITE}by {AUTHOR} {Fore.GREEN}| {Fore.CYAN}⭐ {GITHUB_URL}{Fore.GREEN}     ║
 {Fore.GREEN}╚══════════════════════════════════════════════════════════════════╝{Style.RESET_ALL}
 """)
 
@@ -914,9 +880,7 @@ def hack_mission(hacker, server, lang="es"):
     max_attempts = max(3, 5 - server['difficulty'] // 2)
     if not MiniGames.firewall_memory(server['difficulty'], max_attempts, lang):
         print(f"\n{Fore.RED}{text['mission_failed']}{Style.RESET_ALL}")
-        hacker.failures += 1
-        hacker.current_streak = 0
-        return False
+        hacker.failures += 1; hacker.current_streak = 0; return False
     
     print(f"\n{Fore.CYAN}{text['phase2']}{Style.RESET_ALL}")
     print(f"{Fore.YELLOW}{text['clue']}: {get_clue(server, lang)}{Style.RESET_ALL}")
@@ -940,9 +904,7 @@ def hack_mission(hacker, server, lang="es"):
     if not correct:
         print(f"\n{Fore.RED}{text['password_failed']}{Style.RESET_ALL}")
         print(f"{Fore.YELLOW}{text['real_password'].format(server['password'])}{Style.RESET_ALL}")
-        hacker.failures += 1
-        hacker.current_streak = 0
-        return False
+        hacker.failures += 1; hacker.current_streak = 0; return False
     
     if server['difficulty'] >= 5:
         print(f"\n{Fore.CYAN}{text['phase3']}{Style.RESET_ALL}")
@@ -950,34 +912,23 @@ def hack_mission(hacker, server, lang="es"):
         mini = random.choice([MiniGames.caesar_cipher, MiniGames.sql_injection, MiniGames.logic_puzzle])
         if not mini(server['difficulty'], lang):
             print(f"{Fore.RED}{text['discovered']}{Style.RESET_ALL}")
-            hacker.failures += 1
-            hacker.current_streak = 0
-            return False
+            hacker.failures += 1; hacker.current_streak = 0; return False
     
     print(f"\n{Fore.GREEN}{'═'*50}")
     print(f"🎉 {text['mission_complete']}")
     print(f"{'═'*50}{Style.RESET_ALL}")
-    reward = server['reward']
-    bonus = min(hacker.current_streak * 25, 200)
-    total = reward + bonus
-    if hacker.level >= 5:
-        total = int(total * 1.2)
-    hacker.credits += total
-    hacker.missions_completed += 1
-    hacker.current_streak += 1
-    if hacker.current_streak > hacker.best_streak:
-        hacker.best_streak = hacker.current_streak
-    if server['name'] not in hacker.hacked_servers:
-        hacker.hacked_servers.append(server['name'])
+    reward = server['reward']; bonus = min(hacker.current_streak * 25, 200); total = reward + bonus
+    if hacker.level >= 5: total = int(total * 1.2)
+    hacker.credits += total; hacker.missions_completed += 1; hacker.current_streak += 1
+    if hacker.current_streak > hacker.best_streak: hacker.best_streak = hacker.current_streak
+    if server['name'] not in hacker.hacked_servers: hacker.hacked_servers.append(server['name'])
     hacker.last_mission = server['name']
     exp = server['difficulty'] * 5 + hacker.current_streak * 2
     hacker.gain_exp(exp)
     print(f"{Fore.GREEN}{text['reward_total'].format(total)}")
     print(f"{text['exp_total'].format(exp)}")
-    if bonus > 0:
-        print(f"{text['streak_bonus'].format(bonus)}")
-    if hacker.current_streak >= 3:
-        print(f"{Fore.MAGENTA}{text['streak_current'].format(hacker.current_streak)}{Style.RESET_ALL}")
+    if bonus > 0: print(f"{text['streak_bonus'].format(bonus)}")
+    if hacker.current_streak >= 3: print(f"{Fore.MAGENTA}{text['streak_current'].format(hacker.current_streak)}{Style.RESET_ALL}")
     hacker.check_achievements(lang)
     return True
 
@@ -988,8 +939,7 @@ def daily_mission(hacker, lang="es"):
     print(f"{'═'*50}{Style.RESET_ALL}")
     if hacker.daily_done:
         print(f"{Fore.YELLOW}{text['already_done']}{Style.RESET_ALL}")
-        input(f"\n{Fore.CYAN}⏎ Enter...{Style.RESET_ALL}")
-        return
+        input(f"\n{Fore.CYAN}⏎ Enter...{Style.RESET_ALL}"); return
     available = [s for s in SERVERS if s['difficulty'] <= 5]
     server = random.choice(available)
     print(f"{Fore.YELLOW}{text['today_mission']}{Style.RESET_ALL}")
@@ -998,31 +948,24 @@ def daily_mission(hacker, lang="es"):
     print(f"{Fore.CYAN}{text['clue']}: {get_clue(server, lang)}{Style.RESET_ALL}")
     print(f"\n{Fore.CYAN}{text['phase1']}{Style.RESET_ALL}")
     if not MiniGames.firewall_memory(server['difficulty'], 4, lang):
-        print(f"{Fore.RED}{text['mission_failed']}{Style.RESET_ALL}")
-        return
+        print(f"{Fore.RED}{text['mission_failed']}{Style.RESET_ALL}"); return
     print(f"\n{Fore.CYAN}{text['phase2']}{Style.RESET_ALL}")
-    attempts = 3
-    correct = False
+    attempts = 3; correct = False
     while attempts > 0 and not correct:
         print(f"\n{Fore.CYAN}{text['attempts_left'].format(attempts)}{Style.RESET_ALL}")
         password = input("➡️  Password: ").strip().lower()
         if password == server['password']:
-            correct = True
-            print(f"{Fore.GREEN}{text['password_correct']}{Style.RESET_ALL}")
+            correct = True; print(f"{Fore.GREEN}{text['password_correct']}{Style.RESET_ALL}")
         else:
             attempts -= 1
-            if attempts > 0:
-                print(f"{Fore.RED}{text['password_incorrect']}{Style.RESET_ALL}")
+            if attempts > 0: print(f"{Fore.RED}{text['password_incorrect']}{Style.RESET_ALL}")
     if not correct:
-        print(f"{Fore.RED}{text['password_failed']}{Style.RESET_ALL}")
-        return
+        print(f"{Fore.RED}{text['password_failed']}{Style.RESET_ALL}"); return
     print(f"\n{Fore.GREEN}{'═'*50}")
     print(f"🎉 {text['daily_complete']}")
     print(f"{'═'*50}{Style.RESET_ALL}")
     reward = server['reward'] * 2
-    hacker.credits += reward
-    hacker.missions_completed += 1
-    hacker.daily_done = True
+    hacker.credits += reward; hacker.missions_completed += 1; hacker.daily_done = True
     hacker.last_daily = datetime.now().strftime("%Y-%m-%d")
     exp = server['difficulty'] * 8
     hacker.gain_exp(exp)
@@ -1059,24 +1002,20 @@ def shop(hacker, lang="es"):
     print("[0] 🚪 Exit")
     try:
         option = int(input("\n➡️  ").strip())
-        if option == 0:
-            return
+        if option == 0: return
         elif option == 9:
             if hacker.credits >= 100:
-                hacker.credits -= 100
-                hacker.gain_exp(10)
+                hacker.credits -= 100; hacker.gain_exp(10)
                 print(f"{Fore.GREEN}{text['exp_gained']}{Style.RESET_ALL}")
             else:
                 print(f"{Fore.RED}{text['no_credits']}{Style.RESET_ALL}")
-            time.sleep(1)
-            return
+            time.sleep(1); return
         elif 1 <= option <= len(items):
             item = items[option-1]
             if item['name'] in hacker.tools:
                 print(f"{Fore.YELLOW}{text['already_have']}{Style.RESET_ALL}")
             elif hacker.credits >= item['price']:
-                hacker.credits -= item['price']
-                hacker.tools.append(item['name'])
+                hacker.credits -= item['price']; hacker.tools.append(item['name'])
                 print(f"{Fore.GREEN}{text['purchased']}{Style.RESET_ALL}")
                 hacker.check_achievements(lang)
             else:
@@ -1179,7 +1118,7 @@ def settings_menu(hacker, lang="es"):
                     print(f"{Fore.RED}{text['invalid']}{Style.RESET_ALL}")
                     time.sleep(1)
             elif choice == "2":
-                print(f"\n{Fore.CYAN}🌍 Select language / Selecciona idioma:{Style.RESET_ALL}")
+                print(f"\n{Fore.CYAN}🌍 Select language:{Style.RESET_ALL}")
                 print("[1] 🇪🇸 Español")
                 print("[2] 🇬🇧 English")
                 l_choice = input("➡️  ").strip()
