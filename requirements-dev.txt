@@ -1,0 +1,9 @@
+colorama>=0.4.4
+setuptools>=45
+wheel
+build
+pytest>=7.0
+pytest-cov
+black
+flake8
+mypy

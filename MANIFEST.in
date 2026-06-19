@@ -1,0 +1,6 @@
+include README.md
+include LICENSE
+include CONTRIBUTING.md
+include requirements.txt
+include logo.png
+recursive-include docs *.md

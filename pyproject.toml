@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hacker-simulator-2077"
+version = "10.0.0"
+description = "Hacker Simulator 2077 - Terminal-based hacking game"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "DlopedDtorred", email = "tu-email@ejemplo.com"},
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: End Users/Desktop",
+    "Topic :: Games/Entertainment",
+    "Topic :: Security",
+]
+dependencies = [
+    "colorama>=0.4.4",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/DlopedDtorred/hacker-simulator"
+"Bug Reports" = "https://github.com/DlopedDtorred/hacker-simulator/issues"
+"Source" = "https://github.com/DlopedDtorred/hacker-simulator"
+
+[project.scripts]
+hacker-simulator = "cyberdex:main"
+
+[tool.setuptools]
+py-modules = ["cyberdex"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"*" = ["*.txt", "*.md", "*.json"]
