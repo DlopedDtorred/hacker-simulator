@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hacker Simulator 2077 – Open Source Hacking Game</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
 
     <!-- ===== FONTS & ICONS ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -11,13 +12,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="style.css" />
+
     <style>
         /* ============================================================
-                   RESET & BASE
-                   ============================================================ */
-        *,
-        *::before,
-        *::after {
+           RESET & BASE
+           ============================================================ */
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -67,8 +69,8 @@
         }
 
         /* ============================================================
-                   SCROLLBAR
-                   ============================================================ */
+           SCROLLBAR
+           ============================================================ */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -81,8 +83,8 @@
         }
 
         /* ============================================================
-                   HEADER / NAV
-                   ============================================================ */
+           HEADER / NAV
+           ============================================================ */
         header {
             width: 100%;
             padding: 20px 0 16px;
@@ -176,8 +178,8 @@
         }
 
         /* ============================================================
-                   HERO
-                   ============================================================ */
+           HERO
+           ============================================================ */
         .hero {
             padding: 80px 0 60px;
             text-align: center;
@@ -258,17 +260,6 @@
             transform: scale(1.03);
         }
 
-        .btn-download {
-            background: #1a2a1a;
-            color: var(--green);
-            border: 1px solid var(--green);
-        }
-        .btn-download:hover {
-            background: var(--green);
-            color: #0a0a0a;
-            transform: scale(1.03);
-        }
-
         .hero-stats {
             display: flex;
             justify-content: center;
@@ -296,8 +287,8 @@
         }
 
         /* ============================================================
-                   FEATURES
-                   ============================================================ */
+           SECTIONS
+           ============================================================ */
         .section {
             padding: 70px 0;
             border-top: 1px solid var(--border);
@@ -322,6 +313,9 @@
             font-size: 17px;
         }
 
+        /* ============================================================
+           FEATURES
+           ============================================================ */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -362,8 +356,8 @@
         }
 
         /* ============================================================
-                   DOWNLOAD
-                   ============================================================ */
+           DOWNLOAD
+           ============================================================ */
         .download-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -426,8 +420,8 @@
         }
 
         /* ============================================================
-                   CONTRIBUTE
-                   ============================================================ */
+           CONTRIBUTE
+           ============================================================ */
         .contribute-steps {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -475,8 +469,8 @@
         }
 
         /* ============================================================
-                   GUIDE
-                   ============================================================ */
+           GUIDE
+           ============================================================ */
         .guide-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -533,8 +527,8 @@
         }
 
         /* ============================================================
-                   FOOTER
-                   ============================================================ */
+           FOOTER
+           ============================================================ */
         footer {
             width: 100%;
             padding: 40px 0 30px;
@@ -570,8 +564,8 @@
         }
 
         /* ============================================================
-                   RESPONSIVE
-                   ============================================================ */
+           RESPONSIVE
+           ============================================================ */
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -656,7 +650,7 @@
                 <a href="https://github.com/DlopedDtorred/hacker-simulator" target="_blank" class="btn btn-secondary">
                     <i class="fab fa-github"></i> View on GitHub
                 </a>
-                <a href="#guide" class="btn btn-secondary">
+                <a href="guides/guide.html" class="btn btn-secondary">
                     <i class="fas fa-book"></i> Read Guide
                 </a>
             </div>
@@ -835,25 +829,25 @@
                     <span class="guide-icon">🎮</span>
                     <h4>Controls</h4>
                     <p>1=Hack · 2=Daily · 3=Train · 4=Shop · 5=Stats · 6=Ranking · 7=Settings · 8=Save · 9=Guide · 0=Exit</p>
-                    <a href="https://github.com/DlopedDtorred/hacker-simulator/blob/main/docs/GUIDE.md" target="_blank" class="btn-sm">Read More</a>
+                    <a href="guides/guide.html" class="btn-sm">Read More</a>
                 </div>
                 <div class="guide-card">
                     <span class="guide-icon">🔐</span>
                     <h4>How to Hack</h4>
                     <p>1. Choose a server. 2. Evade the firewall. 3. Crack the password using the clue.</p>
-                    <a href="https://github.com/DlopedDtorred/hacker-simulator/blob/main/docs/GUIDE.md#gameplay-guide" target="_blank" class="btn-sm">Read More</a>
+                    <a href="guides/guide.html#how-to-hack" class="btn-sm">Read More</a>
                 </div>
                 <div class="guide-card">
                     <span class="guide-icon">🛠️</span>
                     <h4>Tools</h4>
                     <p>Buy tools in the shop: Advanced Scanner, Firewall Bypass, Crypto Key, and more.</p>
-                    <a href="https://github.com/DlopedDtorred/hacker-simulator/blob/main/docs/GUIDE.md#tools" target="_blank" class="btn-sm">Read More</a>
+                    <a href="guides/guide.html#tools" class="btn-sm">Read More</a>
                 </div>
                 <div class="guide-card">
                     <span class="guide-icon">🏆</span>
                     <h4>Achievements</h4>
                     <p>Unlock 25+ achievements for extra credits and rewards.</p>
-                    <a href="https://github.com/DlopedDtorred/hacker-simulator/blob/main/docs/GUIDE.md#achievements" target="_blank" class="btn-sm">Read More</a>
+                    <a href="guides/guide.html#achievements" class="btn-sm">Read More</a>
                 </div>
             </div>
         </section>
