@@ -7,7 +7,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 <p align="center">
-  <img src="logo.png" width="300" alt="Hacker Simulator 2077 Logo">
+  <img src="docs/img/logo.png" width="300" alt="Hacker Simulator 2077 Logo">
 </p>
 
 ## 🌍 Multi-Language Support
