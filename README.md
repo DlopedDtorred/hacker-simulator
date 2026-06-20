@@ -181,5 +181,8 @@ Users who report bugs and suggest improvements
 ## ⭐ Support Us
 If you like the project, give it a star on GitHub!
 
+## Web
+https://dlopeddtorred.github.io/hacker-simulator/
+
 <p align="center"> <a href="https://github.com/DlopedDtorred/hacker-simulator"> <img src="https://img.shields.io/github/stars/DlopedDtorred/hacker-simulator?style=social" alt="GitHub stars"> </a> </p>
 Happy hacking! 🚀
