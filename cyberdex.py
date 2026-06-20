@@ -57,7 +57,7 @@ def check_for_updates():
 init(autoreset=True, convert=True)
 os.system('cls' if os.name == 'nt' else 'clear')
 
-VERSION = "10.0.0"
+VERSION = "10.0.02"
 AUTHOR = "DlopedDtorred"
 GITHUB_URL = "https://github.com/DlopedDtorred/hacker-simulator"
 CONFIG_FILE = "config.json"
