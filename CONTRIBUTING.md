@@ -12,7 +12,7 @@ Please be respectful to other contributors. We welcome everyone regardless of ex
 2. **Clone your fork:**
 
 ```bash
-git clone https://github.com/your-username/hacker-simulator.git
+git clone https://github.com/dlopeddtorred/hacker-simulator.git
 cd hacker-simulator
 ```
 ### Install dependencies:
