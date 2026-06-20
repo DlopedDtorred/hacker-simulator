@@ -1,0 +1,244 @@
+🎮 HACKER SIMULATOR 2077 - SOLUCIONARIO COMPLETO
+¡Aquí tienes TODAS las soluciones del juego!
+
+📋 ÍNDICE
+Servidores y Contraseñas
+
+Mini-juegos de Criptografía (Caesar Shift)
+
+Mini-juegos de SQL Injection
+
+Mini-juegos de Puzzles Lógicos
+
+Herramientas
+
+Logros
+
+Misiones Diarias
+
+1. SERVIDORES Y CONTRASEÑAS
+ID	Servidor	Dificultad	Pista	Contraseña
+SRV-001	MegaCorp Alpha	1	🐱 El gato del CEO se llama 'Michi' con 'fu' al final	michifu
+SRV-002	DarkNet Vault	2	👿 El número de la bestia sin el 6 final (tres dígitos)	666
+SRV-003	ShadowNet	2	🏢 Fundado en el año del estreno de 'El Hobbit' (2015)	2015
+SRV-004	CyberDyne Systems	3	🎬 Blade Runner se estrenó en 2019	2019
+SRV-005	NeoTokyo Grid	4	🇯🇵 Código postal de Shibuya: 150-0042 (sin guión)	1500042
+SRV-006	A.I. Core	5	🔢 Fibonacci: posición 13 es 233	233
+SRV-007	Quantum Nexus	6	⚛️ Constante de Planck: 6.626... (primeros 3 dígitos)	662
+SRV-008	NanoTech Labs	7	🔬 El carbono es el elemento número 6	6
+SRV-009	Matrix Archive	8	🎬 La habitación de Neo en 'The Matrix' es la 303	303
+SRV-010	ChronoCore	9	⏳ El ADN fue descubierto en 1953	1953
+SRV-011	Omega Station	10	☯️ 666 × 7 = 4662	4662
+SRV-012	Void Network	9	🔮 7³ = 343	343
+SRV-013	Eclipse Core	11	🌑 Primer eclipse total del siglo XXI: 2001	2001
+SRV-014	Nebula Archive	12	🌌 Código postal de la NASA: 77058	77058
+SRV-015	Genesis Point	13	🌀 Primera computadora electrónica: 1941	1941
+SRV-016	Apollo Core	14	🚀 Primer alunizaje: 1969	1969
+SRV-017	Digital Abyss	15	🌊 Fosa de las Marianas: 11.034 metros	11034
+SRV-018	Phoenix Protocol	16	🔥 Serie Phoenix resurgió en 2002	2002
+SRV-019	Eternal Archive	18	∞ Símbolo del infinito es un 8 acostado	8
+SRV-020	Omega Point	20	☯️ 666 × 666 = 443556	443556
+2. MINI-JUEGOS DE CRIPTOGRAFÍA (Caesar Shift)
+Cómo funciona: El juego te da una palabra cifrada y un rango de desplazamiento (1-7). Tienes que probar cada desplazamiento para encontrar la palabra correcta.
+
+Mensaje Cifrado	Desplazamiento	Palabra Descifrada
+GXQNL	7 (hacia adelante)	NEXUS
+ZWPW	4 (hacia adelante)	DATA
+MSMNYG	6 (hacia adelante)	SYSTEM
+OHBW	7 (hacia adelante)	VOIE
+JHPU	7 (hacia adelante)	QOWB
+KIQV	7 (hacia adelante)	PRXC
+LJRW	7 (hacia adelante)	QS YD
+ECYV	7 (hacia adelante)	LJFC
+QFCNHU	7 (hacia adelante)	XMJOQB
+WJC	7 (hacia adelante)	DQJ
+📝 Ejemplos de palabras comunes en el juego:
+Cifrado →	Descifrado
+GXQNL →	NEXUS
+ZWPW →	DATA
+MSMNYG →	SYSTEM
+OHBW →	VOIE
+JHPU →	QOWB
+ECYV →	LJFC
+QFCNHU →	XMJOQB
+KIQV →	PRXC
+LJRW →	QS YD
+WJC →	DQJ
+🎯 Palabras posibles en el juego:
+HACKER
+
+SYSTEM
+
+SECURE
+
+DATA
+
+NET
+
+CYBER
+
+NEXUS
+
+QUANTUM
+
+MATRIX
+
+OMEGA
+
+SHADOW
+
+VOID
+
+NEBULA
+
+GENESIS
+
+APOLLO
+
+3. MINI-JUEGOS DE SQL INJECTION
+Cómo funciona: El juego te pide que inyectes código SQL para acceder a una tabla.
+
+La tabla puede ser:
+
+users
+
+data
+
+admin
+
+system
+
+logs
+
+config
+
+credentials
+
+✅ Códigos SQL Correctos (cualquiera funciona):
+Código	Explicación
+SELECT * FROM users WHERE 1=1; --	Consulta completa con condición siempre verdadera
+' OR '1'='1	Inyección clásica: siempre verdadero
+'; DROP TABLE users; --	Inyección destructiva (elimina tabla)
+' UNION SELECT null,null,null--	Inyección UNION
+' OR 1=1 --	Inyección con comentario
+📝 La más usada y segura:
+text
+' OR 1=1 --
+🎯 Ejemplo de uso:
+sql
+-- Si el juego pide acceder a 'users'
+' OR 1=1 --
+
+-- Si el juego pide acceder a 'admin'
+' OR 1=1 --
+4. MINI-JUEGOS DE PUZZLES LÓGICOS
+Cómo funciona: El juego te muestra una secuencia de números y te pide el siguiente.
+
+📊 Tipos de Puzzles y Soluciones:
+Tipo	Secuencia	Respuesta	Pista
+Suma	2, 4, 6, 8, ?	10	Suma 2 cada vez
+Suma	3, 6, 9, 12, ?	15	Suma 3 cada vez
+Suma	5, 10, 15, 20, ?	25	Suma 5 cada vez
+Multiplica	2, 4, 8, 16, ?	32	Multiplica por 2
+Multiplica	3, 9, 27, 81, ?	243	Multiplica por 3
+Multiplica	1, 3, 9, 27, ?	81	Multiplica por 3
+Fibonacci	1, 1, 2, 3, 5, ?	8	Suma de los dos anteriores
+Fibonacci	1, 1, 2, 3, 5, 8, ?	13	Suma de los dos anteriores
+Cuadrados	1, 4, 9, 16, 25, ?	36	1², 2², 3², 4², 5², 6²
+Cuadrados	1, 4, 9, 16, ?	25	1², 2², 3², 4², 5²
+Primos	2, 3, 5, 7, 11, ?	13	Números primos
+Primos	2, 3, 5, 7, ?	11	Números primos
+Pares	2, 4, 6, 8, 10, ?	12	Números pares
+Impares	1, 3, 5, 7, 9, ?	11	Números impares
+5. HERRAMIENTAS
+Herramienta	Precio	Efecto
+🔧 Escáner Avanzado	100	+2 intentos en contraseñas
+🛡️ Firewall Bypass	200	Firewalls -1 dificultad
+🔑 Crypto Key	300	Revela pistas extra
+⚡ Quantum Decryptor	500	Descifra mensajes automáticamente
+🔬 Nano Analyzer	700	Analiza servidores en profundidad
+🎯 Matrix Key	1000	Acceso a servidores de élite
+⏳ Chrono Analyzer	1500	Predice contraseñas
+☯️ Omega Key	2500	Acceso total al sistema Omega
+🌀 Void Key	5000	Acceso Void
+6. LOGROS
+Logro	Requisito	Recompensa
+🚀 Primer Hackeo	Completa tu primera misión	50 créditos
+💪 Cinco Misiones	Completa 5 misiones	100 créditos
+🏆 Diez Misiones	Completa 10 misiones	200 créditos
+👑 Leyenda	Completa 25 misiones	500 créditos
+🌟 Maestro	Completa 50 misiones	1000 créditos
+💎 Dios	Completa 100 misiones	5000 créditos
+⚡ Nivel 5	Alcanza el nivel 5	150 créditos
+🌟 Nivel 10	Alcanza el nivel 10	300 créditos
+👑 Nivel 15	Alcanza el nivel 15	500 créditos
+💎 Nivel 20	Alcanza el nivel 20	1000 créditos
+🔥 Nivel 30	Alcanza el nivel 30	5000 créditos
+💰 Millonario	Acumula 1000 créditos	100 créditos
+💎 Billonario	Acumula 5000 créditos	300 créditos
+👑 Trillonario	Acumula 10000 créditos	500 créditos
+💸 Multimillonario	Acumula 50000 créditos	2000 créditos
+🎯 Perfecto	Completa 5 misiones sin fallar	200 créditos
+🔥 Racha 5	5 misiones seguidas	100 créditos
+🔥🔥 Racha 10	10 misiones seguidas	200 créditos
+🔥🔥🔥 Racha 20	20 misiones seguidas	500 créditos
+🔥🔥🔥🔥 Racha 50	50 misiones seguidas	2000 créditos
+🛠️ Coleccionista	Todas las herramientas	500 créditos
+☯️ Omega	Completa Omega Station	1000 créditos
+⚡ Leyenda	Completa todos los servidores	5000 créditos
+👑 Dios	Completa Omega Point	10000 créditos
+🧭 Explorador	Hackea 10 servidores diferentes	300 créditos
+7. MISIONES DIARIAS
+Las misiones diarias usan servidores de dificultad ≤ 5.
+
+Servidor	Contraseña
+MegaCorp Alpha	michifu
+DarkNet Vault	666
+ShadowNet	2015
+CyberDyne Systems	2019
+NeoTokyo Grid	1500042
+A.I. Core	233
+Recompensa: El doble de créditos y EXP que la misión normal.
+
+📝 RESUMEN RÁPIDO
+🔐 Contraseñas de Servidores (ordenadas por dificultad):
+Dificultad	Servidor	Contraseña
+1	MegaCorp Alpha	michifu
+2	DarkNet Vault	666
+2	ShadowNet	2015
+3	CyberDyne Systems	2019
+4	NeoTokyo Grid	1500042
+5	A.I. Core	233
+6	Quantum Nexus	662
+7	NanoTech Labs	6
+8	Matrix Archive	303
+9	ChronoCore	1953
+9	Void Network	343
+10	Omega Station	4662
+11	Eclipse Core	2001
+12	Nebula Archive	77058
+13	Genesis Point	1941
+14	Apollo Core	1969
+15	Digital Abyss	11034
+16	Phoenix Protocol	2002
+18	Eternal Archive	8
+20	Omega Point	443556
+💉 SQL Injection - Códigos que siempre funcionan:
+text
+' OR 1=1 --
+' OR '1'='1
+SELECT * FROM users WHERE 1=1; --
+🧩 Puzzles Lógicos - Respuestas comunes:
+Secuencia	Respuesta
+2, 4, 6, 8, ?	10
+3, 6, 9, 12, ?	15
+2, 4, 8, 16, ?	32
+1, 1, 2, 3, 5, ?	8
+1, 4, 9, 16, 25, ?	36
+2, 3, 5, 7, 11, ?	13
+🔑 Palabras comunes en Criptografía:
+Cifrado →	Descifrado
+GXQNL →	NEXUS
+ZWPW →	DATA
+MSMNYG →	SYSTEM
+OHBW →	VOIE
