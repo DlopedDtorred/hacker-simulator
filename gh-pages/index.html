@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Simulator 2077 - Open Source Game</title>
+    <style>
+        /* ===== RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff00;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ===== HEADER / NAV ===== */
+        header {
+            width: 100%;
+            max-width: 1100px;
+            padding: 30px 20px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #00ff00;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            color: #00ff00;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+        }
+
+        .logo span {
+            font-size: 14px;
+            color: #00cc88;
+            display: block;
+        }
+
+        nav a {
+            color: #00ff00;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 16px;
+            transition: 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        nav a:hover {
+            border-bottom-color: #00ff00;
+            color: #00ff88;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            width: 100%;
+            max-width: 1100px;
+            padding: 80px 20px 60px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 52px;
+            color: #00ff00;
+            text-shadow: 0 0 40px rgba(0, 255, 0, 0.15);
+            letter-spacing: 6px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #88ff88;
+            margin: 20px 0 30px;
+        }
+
+        .hero .badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+
+        .hero .badges img {
+            height: 24px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 40px;
+            background: #00ff00;
+            color: #0a0a0a;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 6px;
+            font-size: 18px;
+            transition: 0.3s;
+            margin: 10px;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: #00cc00;
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+        }
+
+        .btn-outline:hover {
+            background: #00ff00;
+            color: #0a0a0a;
+        }
+
+        /* ===== FEATURES ===== */
+        .features {
+            width: 100%;
+            max-width: 1100px;
+            padding: 60px 20px;
+        }
+
+        .features h3 {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #00ff88;
+            letter-spacing: 3px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: #111;
+            border: 1px solid #1a1a1a;
+            border-radius: 10px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: 0.4s;
+        }
+
+        .feature-card:hover {
+            border-color: #00ff00;
+            transform: translateY(-6px);
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.05);
+        }
+
+        .feature-card .icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .feature-card h4 {
+            color: #00ff88;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #88aa88;
+            font-size: 15px;
+        }
+
+        /* ===== INSTALL ===== */
+        .install {
+            width: 100%;
+            max-width: 1100px;
+            padding: 60px 20px;
+        }
+
+        .install h3 {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #00ff88;
+            letter-spacing: 3px;
+        }
+
+        .code-block {
+            background: #0d0d0d;
+            border: 1px solid #1a1a1a;
+            border-radius: 10px;
+            padding: 25px 30px;
+            color: #88ff88;
+            font-size: 15px;
+            overflow-x: auto;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .code-block .comment {
+            color: #446644;
+        }
+
+        .code-block .cmd {
+            color: #00ff00;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            width: 100%;
+            max-width: 1100px;
+            padding: 40px 20px 30px;
+            border-top: 1px solid #1a1a1a;
+            text-align: center;
+            color: #446644;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #00cc88;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #00ff88;
+        }
+
+        footer .links {
+            margin-bottom: 15px;
+        }
+
+        footer .links a {
+            margin: 0 12px;
+            font-size: 18px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 12px;
+                font-size: 14px;
+            }
+
+            .hero h2 {
+                font-size: 34px;
+                letter-spacing: 3px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            .features h3,
+            .install h3 {
+                font-size: 26px;
+            }
+
+            .code-block {
+                font-size: 13px;
+                padding: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 26px;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 15px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== TERMINAL ANIMATION ===== */
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .glow-text {
+            text-shadow: 0 0 30px rgba(0, 255, 0, 0.08);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="logo">
+            <h1>🖥️ HACKER SIMULATOR</h1>
+            <span>2077 · Ultimate Edition</span>
+        </div>
+        <nav>
+            <a href="#features">Features</a>
+            <a href="#install">Install</a>
+            <a href="https://github.com/DlopedDtorred/hacker-simulator" target="_blank">GitHub</a>
+            <a href="https://github.com/DlopedDtorred/hacker-simulator/issues" target="_blank">Issues</a>
+        </nav>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <h2>HACK THE WORLD</h2>
+        <p>Terminal-based hacking game · Open Source · Python</p>
+
+        <div class="badges">
+            <img src="https://img.shields.io/badge/Python-3.8+-blue.svg" alt="Python">
+            <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
+            <img src="https://img.shields.io/github/stars/DlopedDtorred/hacker-simulator" alt="Stars">
+            <img src="https://img.shields.io/github/issues/DlopedDtorred/hacker-simulator" alt="Issues">
+            <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome">
+        </div>
+
+        <div>
+            <a href="https://github.com/DlopedDtorred/hacker-simulator" class="btn" target="_blank">⭐ Star on GitHub</a>
+            <a href="#install" class="btn btn-outline">📦 Install</a>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="features" id="features">
+        <h3>⚡ FEATURES</h3>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="icon">🔐</span>
+                <h4>20 Servers</h4>
+                <p>Unique servers with different difficulties and passwords to crack.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🧩</span>
+                <h4>4 Mini-games</h4>
+                <p>Firewall, Cryptography, SQL Injection, and Logic Puzzles.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🏆</span>
+                <h4>25+ Achievements</h4>
+                <p>Unlock achievements and earn extra credits.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🌍</span>
+                <h4>Multi-language</h4>
+                <p>Spanish and English support. Choose your language on first run.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">💾</span>
+                <h4>Save/Load</h4>
+                <p>Your progress is saved automatically in JSON format.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🎨</span>
+                <h4>4 Themes</h4>
+                <p>Matrix, Cyberpunk, Classic, and Dark visual themes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== INSTALL ===== -->
+    <section class="install" id="install">
+        <h3>📦 INSTALLATION</h3>
+        <div class="code-block">
+            <span class="comment"># 1. Clone the repository</span><br>
+            <span class="cmd">git clone https://github.com/DlopedDtorred/hacker-simulator.git</span><br>
+            <span class="cmd">cd hacker-simulator</span><br>
+            <br>
+            <span class="comment"># 2. Create virtual environment (optional)</span><br>
+            <span class="cmd">python -m venv venv</span><br>
+            <span class="cmd">source venv/bin/activate  <span class="comment"># On Windows: venv\Scripts\activate</span></span><br>
+            <br>
+            <span class="comment"># 3. Install dependencies</span><br>
+            <span class="cmd">pip install colorama</span><br>
+            <br>
+            <span class="comment"># 4. Run the game</span><br>
+            <span class="cmd">python cyberdex.py</span><br>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="links">
+            <a href="https://github.com/DlopedDtorred/hacker-simulator" target="_blank">🐙 GitHub</a>
+            <a href="https://github.com/DlopedDtorred/hacker-simulator/issues" target="_blank">🐛 Issues</a>
+            <a href="https://github.com/DlopedDtorred/hacker-simulator/blob/main/CONTRIBUTING.md" target="_blank">🤝 Contribute</a>
+            <a href="https://github.com/DlopedDtorred/hacker-simulator/blob/main/LICENSE" target="_blank">📄 License</a>
+        </div>
+        <p>
+            Hacker Simulator 2077 · Open Source · MIT License<br>
+            Made with ❤️ by <a href="https://github.com/DlopedDtorred" target="_blank">DlopedDtorred</a>
+        </p>
+        <p style="margin-top:10px; font-size:12px; color:#335533;">
+            🚀 Happy hacking!
+        </p>
+    </footer>
+
+</body>
+</html>
