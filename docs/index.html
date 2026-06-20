@@ -198,6 +198,11 @@
             font-weight: 500;
         }
 
+        .hero-badge #version-display {
+            color: #66ff88;
+            font-weight: 700;
+        }
+
         .hero h1 {
             font-size: clamp(40px, 8vw, 80px);
             font-weight: 800;
@@ -419,6 +424,17 @@
             transform: scale(1.04);
         }
 
+        .update-badge {
+            display: inline-block;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 11px;
+            color: var(--green);
+            margin-top: 8px;
+        }
+
         /* ============================================================
            CONTRIBUTE
            ============================================================ */
@@ -634,7 +650,9 @@
         HERO
         ========================================================== -->
         <section class="hero">
-            <span class="hero-badge">⚡ v10.0 · Ultimate Edition</span>
+            <span class="hero-badge">
+                ⚡ <span id="version-display">v10.0.0</span> · Ultimate Edition
+            </span>
             <h1>
                 HACK THE<br />
                 <span class="highlight">DIGITAL WORLD</span>
@@ -738,7 +756,7 @@
         <section class="section" id="download">
             <div class="section-header">
                 <h2>📦 Download</h2>
-                <p>Get the game for your platform.</p>
+                <p id="download-version-text">Latest version: <strong id="download-version">v10.0.0</strong></p>
             </div>
             <div class="download-grid">
                 <div class="download-card">
@@ -748,6 +766,7 @@
                     <a href="https://github.com/DlopedDtorred/hacker-simulator/releases/latest/download/HackerSimulator2077-Linux" class="btn-sm" download>
                         <i class="fas fa-download"></i> Download
                     </a>
+                    <span class="update-badge">Always latest</span>
                 </div>
                 <div class="download-card">
                     <span class="os-icon">🪟</span>
@@ -756,6 +775,7 @@
                     <a href="https://github.com/DlopedDtorred/hacker-simulator/releases/latest/download/HackerSimulator2077-Windows.exe" class="btn-sm" download>
                         <i class="fas fa-download"></i> Download
                     </a>
+                    <span class="update-badge">Always latest</span>
                 </div>
                 <div class="download-card">
                     <span class="os-icon">🍎</span>
@@ -764,6 +784,7 @@
                     <a href="https://github.com/DlopedDtorred/hacker-simulator/releases/latest/download/HackerSimulator2077-Mac" class="btn-sm" download>
                         <i class="fas fa-download"></i> Download
                     </a>
+                    <span class="update-badge">Always latest</span>
                 </div>
                 <div class="download-card">
                     <span class="os-icon">🐍</span>
@@ -772,8 +793,12 @@
                     <a href="https://github.com/DlopedDtorred/hacker-simulator/archive/refs/heads/main.zip" class="btn-sm" download>
                         <i class="fas fa-code"></i> Download ZIP
                     </a>
+                    <span class="update-badge">Always latest</span>
                 </div>
             </div>
+            <p style="text-align:center; margin-top: 24px; color: var(--text-muted); font-size: 14px;">
+                <i class="fas fa-sync-alt"></i> All downloads always point to the latest version
+            </p>
         </section>
 
         <!-- ==========================================================
@@ -880,11 +905,15 @@
                 <a href="https://github.com/DlopedDtorred" target="_blank">DlopedDtorred</a>
             </p>
             <p style="margin-top:12px; font-size:13px; color: #335533;">
-                🚀 Happy hacking!
+                🚀 Happy hacking! <span id="footer-version">v10.0.0</span>
             </p>
         </footer>
 
     </div>
 
+    <!-- ==========================================================
+    SCRIPTS
+    ========================================================== -->
+    <script src="script.js"></script>
 </body>
 </html>

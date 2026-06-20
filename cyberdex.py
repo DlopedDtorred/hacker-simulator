@@ -16,6 +16,41 @@ from datetime import datetime
 from colorama import init, Fore, Back, Style
 
 # ============================================
+# CHECK FOR UPDATES
+# ============================================
+
+def check_for_updates():
+    """Check if a new version is available on GitHub"""
+    try:
+        import urllib.request
+        import json
+        
+        # Current version
+        current = "v10.0.1"
+        
+        # Get latest from GitHub
+        url = "https://api.github.com/repos/DlopedDtorred/hacker-simulator/releases/latest"
+        req = urllib.request.Request(url, headers={'User-Agent': 'HackerSimulator'})
+        response = urllib.request.urlopen(req, timeout=5)
+        data = json.loads(response.read().decode())
+        latest = data.get("tag_name", current)
+        
+        if latest != current:
+            print(f"\n{Fore.YELLOW}╔═══════════════════════════════════════════╗")
+            print(f"║  📦 NEW VERSION AVAILABLE!              ║")
+            print(f"║  Current: {current}                        ║")
+            print(f"║  Latest:  {latest}                        ║")
+            print(f"║  Download: {GITHUB_URL}/releases        ║")
+            print(f"╚═══════════════════════════════════════════╝{Style.RESET_ALL}\n")
+            time.sleep(1.5)
+            return True
+        else:
+            return False
+    except:
+        # Silently fail if can't check
+        return False
+
+# ============================================
 # INITIAL SETUP
 # ============================================
 
@@ -1355,3 +1390,33 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+def main():
+    try:
+        config = load_config()
+        if config and "language" in config:
+            language = config["language"]
+            name = config.get("name", "Zero_Cool")
+        else:
+            language, name = first_time_setup()
+        text = get_text(language)
+        hacker = Hacker(name)
+        if not hacker.load_game():
+            hacker.save_game()
+        
+        show_header()
+        
+        # ===== CHECK FOR UPDATES =====
+        check_for_updates()
+        
+        print(f"\n{Fore.GREEN}{text['connection'].format(hacker.name)}{Style.RESET_ALL}")
+        print(f"{Fore.CYAN}{text['guide_hint']}{Style.RESET_ALL}")
+        time.sleep(1.5)
+        main_menu(hacker, language)
+    except KeyboardInterrupt:
+        print(f"\n\n{Fore.YELLOW}👋 Session terminated.{Style.RESET_ALL}")
+    except Exception as e:
+        print(f"\n{Fore.RED}❌ Error: {e}{Style.RESET_ALL}")
+        import traceback
+        traceback.print_exc()
+        input(f"{Fore.CYAN}⏎ Press Enter to exit...{Style.RESET_ALL}")
