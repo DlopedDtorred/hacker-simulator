@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools & Achievements - Hacker Simulator 2077</title>
+    <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --bg: #0b0e0b;
+            --bg-card: #111411;
+            --border: #1f2a1f;
+            --green: #00ff41;
+            --text: #d0e6d0;
+            --text-muted: #7a9a7a;
+            --text-light: #f0faf0;
+            --radius: 14px;
+            --transition: 0.3s ease;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 0 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            padding: 30px 0 60px;
+        }
+        .guide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .guide-header .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--green);
+        }
+        .guide-header .logo span {
+            font-weight: 400;
+            color: var(--text-muted);
+            font-size: 14px;
+            display: block;
+        }
+        .guide-header a {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .guide-header a:hover {
+            color: #66ff88;
+        }
+        h1 {
+            font-size: 36px;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-size: 26px;
+            color: var(--green);
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+        h3 {
+            font-size: 20px;
+            color: var(--text-light);
+            margin-top: 28px;
+            margin-bottom: 10px;
+        }
+        p {
+            color: var(--text);
+            margin-bottom: 14px;
+        }
+        ul,
+        ol {
+            color: var(--text);
+            margin: 10px 0 20px 24px;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        code {
+            background: var(--bg-card);
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--green);
+            border: 1px solid var(--border);
+        }
+        kbd {
+            background: var(--bg-card);
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            border: 1px solid var(--border);
+            color: var(--text-light);
+        }
+        .note {
+            background: rgba(0, 255, 65, 0.05);
+            border-left: 3px solid var(--green);
+            padding: 14px 20px;
+            border-radius: var(--radius);
+            margin: 16px 0;
+        }
+        .note strong {
+            color: var(--green);
+        }
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: var(--green);
+            color: #0a0a0a;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            margin-top: 30px;
+        }
+        .btn-back:hover {
+            background: #66ff88;
+            transform: scale(1.02);
+        }
+        .table-wrap {
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+        .table-wrap table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .table-wrap th {
+            background: var(--bg-card);
+            color: var(--green);
+            padding: 10px 14px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+        .table-wrap td {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+        .table-wrap tr:hover td {
+            background: var(--bg-card);
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 28px;
+            }
+            h2 {
+                font-size: 22px;
+            }
+            .guide-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="guide-header">
+            <div class="logo">
+                🖥️ HACKER SIMULATOR
+                <span>2077 · Tools & Achievements</span>
+            </div>
+            <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+        </div>
+
+        <h1>🛠️ Tools & Achievements</h1>
+        <p class="subtitle">Complete list of tools, achievements, and how to unlock them.</p>
+
+        <h2>🛠️ All Tools</h2>
+        <p>Tools help you during missions. You can buy them in the shop or earn them by leveling up.</p>
+
+        <div class="table-wrap">
+            <table>
+                <tr><th>Tool</th><th>Price</th><th>Effect</th></tr>
+                <tr><td>🔧 Basic Scanner</td><td>Free</td><td>Starting tool</td></tr>
+                <tr><td>🔧 Advanced Scanner</td><td>100</td><td>+2 password attempts</td></tr>
+                <tr><td>🛡️ Firewall Bypass</td><td>200</td><td>Firewalls -1 difficulty</td></tr>
+                <tr><td>🔑 Crypto Key</td><td>300</td><td>Reveals extra clues</td></tr>
+                <tr><td>⚡ Quantum Decryptor</td><td>500</td><td>Auto-decrypts messages</td></tr>
+                <tr><td>🔬 Nano Analyzer</td><td>700</td><td>Analyzes servers in depth</td></tr>
+                <tr><td>🎯 Matrix Key</td><td>1000</td><td>Access to elite servers</td></tr>
+                <tr><td>⏳ Chrono Analyzer</td><td>1500</td><td>Predicts passwords</td></tr>
+                <tr><td>☯️ Omega Key</td><td>2500</td><td>Full access to Omega system</td></tr>
+                <tr><td>🌀 Void Key</td><td>5000</td><td>Void access</td></tr>
+            </table>
+        </div>
+
+        <h3>🆓 Free Tools (Earned by Leveling Up)</h3>
+        <div class="table-wrap">
+            <table>
+                <tr><th>Level</th><th>Tool</th></tr>
+                <tr><td>Level 2</td><td>🔧 Advanced Scanner</td></tr>
+                <tr><td>Level 4</td><td>🛡️ Firewall Bypass</td></tr>
+                <tr><td>Level 6</td><td>🔑 Crypto Key</td></tr>
+                <tr><td>Level 8</td><td>⚡ Quantum Decryptor</td></tr>
+                <tr><td>Level 10</td><td>🔬 Nano Analyzer</td></tr>
+                <tr><td>Level 12</td><td>🎯 Matrix Key</td></tr>
+                <tr><td>Level 14</td><td>⏳ Chrono Analyzer</td></tr>
+                <tr><td>Level 16</td><td>☯️ Omega Key</td></tr>
+                <tr><td>Level 18</td><td>🌀 Void Key</td></tr>
+            </table>
+        </div>
+
+        <h2>🏆 All Achievements</h2>
+        <p>Complete these challenges to earn extra credits and show off your skills!</p>
+
+        <div class="table-wrap">
+            <table>
+                <tr><th>Achievement</th><th>Requirement</th><th>Reward</th></tr>
+                <tr><td>🚀 First Hack</td><td>Complete your first mission</td><td>50 credits</td></tr>
+                <tr><td>💪 Five Missions</td><td>Complete 5 missions</td><td>100 credits</td></tr>
+                <tr><td>🏆 Ten Missions</td><td>Complete 10 missions</td><td>200 credits</td></tr>
+                <tr><td>👑 Legend</td><td>Complete 25 missions</td><td>500 credits</td></tr>
+                <tr><td>🌟 Master</td><td>Complete 50 missions</td><td>1000 credits</td></tr>
+                <tr><td>💎 God</td><td>Complete 100 missions</td><td>5000 credits</td></tr>
+                <tr><td>⚡ Level 5</td><td>Reach level 5</td><td>150 credits</td></tr>
+                <tr><td>🌟 Level 10</td><td>Reach level 10</td><td>300 credits</td></tr>
+                <tr><td>👑 Level 15</td><td>Reach level 15</td><td>500 credits</td></tr>
+                <tr><td>💎 Level 20</td><td>Reach level 20</td><td>1000 credits</td></tr>
+                <tr><td>🔥 Level 30</td><td>Reach level 30</td><td>5000 credits</td></tr>
+                <tr><td>💰 Millionaire</td><td>Accumulate 1000 credits</td><td>100 credits</td></tr>
+                <tr><td>💎 Billionaire</td><td>Accumulate 5000 credits</td><td>300 credits</td></tr>
+                <tr><td>👑 Trillionaire</td><td>Accumulate 10000 credits</td><td>500 credits</td></tr>
+                <tr><td>💸 Multi-millionaire</td><td>Accumulate 50000 credits</td><td>2000 credits</td></tr>
+                <tr><td>🎯 Perfect</td><td>5 missions without failing</td><td>200 credits</td></tr>
+                <tr><td>🔥 Streak 5</td><td>5 missions in a row</td><td>100 credits</td></tr>
+                <tr><td>🔥🔥 Streak 10</td><td>10 missions in a row</td><td>200 credits</td></tr>
+                <tr><td>🔥🔥🔥 Streak 20</td><td>20 missions in a row</td><td>500 credits</td></tr>
+                <tr><td>🔥🔥🔥🔥 Streak 50</td><td>50 missions in a row</td><td>2000 credits</td></tr>
+                <tr><td>🛠️ Collector</td><td>All tools</td><td>500 credits</td></tr>
+                <tr><td>☯️ Omega</td><td>Complete Omega Station</td><td>1000 credits</td></tr>
+                <tr><td>⚡ Legend</td><td>Complete all servers</td><td>5000 credits</td></tr>
+                <tr><td>👑 God</td><td>Complete Omega Point</td><td>10000 credits</td></tr>
+                <tr><td>🧭 Explorer</td><td>Hack 10 different servers</td><td>300 credits</td></tr>
+            </table>
+        </div>
+
+        <div class="note">
+            <strong>💡 Pro tip:</strong> Focus on achievements that give the most credits — Legend (5000) and God (10000) are the best!
+        </div>
+
+        <a href="../index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+</body>
+</html>
