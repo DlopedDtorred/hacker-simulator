@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Start Guide - Hacker Simulator 2077</title>
+    <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --bg: #0b0e0b;
+            --bg-card: #111411;
+            --border: #1f2a1f;
+            --green: #00ff41;
+            --text: #d0e6d0;
+            --text-muted: #7a9a7a;
+            --text-light: #f0faf0;
+            --radius: 14px;
+            --transition: 0.3s ease;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 0 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            padding: 30px 0 60px;
+        }
+        /* Header */
+        .guide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .guide-header .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--green);
+        }
+        .guide-header .logo span {
+            font-weight: 400;
+            color: var(--text-muted);
+            font-size: 14px;
+            display: block;
+        }
+        .guide-header a {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .guide-header a:hover {
+            color: #66ff88;
+        }
+
+        /* Content */
+        h1 {
+            font-size: 36px;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-size: 26px;
+            color: var(--green);
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+        h3 {
+            font-size: 20px;
+            color: var(--text-light);
+            margin-top: 28px;
+            margin-bottom: 10px;
+        }
+        p {
+            color: var(--text);
+            margin-bottom: 14px;
+        }
+        ul,
+        ol {
+            color: var(--text);
+            margin: 10px 0 20px 24px;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        code {
+            background: var(--bg-card);
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--green);
+            border: 1px solid var(--border);
+        }
+        kbd {
+            background: var(--bg-card);
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            border: 1px solid var(--border);
+            color: var(--text-light);
+        }
+        pre {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px 22px;
+            overflow-x: auto;
+            color: #88ff88;
+            font-size: 14px;
+            margin: 16px 0;
+        }
+        .note {
+            background: rgba(0, 255, 65, 0.05);
+            border-left: 3px solid var(--green);
+            padding: 14px 20px;
+            border-radius: var(--radius);
+            margin: 16px 0;
+        }
+        .note strong {
+            color: var(--green);
+        }
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: var(--green);
+            color: #0a0a0a;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            margin-top: 30px;
+        }
+        .btn-back:hover {
+            background: #66ff88;
+            transform: scale(1.02);
+        }
+        .table-wrap {
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+        .table-wrap table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .table-wrap th {
+            background: var(--bg-card);
+            color: var(--green);
+            padding: 10px 14px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+        .table-wrap td {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+        .table-wrap tr:hover td {
+            background: var(--bg-card);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 28px;
+            }
+            h2 {
+                font-size: 22px;
+            }
+            .guide-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="guide-header">
+            <div class="logo">
+                🖥️ HACKER SIMULATOR
+                <span>2077 · Quick Start Guide</span>
+            </div>
+            <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+        </div>
+
+        <h1>🚀 Quick Start Guide</h1>
+        <p class="subtitle">Get started with Hacker Simulator 2077 in 5 minutes.</p>
+
+        <h2>📦 Installation</h2>
+        <h3>Requirements</h3>
+        <ul>
+            <li>Python 3.8 or higher</li>
+            <li>pip (Python package manager)</li>
+            <li>Git (optional, for cloning)</li>
+        </ul>
+
+        <h3>Step 1: Download the game</h3>
+        <p><strong>Option A: Clone with Git</strong></p>
+        <pre>git clone https://github.com/DlopedDtorred/hacker-simulator.git
+cd hacker-simulator</pre>
+
+        <p><strong>Option B: Download ZIP</strong></p>
+        <ol>
+            <li>Go to <a href="https://github.com/DlopedDtorred/hacker-simulator" target="_blank">GitHub</a></li>
+            <li>Click <strong>"Code"</strong> → <strong>"Download ZIP"</strong></li>
+            <li>Extract the ZIP file</li>
+        </ol>
+
+        <h3>Step 2: Install dependencies</h3>
+        <pre>pip install colorama</pre>
+
+        <div class="note">
+            <strong>💡 Tip:</strong> It's recommended to use a virtual environment:
+            <pre>python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate</pre>
+        </div>
+
+        <h3>Step 3: Run the game</h3>
+        <pre>python cyberdex.py</pre>
+
+        <h2>⚙️ First-Time Setup</h2>
+        <p>When you run the game for the first time, you'll see:</p>
+        <ol>
+            <li><strong>Language selection</strong> — Press <kbd>1</kbd> for Spanish, <kbd>2</kbd> for English</li>
+            <li><strong>Hacker name</strong> — Enter your name (or press Enter for "Zero_Cool")</li>
+        </ol>
+        <p>Your configuration is saved in <code>config.json</code>.</p>
+
+        <h2>🎮 Basic Controls</h2>
+        <div class="table-wrap">
+            <table>
+                <tr><th>Key</th><th>Action</th></tr>
+                <tr><td><kbd>1</kbd></td><td>Hack server (start a mission)</td></tr>
+                <tr><td><kbd>2</kbd></td><td>Daily mission (DOUBLE rewards)</td></tr>
+                <tr><td><kbd>3</kbd></td><td>Train (practice mini-games)</td></tr>
+                <tr><td><kbd>4</kbd></td><td>Shop (buy tools)</td></tr>
+                <tr><td><kbd>5</kbd></td><td>Statistics (view progress)</td></tr>
+                <tr><td><kbd>6</kbd></td><td>Ranking (hacker rankings)</td></tr>
+                <tr><td><kbd>7</kbd></td><td>Settings (theme, language, delete account)</td></tr>
+                <tr><td><kbd>8</kbd></td><td>Save game</td></tr>
+                <tr><td><kbd>9</kbd></td><td>User guide</td></tr>
+                <tr><td><kbd>0</kbd></td><td>Exit game</td></tr>
+            </table>
+        </div>
+
+        <h2>🎯 Your First Mission</h2>
+        <ol>
+            <li>Press <kbd>1</kbd> to see available servers</li>
+            <li>Choose a server (start with difficulty 1-3)</li>
+            <li><strong>Evade the firewall:</strong> Memorize and repeat a number sequence</li>
+            <li><strong>Crack the password:</strong> Use the clue to guess the password</li>
+            <li>Earn credits and EXP!</li>
+        </ol>
+
+        <div class="note">
+            <strong>💡 Tip:</strong> Read the clues carefully — they tell you exactly what the password is!
+        </div>
+
+        <h2>🛠️ First Tools to Buy</h2>
+        <ul>
+            <li><strong>🔧 Advanced Scanner</strong> (100 credits) — +2 password attempts</li>
+            <li><strong>🛡️ Firewall Bypass</strong> (200 credits) — Firewalls -1 difficulty</li>
+            <li><strong>🔑 Crypto Key</strong> (300 credits) — Reveals extra clues</li>
+        </ul>
+
+        <h2>💾 Saving Your Game</h2>
+        <p>Press <kbd>8</kbd> at any time to save. Your progress is stored in <code>save.json</code>.</p>
+
+        <div class="note">
+            <strong>✅ Done!</strong> You're ready to play. Check the <a href="beginners.html">Beginner's Guide</a> for more detailed tips.
+        </div>
+
+        <a href="../index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+</body>
+</html>s

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Guide - Hacker Simulator 2077</title>
+    <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --bg: #0b0e0b;
+            --bg-card: #111411;
+            --border: #1f2a1f;
+            --green: #00ff41;
+            --text: #d0e6d0;
+            --text-muted: #7a9a7a;
+            --text-light: #f0faf0;
+            --radius: 14px;
+            --transition: 0.3s ease;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 0 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            padding: 30px 0 60px;
+        }
+        .guide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .guide-header .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--green);
+        }
+        .guide-header .logo span {
+            font-weight: 400;
+            color: var(--text-muted);
+            font-size: 14px;
+            display: block;
+        }
+        .guide-header a {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .guide-header a:hover {
+            color: #66ff88;
+        }
+        h1 {
+            font-size: 36px;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-size: 26px;
+            color: var(--green);
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+        h3 {
+            font-size: 20px;
+            color: var(--text-light);
+            margin-top: 28px;
+            margin-bottom: 10px;
+        }
+        p {
+            color: var(--text);
+            margin-bottom: 14px;
+        }
+        ul,
+        ol {
+            color: var(--text);
+            margin: 10px 0 20px 24px;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        code {
+            background: var(--bg-card);
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--green);
+            border: 1px solid var(--border);
+        }
+        kbd {
+            background: var(--bg-card);
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            border: 1px solid var(--border);
+            color: var(--text-light);
+        }
+        pre {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 18px 22px;
+            overflow-x: auto;
+            color: #88ff88;
+            font-size: 14px;
+            margin: 16px 0;
+        }
+        .note {
+            background: rgba(0, 255, 65, 0.05);
+            border-left: 3px solid var(--green);
+            padding: 14px 20px;
+            border-radius: var(--radius);
+            margin: 16px 0;
+        }
+        .note strong {
+            color: var(--green);
+        }
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: var(--green);
+            color: #0a0a0a;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            margin-top: 30px;
+        }
+        .btn-back:hover {
+            background: #66ff88;
+            transform: scale(1.02);
+        }
+        .table-wrap {
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+        .table-wrap table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .table-wrap th {
+            background: var(--bg-card);
+            color: var(--green);
+            padding: 10px 14px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+        .table-wrap td {
+            padding: 8px 14px;
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+        .table-wrap tr:hover td {
+            background: var(--bg-card);
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 28px;
+            }
+            h2 {
+                font-size: 22px;
+            }
+            .guide-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="guide-header">
+            <div class="logo">
+                🖥️ HACKER SIMULATOR
+                <span>2077 · Developer Guide</span>
+            </div>
+            <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+        </div>
+
+        <h1>👨‍💻 Developer Guide</h1>
+        <p class="subtitle">For contributors and developers — project structure, adding features, and more.</p>
+
+        <h2>📁 Project Structure</h2>
+        <pre>
+hacker-simulator/
+├── cyberdex.py          # Main game code
+├── README.md            # Project documentation
+├── CONTRIBUTING.md      # Contribution guidelines
+├── LICENSE              # MIT License
+├── requirements.txt     # Python dependencies
+├── .gitignore           # Git ignore file
+├── setup.py             # Package setup
+├── pyproject.toml       # Modern package config
+├── run.sh               # Linux/Mac launcher
+├── run.bat              # Windows launcher
+├── Makefile             # Build commands
+├── logo.png             # Project logo
+├── .github/
+│   └── workflows/
+│       └── build.yml    # CI/CD pipeline
+├── docs/                # Documentation & website
+│   ├── index.html
+│   ├── style.css
+│   ├── script.js
+│   ├── img/
+│   │   └── favicon.svg
+│   └── guides/
+│       ├── quickstart.html
+│       ├── beginners.html
+│       ├── minigames.html
+│       ├── tools.html
+│       ├── developer.html
+│       └── faq.html
+└── dist/                # Compiled executables
+    ├── HackerSimulator2077-Linux
+    └── HackerSimulator2077-Windows.exe
+</pre>
+
+        <h2>🏗️ Code Architecture</h2>
+        <h3>Main Classes</h3>
+        <ul>
+            <li><strong>Hacker</strong> — Player data and logic (level, EXP, credits, tools, achievements)</li>
+            <li><strong>MiniGames</strong> — All mini-game logic (firewall, cipher, SQL, puzzles)</li>
+        </ul>
+
+        <h3>Key Data Structures</h3>
+        <ul>
+            <li><strong>SERVERS</strong> — List of 20 servers with passwords and clues</li>
+            <li><strong>ACHIEVEMENTS</strong> — List of 25+ achievements</li>
+            <li><strong>TEXT</strong> — Multi-language dictionary (Spanish/English)</li>
+        </ul>
+
+        <h2>🎨 Adding a New Server</h2>
+        <p>Add a new server to the <code>SERVERS</code> list in <code>cyberdex.py</code>:</p>
+        <pre>
+{
+    "id": "SRV-XXX",
+    "name": "Server Name",
+    "difficulty": 1-20,
+    "reward": 100-200000,
+    "clue_es": "Spanish clue",
+    "clue_en": "English clue",
+    "password": "password",
+    "desc_es": "Spanish description",
+    "desc_en": "English description"
+}</pre>
+
+        <h2>🧩 Adding a New Mini-Game</h2>
+        <p>Add a new method to the <code>MiniGames</code> class:</p>
+        <pre>
+@staticmethod
+def new_game(difficulty, lang="es"):
+    text = get_text(lang)
+    # Your game logic here
+    return True/False</pre>
+
+        <h2>🛠️ Adding a New Tool</h2>
+        <p>Add to the <code>items</code> list in the <code>shop()</code> function:</p>
+        <pre>
+{"name": "🔧 New Tool", "price": 100, "desc_es": "ES Description", "desc_en": "EN Description"}</pre>
+
+        <h2>🏆 Adding a New Achievement</h2>
+        <p>Add to the <code>ACHIEVEMENTS</code> dictionary:</p>
+        <pre>
+"id": {
+    "name_es": "🏆 Spanish Name",
+    "name_en": "🏆 English Name",
+    "desc_es": "Spanish description",
+    "desc_en": "English description",
+    "reward": 100
+}</pre>
+
+        <h2>🌍 Adding a New Language</h2>
+        <p>Add a new dictionary to <code>TEXT</code>:</p>
+        <pre>
+"fr": {
+    "menu_hack": "🌐 Pirater un serveur",
+    # ... all keys translated
+}</pre>
+
+        <h2>📦 Building from Source</h2>
+        <h3>Linux</h3>
+        <pre>pyinstaller --onefile --console --name "HackerSimulator2077-Linux" cyberdex.py</pre>
+
+        <h3>Windows (with wine)</h3>
+        <pre>wine python -m PyInstaller --onefile --console --name "HackerSimulator2077-Windows" cyberdex.py</pre>
+
+        <h2>🧪 Testing Your Changes</h2>
+        <p>Before submitting a Pull Request, make sure to:</p>
+        <ul>
+            <li>Run the game locally: <code>python cyberdex.py</code></li>
+            <li>Check for syntax errors: <code>python -m py_compile cyberdex.py</code></li>
+            <li>Test all new features thoroughly</li>
+        </ul>
+
+        <div class="note">
+            <strong>💡 Best practices:</strong>
+            <ul>
+                <li>Follow PEP 8 for Python code</li>
+                <li>Add comments in English</li>
+                <li>Use descriptive variable names</li>
+            </ul>
+        </div>
+
+        <h2>🔗 Useful Links</h2>
+        <ul>
+            <li><a href="https://github.com/DlopedDtorred/hacker-simulator" target="_blank">GitHub Repository</a></li>
+            <li><a href="https://github.com/DlopedDtorred/hacker-simulator/issues" target="_blank">Issue Tracker</a></li>
+            <li><a href="https://github.com/DlopedDtorred/hacker-simulator/blob/main/CONTRIBUTING.md" target="_blank">Contribution Guidelines</a></li>
+        </ul>
+
+        <a href="../index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+</body>
+</html>
