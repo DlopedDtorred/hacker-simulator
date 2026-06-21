@@ -1,27 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hacker Simulator 2077 – Open Source Hacking Game</title>
+    <title>Hacker Simulator 2077 – Descargar</title>
     <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
-
-    <!-- ===== FONTS & ICONS ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
     <style>
-        /* ============================================================
-           RESET & BASE
-           ============================================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* ===== RESET ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --bg: #0b0e0b;
             --bg-card: #111411;
@@ -29,7 +19,6 @@
             --border: #1f2a1f;
             --green: #00ff41;
             --green-dim: #00cc33;
-            --green-glow: rgba(0, 255, 65, 0.08);
             --text: #d0e6d0;
             --text-muted: #7a9a7a;
             --text-light: #f0faf0;
@@ -38,7 +27,6 @@
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             --header-bg: rgba(11, 14, 11, 0.9);
         }
-
         .light-mode {
             --bg: #f0f5f0;
             --bg-card: #e8ede8;
@@ -50,11 +38,7 @@
             --header-bg: rgba(240, 245, 240, 0.95);
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
@@ -67,32 +51,14 @@
             padding: 0 24px;
             transition: background 0.4s, color 0.4s;
         }
-
-        a {
-            color: var(--green);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        a:hover {
-            color: #66ff88;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-        }
+        a { color: var(--green); text-decoration: none; transition: var(--transition); }
+        a:hover { color: #66ff88; }
+        .container { width: 100%; max-width: 1200px; }
 
         /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--green);
-            border-radius: 10px;
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 10px; }
 
         /* ===== PROGRESS BAR ===== */
         #progress-bar {
@@ -124,16 +90,8 @@
             z-index: 100;
             transition: background 0.4s;
         }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .logo-icon {
-            font-size: 28px;
-            line-height: 1;
-        }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo-icon { font-size: 28px; line-height: 1; }
         .logo-text {
             font-size: 20px;
             font-weight: 800;
@@ -147,7 +105,6 @@
             display: block;
             letter-spacing: 1px;
         }
-
         nav {
             display: flex;
             align-items: center;
@@ -172,13 +129,8 @@
             background: var(--green);
             transition: var(--transition);
         }
-        nav a:hover {
-            color: var(--text);
-        }
-        nav a:hover::after {
-            width: 100%;
-        }
-
+        nav a:hover { color: var(--text); }
+        nav a:hover::after { width: 100%; }
         nav .github-btn {
             background: var(--green);
             color: #0a0a0a;
@@ -196,10 +148,7 @@
             transform: scale(1.03);
             color: #0a0a0a;
         }
-        nav .github-btn::after {
-            display: none;
-        }
-
+        nav .github-btn::after { display: none; }
         .theme-toggle {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -213,78 +162,33 @@
             gap: 6px;
             color: var(--text);
         }
-        .theme-toggle:hover {
-            border-color: var(--green);
-        }
+        .theme-toggle:hover { border-color: var(--green); }
 
         /* ===== HERO ===== */
         .hero {
-            padding: 80px 0 60px;
+            padding: 60px 0 40px;
             text-align: center;
         }
-
-        .hero-badge {
-            display: inline-block;
-            background: rgba(0, 255, 65, 0.08);
-            border: 1px solid rgba(0, 255, 65, 0.15);
-            padding: 6px 18px;
-            border-radius: 40px;
-            font-size: 13px;
-            color: var(--green);
-            letter-spacing: 1px;
-            margin-bottom: 24px;
-            font-weight: 500;
-        }
-        .hero-badge #version-display {
-            color: #66ff88;
-            font-weight: 700;
-        }
-
         .hero h1 {
-            font-size: clamp(40px, 8vw, 76px);
+            font-size: clamp(36px, 7vw, 64px);
             font-weight: 800;
             letter-spacing: -2px;
             line-height: 1.05;
             color: var(--text-light);
         }
-        .hero h1 .highlight {
-            color: var(--green);
-            text-shadow: 0 0 60px rgba(0, 255, 65, 0.1);
-        }
-
-        .hero .typing-text {
-            font-size: clamp(18px, 2.5vw, 24px);
+        .hero h1 .highlight { color: var(--green); text-shadow: 0 0 60px rgba(0, 255, 65, 0.1); }
+        .hero p {
+            font-size: clamp(16px, 1.8vw, 20px);
             color: var(--text-muted);
             max-width: 640px;
-            margin: 20px auto 32px;
-            min-height: 40px;
+            margin: 16px auto 28px;
         }
-        .hero .typing-text .cursor {
-            display: inline-block;
-            width: 3px;
-            height: 1.2em;
-            background: var(--green);
-            animation: blink 0.8s step-end infinite;
-            vertical-align: text-bottom;
-            margin-left: 2px;
-        }
-        @keyframes blink {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
-        }
-
         .hero-buttons {
             display: flex;
             justify-content: center;
             gap: 16px;
             flex-wrap: wrap;
         }
-
         .btn {
             display: inline-flex;
             align-items: center;
@@ -298,60 +202,32 @@
             transition: var(--transition);
             text-decoration: none;
         }
-        .btn-primary {
-            background: var(--green);
-            color: #0a0a0a;
-        }
-        .btn-primary:hover {
-            background: #66ff88;
-            transform: scale(1.03);
-            color: #0a0a0a;
-        }
+        .btn-primary { background: var(--green); color: #0a0a0a; }
+        .btn-primary:hover { background: #66ff88; transform: scale(1.03); color: #0a0a0a; }
         .btn-secondary {
             background: transparent;
             color: var(--text);
             border: 1.5px solid var(--border);
         }
-        .btn-secondary:hover {
-            border-color: var(--green);
+        .btn-secondary:hover { border-color: var(--green); color: var(--green); transform: scale(1.03); }
+        .btn-download {
+            background: #1a2a1a;
             color: var(--green);
-            transform: scale(1.03);
+            border: 1px solid var(--green);
         }
+        .btn-download:hover { background: var(--green); color: #0a0a0a; transform: scale(1.03); }
 
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 48px;
-            margin-top: 48px;
-            flex-wrap: wrap;
-        }
-        .hero-stats .stat {
-            text-align: center;
-        }
-        .hero-stats .stat-number {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--text-light);
-            display: block;
-        }
-        .hero-stats .stat-label {
-            font-size: 13px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* ===== SECTIONS ===== */
+        /* ===== DOWNLOAD SECTION ===== */
         .section {
-            padding: 70px 0;
+            padding: 60px 0;
             border-top: 1px solid var(--border);
         }
         .section-header {
             text-align: center;
-            margin-bottom: 48px;
+            margin-bottom: 40px;
         }
         .section-header h2 {
-            font-size: clamp(28px, 4vw, 40px);
+            font-size: clamp(28px, 4vw, 36px);
             font-weight: 700;
             letter-spacing: -1px;
             color: var(--text-light);
@@ -359,128 +235,13 @@
         .section-header p {
             color: var(--text-muted);
             max-width: 540px;
-            margin: 10px auto 0;
-            font-size: 17px;
-        }
-
-        /* ===== FEATURES ===== */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 24px;
-        }
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 30px 24px;
-            transition: var(--transition);
-            text-align: center;
-            cursor: default;
-        }
-        .feature-card:hover {
-            border-color: var(--green);
-            transform: translateY(-6px);
-            box-shadow: var(--shadow);
-            background: var(--bg-card-hover);
-        }
-        .feature-card .icon {
-            font-size: 40px;
-            display: block;
-            margin-bottom: 16px;
-        }
-        .feature-card h3 {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--text-light);
-            margin-bottom: 8px;
-        }
-        .feature-card p {
-            font-size: 15px;
-            color: var(--text-muted);
-        }
-
-        /* ===== HOW TO PLAY ===== */
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 24px;
-        }
-        .step-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 28px 20px;
-            text-align: center;
-            transition: var(--transition);
-        }
-        .step-card:hover {
-            border-color: var(--green);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow);
-        }
-        .step-card .step-num {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--green);
-            color: #0a0a0a;
-            font-weight: 700;
-            font-size: 20px;
-            margin-bottom: 14px;
-        }
-        .step-card h4 {
-            color: var(--text-light);
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-        .step-card p {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-
-        /* ===== CONCEPTS ===== */
-        .concepts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-        }
-        .concept-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px 20px;
-            text-align: center;
-            transition: var(--transition);
-        }
-        .concept-card:hover {
-            border-color: var(--green);
-            transform: translateY(-4px);
-        }
-        .concept-card .concept-icon {
-            font-size: 32px;
-            display: block;
-            margin-bottom: 10px;
-        }
-        .concept-card h4 {
-            color: var(--text-light);
+            margin: 8px auto 0;
             font-size: 16px;
-            font-weight: 600;
-        }
-        .concept-card p {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-top: 4px;
         }
 
-        /* ===== DOWNLOAD ===== */
         .download-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
             margin-top: 10px;
         }
@@ -497,22 +258,9 @@
             transform: translateY(-4px);
             box-shadow: var(--shadow);
         }
-        .download-card .os-icon {
-            font-size: 36px;
-            display: block;
-            margin-bottom: 12px;
-        }
-        .download-card h4 {
-            color: var(--text-light);
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        .download-card p {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-        }
+        .download-card .os-icon { font-size: 36px; display: block; margin-bottom: 12px; }
+        .download-card h4 { color: var(--text-light); font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+        .download-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
         .download-card .btn-sm {
             padding: 8px 22px;
             border-radius: 40px;
@@ -528,10 +276,7 @@
             align-items: center;
             gap: 8px;
         }
-        .download-card .btn-sm:hover {
-            background: #66ff88;
-            transform: scale(1.04);
-        }
+        .download-card .btn-sm:hover { background: #66ff88; transform: scale(1.04); }
         .update-badge {
             display: inline-block;
             background: rgba(0, 255, 65, 0.1);
@@ -548,276 +293,73 @@
             color: var(--text-muted);
             font-size: 14px;
         }
-        .download-stats i {
-            margin: 0 4px;
-        }
+        .download-stats i { margin: 0 4px; }
 
-        /* ===== TESTIMONIALS ===== */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 24px;
-        }
-        .testimonial-card {
+        /* ===== INSTALLER SECTION ===== */
+        .installer-box {
             background: var(--bg-card);
-            border: 1px solid var(--border);
+            border: 2px solid var(--green);
             border-radius: var(--radius);
-            padding: 24px 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
             transition: var(--transition);
         }
-        .testimonial-card:hover {
-            border-color: var(--green);
+        .installer-box:hover {
+            box-shadow: 0 0 40px rgba(0, 255, 65, 0.05);
         }
-        .testimonial-card .stars {
-            color: #ffcc00;
-            font-size: 16px;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-        .testimonial-card blockquote {
-            font-style: italic;
-            color: var(--text);
-            font-size: 15px;
-            margin-bottom: 12px;
-        }
-        .testimonial-card .author {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-light);
-        }
-        .testimonial-card .author span {
-            font-weight: 400;
-            color: var(--text-muted);
-            font-size: 13px;
-        }
-
-        /* ===== GUIDES ===== */
-        .guides-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-        .guide-full-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 28px 24px;
-            transition: var(--transition);
-        }
-        .guide-full-card:hover {
-            border-color: var(--green);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow);
-        }
-        .guide-full-card .guide-icon {
-            font-size: 32px;
-            display: block;
-            margin-bottom: 12px;
-        }
-        .guide-full-card h4 {
-            color: var(--text-light);
+        .installer-box .icon { font-size: 48px; display: block; margin-bottom: 16px; }
+        .installer-box h3 { color: var(--text-light); font-size: 24px; margin-bottom: 8px; }
+        .installer-box p { color: var(--text-muted); font-size: 15px; margin-bottom: 20px; }
+        .installer-box .btn-lg {
+            padding: 16px 40px;
             font-size: 18px;
-            font-weight: 600;
-        }
-        .guide-full-card p {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin: 6px 0 14px;
-        }
-        .guide-full-card ul {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 16px 0;
-        }
-        .guide-full-card ul li {
-            padding: 4px 0;
-            font-size: 14px;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .guide-full-card ul li i {
-            color: var(--green);
-            font-size: 12px;
-        }
-        .guide-full-card .btn-sm {
-            padding: 8px 22px;
             border-radius: 40px;
-            font-size: 13px;
-            font-weight: 600;
             background: var(--green);
             color: #0a0a0a;
             border: none;
+            font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-        }
-        .guide-full-card .btn-sm:hover {
-            background: #66ff88;
-            transform: scale(1.04);
-        }
-
-        /* ===== ROADMAP ===== */
-        .roadmap-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
-        .roadmap-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px 20px;
-            text-align: center;
-            transition: var(--transition);
-        }
-        .roadmap-item:hover {
-            border-color: var(--green);
-        }
-        .roadmap-item .status {
-            display: inline-block;
-            padding: 4px 14px;
-            border-radius: 40px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        .status-done {
-            background: rgba(0, 255, 65, 0.2);
-            color: var(--green);
-        }
-        .status-next {
-            background: rgba(255, 200, 0, 0.2);
-            color: #ffcc00;
-        }
-        .status-planned {
-            background: rgba(100, 150, 255, 0.2);
-            color: #6699ff;
-        }
-        .roadmap-item h4 {
-            color: var(--text-light);
-            font-size: 16px;
-            font-weight: 600;
-        }
-        .roadmap-item p {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        /* ===== FAQ ===== */
-        .faq-list {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
             gap: 12px;
         }
-        .faq-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-            transition: var(--transition);
-        }
-        .faq-item:hover {
-            border-color: var(--green);
-        }
-        .faq-question {
-            padding: 18px 24px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            color: var(--text-light);
-            transition: var(--transition);
-            user-select: none;
-        }
-        .faq-question:hover {
-            color: var(--green);
-        }
-        .faq-question i {
-            transition: var(--transition);
-            color: var(--text-muted);
-        }
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-            color: var(--green);
-        }
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            padding: 0 24px;
-            color: var(--text-muted);
-            font-size: 15px;
-        }
-        .faq-item.active .faq-answer {
-            max-height: 300px;
-            padding: 0 24px 18px;
-        }
-        .faq-answer kbd {
-            background: var(--bg);
-            padding: 2px 10px;
-            border-radius: 4px;
-            font-size: 13px;
-            border: 1px solid var(--border);
-            color: var(--text);
-        }
-        .faq-answer code {
-            background: var(--bg);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 13px;
-            color: var(--green);
-        }
+        .installer-box .btn-lg:hover { background: #66ff88; transform: scale(1.03); }
 
-        /* ===== CONTRIBUTE ===== */
-        .contribute-steps {
+        /* ===== HOW TO INSTALL ===== */
+        .steps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 24px;
-            margin-top: 10px;
+            margin-top: 20px;
         }
-        .step {
-            text-align: center;
+        .step-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 28px 20px;
+            text-align: center;
             transition: var(--transition);
         }
-        .step:hover {
-            border-color: var(--green);
-        }
-        .step .step-number {
+        .step-card:hover { border-color: var(--green); transform: translateY(-4px); box-shadow: var(--shadow); }
+        .step-card .step-num {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             background: var(--green);
             color: #0a0a0a;
             font-weight: 700;
-            font-size: 18px;
+            font-size: 20px;
             margin-bottom: 14px;
         }
-        .step h4 {
-            color: var(--text-light);
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-        .step p {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
+        .step-card h4 { color: var(--text-light); font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+        .step-card p { font-size: 14px; color: var(--text-muted); }
 
         /* ===== FOOTER ===== */
         footer {
@@ -834,21 +376,10 @@
             flex-wrap: wrap;
             margin-bottom: 20px;
         }
-        footer .footer-links a {
-            font-size: 14px;
-            color: var(--text-muted);
-            transition: var(--transition);
-        }
-        footer .footer-links a:hover {
-            color: var(--green);
-        }
-        footer p {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
-        footer .heart {
-            color: #ff4466;
-        }
+        footer .footer-links a { font-size: 14px; color: var(--text-muted); transition: var(--transition); }
+        footer .footer-links a:hover { color: var(--green); }
+        footer p { font-size: 14px; color: var(--text-muted); }
+        footer .heart { color: #ff4466; }
 
         /* ===== BACK TO TOP ===== */
         #back-to-top {
@@ -869,123 +400,37 @@
             box-shadow: 0 4px 20px rgba(0, 255, 65, 0.3);
             z-index: 999;
         }
-        #back-to-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        #back-to-top:hover {
-            transform: scale(1.1);
-            background: #66ff88;
-        }
+        #back-to-top.show { opacity: 1; visibility: visible; }
+        #back-to-top:hover { transform: scale(1.1); background: #66ff88; }
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            nav {
-                width: 100%;
-                justify-content: flex-start;
-                gap: 14px;
-            }
-            nav .github-btn {
-                margin-left: 0;
-            }
-            .hero {
-                padding: 50px 0 40px;
-            }
-            .hero-stats {
-                gap: 24px;
-            }
-            .hero-stats .stat-number {
-                font-size: 22px;
-            }
-            .theme-toggle {
-                font-size: 14px;
-                padding: 4px 10px;
-            }
-            .guides-grid {
-                grid-template-columns: 1fr;
-            }
-            .roadmap-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            header { flex-direction: column; align-items: flex-start; }
+            nav { width: 100%; justify-content: flex-start; gap: 14px; }
+            nav .github-btn { margin-left: 0; }
+            .hero { padding: 40px 0 30px; }
+            .theme-toggle { font-size: 14px; padding: 4px 10px; }
+            .installer-box { padding: 24px; }
         }
-
         @media (max-width: 480px) {
-            body {
-                padding: 0 16px;
-            }
-            .hero-buttons .btn {
-                width: 100%;
-                justify-content: center;
-            }
-            .download-grid {
-                grid-template-columns: 1fr;
-            }
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            .steps-grid {
-                grid-template-columns: 1fr;
-            }
-            .concepts-grid {
-                grid-template-columns: 1fr;
-            }
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-            .contribute-steps {
-                grid-template-columns: 1fr;
-            }
-            .roadmap-grid {
-                grid-template-columns: 1fr;
-            }
-            .faq-question {
-                font-size: 14px;
-                padding: 14px 18px;
-            }
-            .faq-answer {
-                font-size: 14px;
-                padding: 0 18px;
-            }
-            .faq-item.active .faq-answer {
-                padding: 0 18px 14px;
-            }
-            #back-to-top {
-                bottom: 20px;
-                right: 20px;
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
-            }
+            body { padding: 0 16px; }
+            .hero-buttons .btn { width: 100%; justify-content: center; }
+            .download-grid { grid-template-columns: 1fr; }
+            .steps-grid { grid-template-columns: 1fr; }
+            #back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 16px; }
         }
 
-        /* ============================================================
-           ANIMATIONS
-           ============================================================ */
+        /* ===== ANIMATIONS ===== */
         @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
@@ -1012,10 +457,9 @@
                 </div>
             </div>
             <nav>
-                <a href="#features">Features</a>
-                <a href="#guides">Guides</a>
-                <a href="#download">Download</a>
-                <a href="#contribute">Contribute</a>
+                <a href="#download">Descargar</a>
+                <a href="#installer">Instalador</a>
+                <a href="#howto">Cómo instalar</a>
                 <a href="https://github.com/DlopedDtorred/hacker-simulator" target="_blank" class="github-btn">
                     <i class="fab fa-github"></i> GitHub
                 </a>
@@ -1029,495 +473,133 @@
         HERO
         ========================================================== -->
         <section class="hero">
-            <span class="hero-badge">
-                ⚡ <span id="version-display">v10.0.0</span> · Ultimate Edition
-            </span>
             <h1>
                 HACK THE<br />
                 <span class="highlight">DIGITAL WORLD</span>
             </h1>
-            <div class="typing-text" id="typing-text">
-                Aprende hacking ético jugando en tu terminal<span class="cursor"></span>
-            </div>
+            <p>
+                Descarga Hacker Simulator 2077, el juego de hacking en terminal
+                con interfaz gráfica. Aprende ciberseguridad jugando.
+            </p>
             <div class="hero-buttons">
                 <a href="#download" class="btn btn-primary">
-                    <i class="fas fa-download"></i> Download Now
+                    <i class="fas fa-download"></i> Descargar Ahora
+                </a>
+                <a href="#installer" class="btn btn-secondary">
+                    <i class="fas fa-box"></i> Instalador
                 </a>
                 <a href="https://github.com/DlopedDtorred/hacker-simulator" target="_blank" class="btn btn-secondary">
-                    <i class="fab fa-github"></i> View on GitHub
+                    <i class="fab fa-github"></i> Ver en GitHub
                 </a>
-                <a href="#guides" class="btn btn-secondary">
-                    <i class="fas fa-book"></i> Read Guides
-                </a>
-            </div>
-
-            <div class="hero-stats">
-                <div class="stat">
-                    <span class="stat-number" id="stat-servers">20</span>
-                    <span class="stat-label">Servers</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number" id="stat-achievements">25+</span>
-                    <span class="stat-label">Achievements</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number" id="stat-tools">9</span>
-                    <span class="stat-label">Tools</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number" id="stat-themes">4</span>
-                    <span class="stat-label">Themes</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-number" id="stat-stars">⭐ 0</span>
-                    <span class="stat-label">GitHub Stars</span>
-                </div>
             </div>
         </section>
 
         <!-- ==========================================================
-        FEATURES
+        DOWNLOAD (Versiones)
         ========================================================== -->
-        <section class="section" id="features">
+        <section class="section" id="download">
             <div class="section-header">
-                <h2>⚡ Features</h2>
-                <p>Everything you need to become the ultimate hacker.</p>
+                <h2>📦 Descarga directa</h2>
+                <p>Elige la versión que prefieras.</p>
             </div>
-            <div class="features-grid">
-                <div class="feature-card animate-on-scroll">
-                    <span class="icon">🔐</span>
-                    <h3>20 Unique Servers</h3>
-                    <p>Each with different difficulty levels, clues, and passwords to crack.</p>
+            <div class="download-grid">
+                <div class="download-card animate-on-scroll">
+                    <span class="os-icon">🐍</span>
+                    <h4>UI Version (Python)</h4>
+                    <p>Interfaz gráfica con PyQt5</p>
+                    <a href="https://github.com/DlopedDtorred/hacker-simulator/raw/main/hacker_simulator_ui.py" class="btn-sm" download>
+                        <i class="fas fa-download"></i> Descargar .py
+                    </a>
+                    <span class="update-badge">Última versión</span>
                 </div>
-                <div class="feature-card animate-on-scroll">
-                    <span class="icon">🧩</span>
-                    <h3>4 Mini-Games</h3>
-                    <p>Firewall, Cryptography, SQL Injection, and Logic Puzzles.</p>
+                <div class="download-card animate-on-scroll">
+                    <span class="os-icon">📦</span>
+                    <h4>Instalador</h4>
+                    <p>Instala la UI automáticamente</p>
+                    <a href="https://github.com/DlopedDtorred/hacker-simulator/raw/main/installer.py" class="btn-sm" download>
+                        <i class="fas fa-download"></i> Descargar installer.py
+                    </a>
+                    <span class="update-badge">Recomendado</span>
                 </div>
-                <div class="feature-card animate-on-scroll">
-                    <span class="icon">🏆</span>
-                    <h3>25+ Achievements</h3>
-                    <p>Earn rewards and credits by completing challenges.</p>
+                <div class="download-card animate-on-scroll">
+                    <span class="os-icon">🐧</span>
+                    <h4>Linux (Ejecutable)</h4>
+                    <p>Compilado para Linux</p>
+                    <a href="https://github.com/DlopedDtorred/hacker-simulator/releases/latest/download/HackerSimulator2077-Linux" class="btn-sm" download>
+                        <i class="fas fa-download"></i> Descargar
+                    </a>
+                    <span class="update-badge">Siempre actual</span>
                 </div>
-                <div class="feature-card animate-on-scroll">
-                    <span class="icon">🌍</span>
-                    <h3>Multi-Language</h3>
-                    <p>Spanish and English support. Choose on first run.</p>
+                <div class="download-card animate-on-scroll">
+                    <span class="os-icon">🪟</span>
+                    <h4>Windows (Ejecutable)</h4>
+                    <p>Compilado para Windows</p>
+                    <a href="https://github.com/DlopedDtorred/hacker-simulator/releases/latest/download/HackerSimulator2077-Windows.exe" class="btn-sm" download>
+                        <i class="fas fa-download"></i> Descargar
+                    </a>
+                    <span class="update-badge">Siempre actual</span>
                 </div>
-                <div class="feature-card animate-on-scroll">
-                    <span class="icon">💾</span>
-                    <h3>Save / Load System</h3>
-                    <p>Your progress is saved automatically in JSON format.</p>
-                </div>
-                <div class="feature-card animate-on-scroll">
-                    <span class="icon">🎨</span>
-                    <h3>4 Visual Themes</h3>
-                    <p>Matrix, Cyberpunk, Classic, and Dark.</p>
-                </div>
-                <div class="feature-card animate-on-scroll">
-                    <span class="icon">📅</span>
-                    <h3>Daily Missions</h3>
-                    <p>Get double rewards every day with a new mission.</p>
-                </div>
-                <div class="feature-card animate-on-scroll">
-                    <span class="icon">🛒</span>
-                    <h3>9 Tools to Buy</h3>
-                    <p>Upgrade your hacker skills with powerful tools.</p>
-                </div>
-                <div class="feature-card animate-on-scroll">
-                    <span class="icon">🔓</span>
-                    <h3>100% Open Source</h3>
-                    <p>MIT License. Free to use, modify, and share.</p>
-                </div>
+            </div>
+            <div class="download-stats">
+                <i class="fas fa-download"></i> <span id="download-count">0</span> descargas totales
+                <span style="margin:0 12px;">·</span>
+                <i class="fas fa-star"></i> <span id="star-count">0</span> estrellas en GitHub
             </div>
         </section>
 
         <!-- ==========================================================
-        HOW TO PLAY
+        INSTALADOR
         ========================================================== -->
-        <section class="section" id="how-to-play">
+        <section class="section" id="installer">
             <div class="section-header">
-                <h2>🎮 How to Play</h2>
-                <p>Become a hacker in 4 simple steps.</p>
+                <h2>📥 Instalador automático</h2>
+                <p>La forma más fácil de instalar Hacker Simulator 2077.</p>
+            </div>
+            <div class="installer-box animate-on-scroll">
+                <span class="icon">🚀</span>
+                <h3>Instalador para Linux / Mac / Windows</h3>
+                <p>
+                    Descarga el instalador, ejecútalo y elige la versión que quieras instalar.
+                    El instalador se encarga de todas las dependencias.
+                </p>
+                <a href="https://github.com/DlopedDtorred/hacker-simulator/raw/main/installer.py" class="btn-lg" download>
+                    <i class="fas fa-download"></i> Descargar Instalador
+                </a>
+                <p style="margin-top:16px; font-size:13px; color: var(--text-muted);">
+                    <i class="fas fa-terminal"></i> Ejecuta: <code style="background:var(--bg);padding:4px 10px;border-radius:6px;">python installer.py</code>
+                </p>
+            </div>
+        </section>
+
+        <!-- ==========================================================
+        CÓMO INSTALAR
+        ========================================================== -->
+        <section class="section" id="howto">
+            <div class="section-header">
+                <h2>🛠️ Cómo instalar</h2>
+                <p>Sigue estos pasos para tener el juego en tu ordenador.</p>
             </div>
             <div class="steps-grid">
                 <div class="step-card animate-on-scroll">
                     <div class="step-num">1</div>
-                    <h4>🌐 Choose a Server</h4>
-                    <p>Select a server from the list. Each has a different difficulty level.</p>
+                    <h4>📥 Descarga el instalador</h4>
+                    <p>Haz clic en "Descargar Instalador" y guarda el archivo.</p>
                 </div>
                 <div class="step-card animate-on-scroll">
                     <div class="step-num">2</div>
-                    <h4>🛡️ Evade the Firewall</h4>
-                    <p>Memorize and repeat a number sequence to bypass the firewall.</p>
+                    <h4>▶️ Ejecuta el instalador</h4>
+                    <p>Abre una terminal y ejecuta: <code style="background:var(--bg);padding:2px 8px;border-radius:4px;">python installer.py</code></p>
                 </div>
                 <div class="step-card animate-on-scroll">
                     <div class="step-num">3</div>
-                    <h4>🔑 Crack the Password</h4>
-                    <p>Use the clue to guess the server's password. You have limited attempts.</p>
+                    <h4>⚡ Elige la versión</h4>
+                    <p>Selecciona "UI Version" para la interfaz gráfica.</p>
                 </div>
                 <div class="step-card animate-on-scroll">
                     <div class="step-num">4</div>
-                    <h4>💰 Earn Rewards</h4>
-                    <p>Get credits and EXP. Level up and unlock new tools!</p>
+                    <h4>🎮 ¡A jugar!</h4>
+                    <p>En Linux/Mac ejecuta <code style="background:var(--bg);padding:2px 8px;border-radius:4px;">hacker-ui</code>. En Windows busca el acceso directo en el escritorio.</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- ==========================================================
-        CONCEPTS (Educativo)
-        ========================================================== -->
-        <section class="section" id="concepts">
-            <div class="section-header">
-                <h2>📚 What You'll Learn</h2>
-                <p>Cybersecurity concepts made fun and interactive.</p>
-            </div>
-            <div class="concepts-grid">
-                <div class="concept-card animate-on-scroll">
-                    <span class="concept-icon">🛡️</span>
-                    <h4>Firewalls</h4>
-                    <p>Learn how firewalls protect networks and how to bypass them.</p>
-                </div>
-                <div class="concept-card animate-on-scroll">
-                    <span class="concept-icon">🔑</span>
-                    <h4>Passwords</h4>
-                    <p>Understand password security and how to crack them using clues.</p>
-                </div>
-                <div class="concept-card animate-on-scroll">
-                    <span class="concept-icon">💉</span>
-                    <h4>SQL Injection</h4>
-                    <p>Discover one of the most common web vulnerabilities.</p>
-                </div>
-                <div class="concept-card animate-on-scroll">
-                    <span class="concept-icon">🔐</span>
-                    <h4>Cryptography</h4>
-                    <p>Learn about Caesar cipher and basic encryption techniques.</p>
-                </div>
-                <div class="concept-card animate-on-scroll">
-                    <span class="concept-icon">🧩</span>
-                    <h4>Logic Puzzles</h4>
-                    <p>Develop computational thinking and pattern recognition.</p>
-                </div>
-                <div class="concept-card animate-on-scroll">
-                    <span class="concept-icon">⚡</span>
-                    <h4>Ethical Hacking</h4>
-                    <p>Understand the principles of ethical hacking in a safe environment.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================================
-        GUIDES
-        ========================================================== -->
-        <section class="section" id="guides">
-            <div class="section-header">
-                <h2>📖 Complete Guides</h2>
-                <p>Everything you need to master Hacker Simulator 2077.</p>
-            </div>
-            <div class="guides-grid">
-                <div class="guide-full-card animate-on-scroll">
-                    <span class="guide-icon">🚀</span>
-                    <h4>Quick Start Guide</h4>
-                    <p>Get started in 5 minutes. Install, setup, and play.</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Installation steps</li>
-                        <li><i class="fas fa-check"></i> First-time setup</li>
-                        <li><i class="fas fa-check"></i> Basic controls</li>
-                    </ul>
-                    <a href="guides/quickstart.html" class="btn-sm">
-                        <i class="fas fa-book-open"></i> Read Guide
-                    </a>
-                </div>
-
-                <div class="guide-full-card animate-on-scroll">
-                    <span class="guide-icon">🎯</span>
-                    <h4>Beginner's Guide</h4>
-                    <p>Learn the basics of hacking and gameplay mechanics.</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Understanding servers</li>
-                        <li><i class="fas fa-check"></i> Cracking passwords</li>
-                        <li><i class="fas fa-check"></i> Using tools</li>
-                    </ul>
-                    <a href="guides/beginners.html" class="btn-sm">
-                        <i class="fas fa-book-open"></i> Read Guide
-                    </a>
-                </div>
-
-                <div class="guide-full-card animate-on-scroll">
-                    <span class="guide-icon">🔐</span>
-                    <h4>Mini-Games Guide</h4>
-                    <p>Master all 4 mini-games: Firewall, Cryptography, SQL, Puzzles.</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Firewall memory game</li>
-                        <li><i class="fas fa-check"></i> Caesar cipher</li>
-                        <li><i class="fas fa-check"></i> SQL injection</li>
-                    </ul>
-                    <a href="guides/minigames.html" class="btn-sm">
-                        <i class="fas fa-book-open"></i> Read Guide
-                    </a>
-                </div>
-
-                <div class="guide-full-card animate-on-scroll">
-                    <span class="guide-icon">🛠️</span>
-                    <h4>Tools & Achievements</h4>
-                    <p>Complete list of tools, achievements, and how to unlock them.</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> All 9 tools explained</li>
-                        <li><i class="fas fa-check"></i> 25+ achievements</li>
-                        <li><i class="fas fa-check"></i> How to earn credits</li>
-                    </ul>
-                    <a href="guides/tools.html" class="btn-sm">
-                        <i class="fas fa-book-open"></i> Read Guide
-                    </a>
-                </div>
-
-                <div class="guide-full-card animate-on-scroll">
-                    <span class="guide-icon">👨‍💻</span>
-                    <h4>Developer Guide</h4>
-                    <p>For contributors and developers. Code structure, adding features.</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Project structure</li>
-                        <li><i class="fas fa-check"></i> Adding servers</li>
-                        <li><i class="fas fa-check"></i> Adding mini-games</li>
-                    </ul>
-                    <a href="guides/developer.html" class="btn-sm">
-                        <i class="fas fa-book-open"></i> Read Guide
-                    </a>
-                </div>
-
-                <div class="guide-full-card animate-on-scroll">
-                    <span class="guide-icon">❓</span>
-                    <h4>FAQ & Troubleshooting</h4>
-                    <p>Common questions and solutions for common problems.</p>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Fixing common errors</li>
-                        <li><i class="fas fa-check"></i> Save file issues</li>
-                        <li><i class="fas fa-check"></i> Performance tips</li>
-                    </ul>
-                    <a href="guides/faq.html" class="btn-sm">
-                        <i class="fas fa-book-open"></i> Read Guide
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================================
-        ROADMAP
-        ========================================================== -->
-        <section class="section" id="roadmap">
-            <div class="section-header">
-                <h2>🗺️ Roadmap</h2>
-                <p>What's coming next for Hacker Simulator 2077.</p>
-            </div>
-            <div class="roadmap-grid">
-                <div class="roadmap-item animate-on-scroll">
-                    <span class="status status-done">✅ Done</span>
-                    <h4>v10.0 Ultimate Edition</h4>
-                    <p>20 servers, 25+ achievements, multi-language, 4 themes</p>
-                </div>
-                <div class="roadmap-item animate-on-scroll">
-                    <span class="status status-next">🔄 Next</span>
-                    <h4>v11.0 Educational Edition</h4>
-                    <p>Explanations, tutorials, educational content for schools</p>
-                </div>
-                <div class="roadmap-item animate-on-scroll">
-                    <span class="status status-planned">📅 Planned</span>
-                    <h4>v12.0 Multiplayer</h4>
-                    <p>Local multiplayer mode, competitive hacking</p>
-                </div>
-                <div class="roadmap-item animate-on-scroll">
-                    <span class="status status-planned">📅 Planned</span>
-                    <h4>v13.0 Web Version</h4>
-                    <p>JavaScript port, play directly in browser</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================================
-        DOWNLOAD
-        ========================================================== -->
-        <section class="section" id="download">
-            <div class="section-header">
-                <h2>📦 Download</h2>
-                <p id="download-version-text">Latest version: <strong id="download-version">v10.0.0</strong></p>
-            </div>
-            <div class="download-grid">
-                <div class="download-card animate-on-scroll">
-                    <span class="os-icon">🐧</span>
-                    <h4>Linux</h4>
-                    <p>Executable for Linux</p>
-                    <a href="https://github.com/DlopedDtorred/hacker-simulator/releases/latest/download/HackerSimulator2077-Linux" class="btn-sm" download>
-                        <i class="fas fa-download"></i> Download
-                    </a>
-                    <span class="update-badge">Always latest</span>
-                </div>
-                <div class="download-card animate-on-scroll">
-                    <span class="os-icon">🪟</span>
-                    <h4>Windows</h4>
-                    <p>Executable for Windows</p>
-                    <a href="https://github.com/DlopedDtorred/hacker-simulator/releases/latest/download/HackerSimulator2077-Windows.exe" class="btn-sm" download>
-                        <i class="fas fa-download"></i> Download
-                    </a>
-                    <span class="update-badge">Always latest</span>
-                </div>
-                <div class="download-card animate-on-scroll">
-                    <span class="os-icon">🍎</span>
-                    <h4>macOS</h4>
-                    <p>Executable for Mac</p>
-                    <a href="https://github.com/DlopedDtorred/hacker-simulator/releases/latest/download/HackerSimulator2077-Mac" class="btn-sm" download>
-                        <i class="fas fa-download"></i> Download
-                    </a>
-                    <span class="update-badge">Always latest</span>
-                </div>
-                <div class="download-card animate-on-scroll">
-                    <span class="os-icon">🐍</span>
-                    <h4>Source Code</h4>
-                    <p>Python source (all platforms)</p>
-                    <a href="https://github.com/DlopedDtorred/hacker-simulator/archive/refs/heads/main.zip" class="btn-sm" download>
-                        <i class="fas fa-code"></i> Download ZIP
-                    </a>
-                    <span class="update-badge">Always latest</span>
-                </div>
-            </div>
-            <div class="download-stats">
-                <i class="fas fa-download"></i> <span id="download-count">0</span> total downloads
-                <span style="margin:0 12px;">·</span>
-                <i class="fas fa-star"></i> <span id="star-count">0</span> stars on GitHub
-            </div>
-        </section>
-
-        <!-- ==========================================================
-        TESTIMONIALS
-        ========================================================== -->
-        <section class="section" id="testimonials">
-            <div class="section-header">
-                <h2>💬 What People Say</h2>
-                <p>Real feedback from the community.</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card animate-on-scroll">
-                    <div class="stars">★★★★★</div>
-                    <blockquote>"Increíble juego para aprender conceptos de ciberseguridad mientras te diviertes. ¡Muy recomendado!"</blockquote>
-                    <div class="author">— Carlos M. <span>· Estudiante</span></div>
-                </div>
-                <div class="testimonial-card animate-on-scroll">
-                    <div class="stars">★★★★★</div>
-                    <blockquote>"Perfecto para centros educativos. Mis alumnos han aprendido sobre firewalls y SQL injection jugando."</blockquote>
-                    <div class="author">— Laura G. <span>· Profesora</span></div>
-                </div>
-                <div class="testimonial-card animate-on-scroll">
-                    <div class="stars">★★★★★</div>
-                    <blockquote>"Open source, bien documentado y fácil de contribuir. Un gran proyecto para aprender Python."</blockquote>
-                    <div class="author">— Alex R. <span>· Desarrollador</span></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================================
-        FAQ
-        ========================================================== -->
-        <section class="section" id="faq">
-            <div class="section-header">
-                <h2>❓ Frequently Asked Questions</h2>
-                <p>Quick answers to common questions.</p>
-            </div>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>¿Cómo guardo mi partida?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">Presiona <kbd>8</kbd> en el menú principal. Tu progreso se guarda en <code>save.json</code>.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>¿Cómo cambio el idioma?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">Ve a Ajustes (<kbd>7</kbd>) → Cambiar idioma (<kbd>2</kbd>) y selecciona Español o English.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>¿Cómo consigo créditos?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">Completa misiones, misiones diarias y desbloquea logros. También puedes comprar EXP con créditos en la tienda.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>¿Puedo jugar sin conexión?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">Sí, el juego es 100% offline. Solo necesitas conexión para descargar actualizaciones.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>¿Es gratuito?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">Sí, es completamente gratuito y open source bajo licencia MIT.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>¿Cómo contribuyo al proyecto?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">Haz fork del repositorio, añade mejoras y abre un Pull Request. Revisa nuestra <a href="https://github.com/DlopedDtorred/hacker-simulator/blob/main/CONTRIBUTING.md" target="_blank">guía de contribución</a>.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>¿Qué hago si el juego no arranca?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">Verifica que tienes Python 3.8+ instalado. Ejecuta <code>pip install colorama</code> y luego <code>python cyberdex.py</code>.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>¿Cómo elimino mi cuenta?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">Ve a Ajustes (<kbd>7</kbd>) → Eliminar cuenta (<kbd>3</kbd>) y confirma escribiendo <code>ELIMINAR</code>.</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================================
-        CONTRIBUTE
-        ========================================================== -->
-        <section class="section" id="contribute">
-            <div class="section-header">
-                <h2>🤝 Contribute</h2>
-                <p>Help make Hacker Simulator 2077 even better!</p>
-            </div>
-            <div class="contribute-steps">
-                <div class="step animate-on-scroll">
-                    <div class="step-number">1</div>
-                    <h4>Fork the Repo</h4>
-                    <p>Click the Fork button on GitHub.</p>
-                </div>
-                <div class="step animate-on-scroll">
-                    <div class="step-number">2</div>
-                    <h4>Make Changes</h4>
-                    <p>Add new servers, mini-games, or fix bugs.</p>
-                </div>
-                <div class="step animate-on-scroll">
-                    <div class="step-number">3</div>
-                    <h4>Open a PR</h4>
-                    <p>Submit a Pull Request with your changes.</p>
-                </div>
-                <div class="step animate-on-scroll">
-                    <div class="step-number">4</div>
-                    <h4>Get Recognized</h4>
-                    <p>Your name will be listed as a contributor.</p>
-                </div>
-            </div>
-            <div style="text-align:center; margin-top: 32px;">
-                <a href="https://github.com/DlopedDtorred/hacker-simulator/blob/main/CONTRIBUTING.md" target="_blank" class="btn btn-secondary">
-                    <i class="fas fa-book"></i> Read Full Guide
-                </a>
-                <a href="https://github.com/DlopedDtorred/hacker-simulator/issues" target="_blank" class="btn btn-secondary" style="margin-left:12px;">
-                    <i class="fas fa-bug"></i> Report Issues
-                </a>
             </div>
         </section>
 
@@ -1533,23 +615,20 @@
                     <i class="fas fa-bug"></i> Issues
                 </a>
                 <a href="https://github.com/DlopedDtorred/hacker-simulator/blob/main/CONTRIBUTING.md" target="_blank">
-                    <i class="fas fa-handshake"></i> Contribute
+                    <i class="fas fa-handshake"></i> Contribuir
                 </a>
                 <a href="https://github.com/DlopedDtorred/hacker-simulator/blob/main/LICENSE" target="_blank">
-                    <i class="fas fa-scale-balanced"></i> License
-                </a>
-                <a href="https://github.com/DlopedDtorred/hacker-simulator#readme" target="_blank">
-                    <i class="fas fa-book"></i> README
+                    <i class="fas fa-scale-balanced"></i> Licencia
                 </a>
             </div>
             <p>
                 Hacker Simulator 2077 · Open Source · MIT License
                 <br />
-                Made with <span class="heart">❤️</span> by
+                Hecho con <span class="heart">❤️</span> por
                 <a href="https://github.com/DlopedDtorred" target="_blank">DlopedDtorred</a>
             </p>
             <p style="margin-top:12px; font-size:13px; color: var(--text-muted);">
-                🚀 Happy hacking! <span id="footer-version">v10.0.0</span>
+                🚀 Happy hacking!
             </p>
         </footer>
 
@@ -1558,6 +637,118 @@
     <!-- ==========================================================
     SCRIPTS
     ========================================================== -->
-    <script src="script.js"></script>
+    <script>
+        // ============================================================
+        // THEME TOGGLE
+        // ============================================================
+        function initTheme() {
+            const saved = localStorage.getItem('hacker-theme') || 'dark';
+            if (saved === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                document.body.classList.remove('light-mode');
+                document.getElementById('themeToggle').innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        }
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            localStorage.setItem('hacker-theme', isLight ? 'light' : 'dark');
+            this.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+
+        // ============================================================
+        // GET GITHUB STATS
+        // ============================================================
+        async function getGitHubStats() {
+            try {
+                const repoRes = await fetch('https://api.github.com/repos/DlopedDtorred/hacker-simulator');
+                if (repoRes.ok) {
+                    const data = await repoRes.json();
+                    document.getElementById('star-count').textContent = data.stargazers_count || 0;
+                }
+                const releasesRes = await fetch('https://api.github.com/repos/DlopedDtorred/hacker-simulator/releases');
+                if (releasesRes.ok) {
+                    const releases = await releasesRes.json();
+                    let total = 0;
+                    releases.forEach(r => {
+                        if (r.assets) {
+                            r.assets.forEach(a => { total += a.download_count || 0; });
+                        }
+                    });
+                    document.getElementById('download-count').textContent = total || 0;
+                }
+            } catch (e) {
+                console.log('Error fetching GitHub stats:', e);
+            }
+        }
+
+        // ============================================================
+        // SCROLL ANIMATIONS
+        // ============================================================
+        function initScrollAnimations() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+            elements.forEach(el => observer.observe(el));
+        }
+
+        // ============================================================
+        // PROGRESS BAR
+        // ============================================================
+        function initProgressBar() {
+            const bar = document.getElementById('progress-bar');
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                bar.style.width = (scrollTop / docHeight) * 100 + '%';
+            });
+        }
+
+        // ============================================================
+        // BACK TO TOP
+        // ============================================================
+        function initBackToTop() {
+            const btn = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                btn.classList.toggle('show', window.scrollY > 300);
+            });
+            btn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // ============================================================
+        // SMOOTH SCROLL
+        // ============================================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            initTheme();
+            getGitHubStats();
+            initScrollAnimations();
+            initProgressBar();
+            initBackToTop();
+        });
+    </script>
 </body>
 </html>

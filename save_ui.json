@@ -1,0 +1,19 @@
+{
+    "name": "Zero_Cool",
+    "level": 1,
+    "exp": 0,
+    "exp_needed": 10,
+    "credits": 50,
+    "tools": [
+        "\ud83d\udd27 Basic Scanner"
+    ],
+    "missions_completed": 0,
+    "failures": 0,
+    "current_streak": 0,
+    "best_streak": 0,
+    "hacked_servers": [],
+    "unlocked_achievements": [],
+    "current_theme": "matrix",
+    "daily_done": false,
+    "last_daily": null
+}
