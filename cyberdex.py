@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """
-HACKER SIMULATOR 2077 - ULTIMATE EDITION v10.0
+HACKER SIMULATOR 2077 - ULTIMATE EDITION v10.1
 ================================================
-Terminal hacking game with multi-language support.
+Terminal hacking game with arrow key navigation.
 """
 
 import random
@@ -12,8 +12,22 @@ import os
 import time
 import sys
 import json
+import urllib.request
 from datetime import datetime
 from colorama import init, Fore, Back, Style
+
+# ============================================
+# INITIAL SETUP
+# ============================================
+
+init(autoreset=True, convert=True)
+os.system('cls' if os.name == 'nt' else 'clear')
+
+VERSION = "10.0.3"
+AUTHOR = "DlopedDtorred"
+GITHUB_URL = "https://github.com/DlopedDtorred/hacker-simulator"
+CONFIG_FILE = "config.json"
+SAVE_FILE = "save.json"
 
 # ============================================
 # CHECK FOR UPDATES
@@ -22,13 +36,7 @@ from colorama import init, Fore, Back, Style
 def check_for_updates():
     """Check if a new version is available on GitHub"""
     try:
-        import urllib.request
-        import json
-        
-        # Current version
-        current = "v10.0.1"
-        
-        # Get latest from GitHub
+        current = VERSION
         url = "https://api.github.com/repos/DlopedDtorred/hacker-simulator/releases/latest"
         req = urllib.request.Request(url, headers={'User-Agent': 'HackerSimulator'})
         response = urllib.request.urlopen(req, timeout=5)
@@ -47,21 +55,91 @@ def check_for_updates():
         else:
             return False
     except:
-        # Silently fail if can't check
         return False
 
 # ============================================
-# INITIAL SETUP
+# KEYBOARD INPUT (ARROW KEYS)
 # ============================================
 
-init(autoreset=True, convert=True)
-os.system('cls' if os.name == 'nt' else 'clear')
+def get_key():
+    """Get a single key press - works on all platforms"""
+    if os.name == 'nt':
+        import msvcrt
+        key = msvcrt.getch()
+        if key == b'\xe0':
+            arrow = msvcrt.getch()
+            if arrow == b'H':
+                return 'up'
+            elif arrow == b'P':
+                return 'down'
+            elif arrow == b'M':
+                return 'right'
+            elif arrow == b'K':
+                return 'left'
+        elif key == b'\r':
+            return 'enter'
+        elif key == b'\x1b':
+            return 'escape'
+        else:
+            try:
+                return key.decode('utf-8').lower()
+            except:
+                return ''
+    else:
+        import termios
+        import tty
+        fd = sys.stdin.fileno()
+        old = termios.tcgetattr(fd)
+        try:
+            tty.setraw(fd)
+            ch = sys.stdin.read(3)
+            if ch == '\x1b[A':
+                return 'up'
+            elif ch == '\x1b[B':
+                return 'down'
+            elif ch == '\x1b[C':
+                return 'right'
+            elif ch == '\x1b[D':
+                return 'left'
+            elif ch == '\r' or ch == '\n':
+                return 'enter'
+            elif ch == '\x1b':
+                return 'escape'
+            else:
+                return ch.strip().lower()
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old)
 
-VERSION = "10.0.02"
-AUTHOR = "DlopedDtorred"
-GITHUB_URL = "https://github.com/DlopedDtorred/hacker-simulator"
-CONFIG_FILE = "config.json"
-SAVE_FILE = "save.json"
+def select_with_arrows(options, title="", lang="es"):
+    """Select an option using arrow keys"""
+    selected = 0
+    text = get_text(lang)
+    
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        show_header()
+        
+        if title:
+            print(f"\n{Fore.CYAN}{title}{Style.RESET_ALL}")
+            print(f"{Fore.CYAN}{'═'*50}{Style.RESET_ALL}")
+        
+        for i, option in enumerate(options):
+            if i == selected:
+                print(f"{Fore.GREEN}▶ {option}{Style.RESET_ALL}")
+            else:
+                print(f"  {option}")
+        
+        print(f"\n{Fore.YELLOW}↑ ↓ Navigate | Enter Select{Style.RESET_ALL}")
+        
+        key = get_key()
+        if key == 'up':
+            selected = (selected - 1) % len(options)
+        elif key == 'down':
+            selected = (selected + 1) % len(options)
+        elif key == 'enter':
+            return selected
+        elif key == 'escape':
+            return -1
 
 # ============================================
 # LANGUAGE SYSTEM
@@ -94,26 +172,13 @@ def first_time_setup():
 {Fore.CYAN}╚══════════════════════════════════════════════════════════════════╝{Style.RESET_ALL}
     """)
     
-    # Language selection
     print(f"\n{Fore.CYAN}📝 Select your language / Selecciona tu idioma:{Style.RESET_ALL}")
-    print("[1] 🇪🇸 Español")
-    print("[2] 🇬🇧 English")
+    lang_options = ["🇪🇸 Español", "🇬🇧 English"]
+    lang_idx = select_with_arrows(lang_options, "", "es")
+    if lang_idx == -1:
+        lang_idx = 0
+    language = "es" if lang_idx == 0 else "en"
     
-    while True:
-        try:
-            choice = input("➡️  ").strip()
-            if choice == "1":
-                language = "es"
-                break
-            elif choice == "2":
-                language = "en"
-                break
-            else:
-                print(f"{Fore.RED}❌ Invalid option / Opción inválida{Style.RESET_ALL}")
-        except:
-            pass
-    
-    # Name input
     print(f"\n{Fore.CYAN}👤 Enter your hacker name / Introduce tu nombre:{Style.RESET_ALL}")
     name = input("➡️  ").strip() or "Zero_Cool"
     
@@ -126,18 +191,16 @@ def first_time_setup():
     return language, name
 
 def get_text(lang="es"):
-    """Get text dictionary for selected language"""
     if lang == "es":
         return TEXTO_ES
     else:
         return TEXTO_EN
 
 # ============================================
-# TEXT DICTIONARIES (Spanish and English)
+# TEXT DICTIONARIES
 # ============================================
 
 TEXTO_ES = {
-    # Menu
     "menu_hack": "🌐 Hackear servidor",
     "menu_daily": "📅 Misión diaria (¡DOBLE!)",
     "menu_train": "🛠️ Entrenar",
@@ -149,7 +212,6 @@ TEXTO_ES = {
     "menu_guide": "📖 Guía",
     "menu_exit": "🚪 Salir",
     
-    # Settings
     "settings": "⚙️ AJUSTES",
     "change_theme": "🎨 Cambiar tema",
     "change_language": "🌍 Cambiar idioma",
@@ -160,13 +222,11 @@ TEXTO_ES = {
     "language_changed": "✅ Idioma cambiado. Reinicia el juego para aplicar.",
     "theme_changed": "✅ Tema cambiado a: {}",
     
-    # Delete Account
     "delete_warning": "⚠️ ¡ADVERTENCIA! Esto ELIMINARÁ PERMANENTEMENTE todos tus datos.",
     "confirm_delete": "¿Estás SEGURO? (escribe 'ELIMINAR' para confirmar): ",
     "deleted": "🗑️ Cuenta eliminada permanentemente.",
     "delete_cancelled": "❌ Eliminación cancelada.",
     
-    # Common
     "welcome": "👤 Bienvenido al mundo del hacking digital.",
     "connection": "✅ Conexión establecida. ¡Bienvenido, {}!",
     "guide_hint": "💡 Escribe '9' para la guía.",
@@ -179,7 +239,6 @@ TEXTO_ES = {
     "purchased": "✅ ¡Comprado!",
     "already_have": "⚠️ Ya la tienes",
     
-    # Servers
     "servers": "🌐 SERVIDORES DISPONIBLES:",
     "max_level": "💡 Nivel máx: {}",
     "choose_server": "➡️ Elige: ",
@@ -214,21 +273,18 @@ TEXTO_ES = {
     "extra_protection": "⚠️ Protección adicional...",
     "discovered": "💀 Descubierto.",
     
-    # Daily
     "daily_mission": "📅 MISIÓN DIARIA",
     "already_done": "⚠️ Ya completaste la de hoy.",
     "today_mission": "🌟 Misión de hoy:",
     "double_reward": "💰 Recompensa: {} créditos (¡DOBLE!)",
     "daily_complete": "🎉 ¡MISIÓN DIARIA COMPLETADA!",
     
-    # Shop
     "shop": "🛒 TIENDA DE HERRAMIENTAS",
     "your_tools": "🛠️ Tus herramientas: {}",
     "buy_exp": "💰 Comprar EXP (100 créditos = 10 EXP)",
     "exit_shop": "🚪 Salir",
     "exp_gained": "✅ +10 EXP",
     
-    # Stats
     "stats": "📊 ESTADÍSTICAS DE {}",
     "progress": "📈 Progreso:",
     "level": "  • Nivel: {}",
@@ -248,12 +304,10 @@ TEXTO_ES = {
     "achievements": "🏆 Logros ({}/{}):",
     "no_achievements": "  • Ninguno",
     
-    # Ranking
     "ranking": "🏆 RANKING DE HACKERS",
     "position": "Posición │ Hacker │ Nivel │ Misiones",
     "rank_up": "💡 Completa misiones para subir.",
     
-    # Training
     "training": "🛠️ ENTRENAMIENTO",
     "firewall": "Firewall",
     "cryptography": "Criptografía",
@@ -261,7 +315,6 @@ TEXTO_ES = {
     "puzzles": "Puzzles",
     "keep_practicing": "💪 Sigue practicando",
     
-    # Guide
     "guide": "📖 GUÍA DE USUARIO",
     "guide_text": """
 🎯 ¿QUÉ ES?
@@ -269,6 +322,8 @@ Un juego de hacking en terminal. Hackea servidores, evita firewalls
 y descifra contraseñas usando pistas.
 
 🕹️ CONTROLES
+↑↓ - Navegar con flechas
+Enter - Seleccionar
 1 - Hackear servidor
 2 - Misión diaria (DOBLE recompensa)
 3 - Entrenar
@@ -301,7 +356,6 @@ y descifra contraseñas usando pistas.
 }
 
 TEXTO_EN = {
-    # Menu
     "menu_hack": "🌐 Hack server",
     "menu_daily": "📅 Daily mission (DOUBLE!)",
     "menu_train": "🛠️ Train",
@@ -313,7 +367,6 @@ TEXTO_EN = {
     "menu_guide": "📖 Guide",
     "menu_exit": "🚪 Exit",
     
-    # Settings
     "settings": "⚙️ SETTINGS",
     "change_theme": "🎨 Change theme",
     "change_language": "🌍 Change language",
@@ -324,13 +377,11 @@ TEXTO_EN = {
     "language_changed": "✅ Language changed. Restart the game to apply.",
     "theme_changed": "✅ Theme changed to: {}",
     
-    # Delete Account
     "delete_warning": "⚠️ WARNING! This will PERMANENTLY DELETE all your data.",
     "confirm_delete": "Are you SURE? (type 'DELETE' to confirm): ",
     "deleted": "🗑️ Account permanently deleted.",
     "delete_cancelled": "❌ Deletion cancelled.",
     
-    # Common
     "welcome": "👤 Welcome to the world of digital hacking.",
     "connection": "✅ Connection established. Welcome, {}!",
     "guide_hint": "💡 Type '9' for the guide.",
@@ -343,7 +394,6 @@ TEXTO_EN = {
     "purchased": "✅ Purchased!",
     "already_have": "⚠️ You already have it",
     
-    # Servers
     "servers": "🌐 AVAILABLE SERVERS:",
     "max_level": "💡 Max level: {}",
     "choose_server": "➡️ Choose: ",
@@ -378,21 +428,18 @@ TEXTO_EN = {
     "extra_protection": "⚠️ Extra protection...",
     "discovered": "💀 Discovered.",
     
-    # Daily
     "daily_mission": "📅 DAILY MISSION",
     "already_done": "⚠️ You already completed today's mission.",
     "today_mission": "🌟 Today's mission:",
     "double_reward": "💰 Reward: {} credits (DOUBLE!)",
     "daily_complete": "🎉 DAILY MISSION COMPLETED!",
     
-    # Shop
     "shop": "🛒 TOOL SHOP",
     "your_tools": "🛠️ Your tools: {}",
     "buy_exp": "💰 Buy EXP (100 credits = 10 EXP)",
     "exit_shop": "🚪 Exit",
     "exp_gained": "✅ +10 EXP",
     
-    # Stats
     "stats": "📊 STATISTICS OF {}",
     "progress": "📈 Progress:",
     "level": "  • Level: {}",
@@ -412,12 +459,10 @@ TEXTO_EN = {
     "achievements": "🏆 Achievements ({}/{}):",
     "no_achievements": "  • None",
     
-    # Ranking
     "ranking": "🏆 HACKER RANKING",
     "position": "Position │ Hacker │ Level │ Missions",
     "rank_up": "💡 Complete missions to rank up.",
     
-    # Training
     "training": "🛠️ TRAINING",
     "firewall": "Firewall",
     "cryptography": "Cryptography",
@@ -425,7 +470,6 @@ TEXTO_EN = {
     "puzzles": "Puzzles",
     "keep_practicing": "💪 Keep practicing",
     
-    # Guide
     "guide": "📖 USER GUIDE",
     "guide_text": """
 🎯 WHAT IS IT?
@@ -433,6 +477,8 @@ A terminal hacking game. Hack servers, evade firewalls
 and crack passwords using clues.
 
 🕹️ CONTROLS
+↑↓ - Navigate with arrows
+Enter - Select
 1 - Hack server
 2 - Daily mission (DOUBLE reward)
 3 - Train
@@ -479,7 +525,7 @@ def get_theme(name):
     return THEMES.get(name, THEMES["matrix"])
 
 # ============================================
-# DATA - 20 SERVERS WITH LOGICAL CLUES
+# DATA - 20 SERVERS
 # ============================================
 
 SERVERS = [
@@ -566,7 +612,7 @@ SERVERS = [
 ]
 
 # ============================================
-# ACHIEVEMENTS (25+)
+# ACHIEVEMENTS
 # ============================================
 
 ACHIEVEMENTS = {
@@ -657,7 +703,6 @@ class Hacker:
             print(f"{Fore.CYAN}🔧 New tool: {new_tool}!{Style.RESET_ALL}")
     
     def check_achievements(self, lang="es"):
-        text = get_text(lang)
         new = []
         if self.missions_completed >= 1 and "first_hack" not in self.unlocked_achievements: new.append("first_hack")
         if self.missions_completed >= 5 and "five_missions" not in self.unlocked_achievements: new.append("five_missions")
@@ -800,9 +845,9 @@ class MiniGames:
         encrypted = ""
         for char in word:
             if char.isalpha():
-                code = ord(char) - shift
-                if code < 65:
-                    code += 26
+                code = ord(char) + shift
+                if code > 90:
+                    code -= 26
                 encrypted += chr(code)
             else:
                 encrypted += char
@@ -810,7 +855,7 @@ class MiniGames:
         print(f"{Fore.WHITE}╔{'═' * (len(encrypted) + 4)}╗")
         print(f"║  {encrypted}  ║")
         print(f"╚{'═' * (len(encrypted) + 4)}╝{Style.RESET_ALL}")
-        print(f"{Fore.CYAN}🔑 Hint: Caesar shift (1-{5 + difficulty // 2}){Style.RESET_ALL}")
+        print(f"{Fore.CYAN}🔑 Hint: Caesar shift (1-{shift}){Style.RESET_ALL}")
         attempts = 3
         while attempts > 0:
             print(f"\n{Fore.CYAN}💡 Attempts left: {attempts}{Style.RESET_ALL}")
@@ -918,8 +963,8 @@ def show_header():
 {Fore.GREEN}║  {Fore.CYAN}██╔══██║██╔══██║██║     ██╔═██╗ ██╔══╝  ██╔══██╗ {Fore.GREEN}       ║
 {Fore.GREEN}║  {Fore.CYAN}██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██║  ██║ {Fore.GREEN}       ║
 {Fore.GREEN}║  {Fore.CYAN}╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ {Fore.GREEN}       ║
-{Fore.GREEN}║     {Fore.YELLOW}HACKER SIMULATOR 2077 - ULTIMATE EDITION v{VERSION}{Fore.GREEN}║
-{Fore.GREEN}║     {Fore.WHITE}by {AUTHOR} {Fore.GREEN}| {Fore.CYAN}⭐ {GITHUB_URL}{Fore.GREEN}║
+{Fore.GREEN}║     {Fore.YELLOW}HACKER SIMULATOR 2077 - ULTIMATE EDITION v{VERSION}{Fore.GREEN} ║
+{Fore.GREEN}║     {Fore.WHITE}by {AUTHOR} {Fore.GREEN}| {Fore.CYAN}⭐ {GITHUB_URL}{Fore.GREEN}     ║
 {Fore.GREEN}╚══════════════════════════════════════════════════════════════════╝{Style.RESET_ALL}
 """)
 
@@ -1255,30 +1300,69 @@ def settings_menu(hacker, lang="es"):
             print(f"{Fore.RED}{text['invalid']}{Style.RESET_ALL}")
             time.sleep(1)
 
+def training(hacker, lang="es"):
+    text = get_text(lang)
+    print(f"\n{Fore.CYAN}{'═'*50}")
+    print(f"{text['training']}")
+    print(f"{'═'*50}{Style.RESET_ALL}")
+    print(f"[1] {text['firewall']}")
+    print(f"[2] {text['cryptography']}")
+    print(f"[3] {text['sql']}")
+    print(f"[4] {text['puzzles']}")
+    try:
+        sub = input("➡️  ").strip()
+        diff = random.randint(1, 3)
+        success = False
+        if sub == "1":
+            success = MiniGames.firewall_memory(diff, 3, lang)
+        elif sub == "2":
+            success = MiniGames.caesar_cipher(diff, lang)
+        elif sub == "3":
+            success = MiniGames.sql_injection(diff, lang)
+        elif sub == "4":
+            success = MiniGames.logic_puzzle(diff, lang)
+        else:
+            print(f"{Fore.RED}{text['invalid']}{Style.RESET_ALL}")
+            time.sleep(1)
+            return
+        if success:
+            exp = diff * 3 + random.randint(1, 3)
+            hacker.gain_exp(exp)
+            print(f"{Fore.GREEN}📈 +{exp} EXP{Style.RESET_ALL}")
+        else:
+            print(f"{Fore.YELLOW}{text['keep_practicing']}{Style.RESET_ALL}")
+    except:
+        print(f"{Fore.RED}{text['invalid']}{Style.RESET_ALL}")
+        time.sleep(1)
+
 # ============================================
-# MAIN MENU
+# MAIN MENU WITH ARROW NAVIGATION
 # ============================================
 
 def main_menu(hacker, lang="es"):
     text = get_text(lang)
+    
+    # Menu options
+    menu_options = [
+        text['menu_hack'],
+        text['menu_daily'],
+        text['menu_train'],
+        text['menu_shop'],
+        text['menu_stats'],
+        text['menu_ranking'],
+        text['menu_settings'],
+        text['menu_save'],
+        text['menu_guide'],
+        text['menu_exit']
+    ]
+    
     while True:
-        show_header()
-        print(hacker)
-        print(f"\n{Fore.CYAN}📡 OPTIONS:{Style.RESET_ALL}")
-        print(f"[1] {text['menu_hack']}")
-        print(f"[2] {text['menu_daily']}")
-        print(f"[3] {text['menu_train']}")
-        print(f"[4] {text['menu_shop']}")
-        print(f"[5] {text['menu_stats']}")
-        print(f"[6] {text['menu_ranking']}")
-        print(f"[7] {text['menu_settings']}")
-        print(f"[8] {text['menu_save']}")
-        print(f"[9] {text['menu_guide']}")
-        print(f"[0] {text['menu_exit']}")
+        selected = select_with_arrows(menu_options, "📡 MAIN MENU", lang)
         
-        choice = input("➡️  ").strip()
+        if selected == -1:
+            continue
         
-        if choice == "1":
+        if selected == 0:  # Hack server
             print(f"\n{Fore.CYAN}{text['servers']}{Style.RESET_ALL}")
             available = [s for s in SERVERS if s['difficulty'] <= hacker.level + 1]
             for i, s in enumerate(available, 1):
@@ -1295,69 +1379,46 @@ def main_menu(hacker, lang="es"):
             except:
                 print(f"{Fore.RED}{text['invalid']}{Style.RESET_ALL}")
             input(f"\n{Fore.CYAN}⏎ Enter...{Style.RESET_ALL}")
-        elif choice == "2":
+        
+        elif selected == 1:  # Daily mission
             daily_mission(hacker, lang)
-        elif choice == "3":
-            print(f"\n{Fore.CYAN}{text['training']}{Style.RESET_ALL}")
-            print(f"[1] {text['firewall']}")
-            print(f"[2] {text['cryptography']}")
-            print(f"[3] {text['sql']}")
-            print(f"[4] {text['puzzles']}")
-            try:
-                sub = input("➡️  ").strip()
-                diff = random.randint(1, 3)
-                success = False
-                if sub == "1":
-                    success = MiniGames.firewall_memory(diff, 3, lang)
-                elif sub == "2":
-                    success = MiniGames.caesar_cipher(diff, lang)
-                elif sub == "3":
-                    success = MiniGames.sql_injection(diff, lang)
-                elif sub == "4":
-                    success = MiniGames.logic_puzzle(diff, lang)
-                else:
-                    print(f"{Fore.RED}{text['invalid']}{Style.RESET_ALL}")
-                    time.sleep(1)
-                    continue
-                if success:
-                    exp = diff * 3 + random.randint(1, 3)
-                    hacker.gain_exp(exp)
-                    print(f"{Fore.GREEN}📈 +{exp} EXP{Style.RESET_ALL}")
-                else:
-                    print(f"{Fore.YELLOW}{text['keep_practicing']}{Style.RESET_ALL}")
-            except:
-                print(f"{Fore.RED}{text['invalid']}{Style.RESET_ALL}")
-            input(f"\n{Fore.CYAN}⏎ Enter...{Style.RESET_ALL}")
-        elif choice == "4":
+        
+        elif selected == 2:  # Train
+            training(hacker, lang)
+        
+        elif selected == 3:  # Shop
             shop(hacker, lang)
-        elif choice == "5":
+        
+        elif selected == 4:  # Statistics
             show_stats(hacker, lang)
             input(f"\n{Fore.CYAN}⏎ Enter...{Style.RESET_ALL}")
-        elif choice == "6":
+        
+        elif selected == 5:  # Ranking
             show_ranking(hacker, lang)
-        elif choice == "7":
+        
+        elif selected == 6:  # Settings
             new_lang = settings_menu(hacker, lang)
             if new_lang == "deleted":
                 return False
             elif new_lang in ["es", "en"]:
                 lang = new_lang
                 text = get_text(lang)
-        elif choice == "8":
+        
+        elif selected == 7:  # Save
             if hacker.save_game():
                 print(f"{Fore.GREEN}{text['saved']}{Style.RESET_ALL}")
             else:
                 print(f"{Fore.RED}{text['save_error']}{Style.RESET_ALL}")
             time.sleep(1)
-        elif choice == "9":
+        
+        elif selected == 8:  # Guide
             show_guide(lang)
-        elif choice == "0":
+        
+        elif selected == 9:  # Exit
             if hacker.save_game():
                 print(f"{Fore.GREEN}{text['saved']}{Style.RESET_ALL}")
             print(f"\n{Fore.GREEN}{text['goodbye'].format(hacker.name)}{Style.RESET_ALL}")
             return False
-        else:
-            print(f"{Fore.RED}{text['invalid']}{Style.RESET_ALL}")
-            time.sleep(1)
 
 # ============================================
 # MAIN
@@ -1375,9 +1436,15 @@ def main():
         hacker = Hacker(name)
         if not hacker.load_game():
             hacker.save_game()
+        
         show_header()
+        
+        # Check for updates
+        check_for_updates()
+        
         print(f"\n{Fore.GREEN}{text['connection'].format(hacker.name)}{Style.RESET_ALL}")
         print(f"{Fore.CYAN}{text['guide_hint']}{Style.RESET_ALL}")
+        print(f"{Fore.YELLOW}💡 Use ↑↓ arrows to navigate the menu{Style.RESET_ALL}")
         time.sleep(1.5)
         main_menu(hacker, language)
     except KeyboardInterrupt:
@@ -1390,33 +1457,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-def main():
-    try:
-        config = load_config()
-        if config and "language" in config:
-            language = config["language"]
-            name = config.get("name", "Zero_Cool")
-        else:
-            language, name = first_time_setup()
-        text = get_text(language)
-        hacker = Hacker(name)
-        if not hacker.load_game():
-            hacker.save_game()
-        
-        show_header()
-        
-        # ===== CHECK FOR UPDATES =====
-        check_for_updates()
-        
-        print(f"\n{Fore.GREEN}{text['connection'].format(hacker.name)}{Style.RESET_ALL}")
-        print(f"{Fore.CYAN}{text['guide_hint']}{Style.RESET_ALL}")
-        time.sleep(1.5)
-        main_menu(hacker, language)
-    except KeyboardInterrupt:
-        print(f"\n\n{Fore.YELLOW}👋 Session terminated.{Style.RESET_ALL}")
-    except Exception as e:
-        print(f"\n{Fore.RED}❌ Error: {e}{Style.RESET_ALL}")
-        import traceback
-        traceback.print_exc()
-        input(f"{Fore.CYAN}⏎ Press Enter to exit...{Style.RESET_ALL}")
