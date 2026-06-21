@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 """
-HACKER SIMULATOR 2077 - ULTIMATE EDITION v10.1
-================================================
+HACKER SIMULATOR 2077 - ULTIMATE EDITION v10.1.0
+==================================================
 Terminal hacking game with arrow key navigation.
 """
 
@@ -23,7 +23,7 @@ from colorama import init, Fore, Back, Style
 init(autoreset=True, convert=True)
 os.system('cls' if os.name == 'nt' else 'clear')
 
-VERSION = "10.0.3"
+VERSION = "10.0.4"
 AUTHOR = "DlopedDtorred"
 GITHUB_URL = "https://github.com/DlopedDtorred/hacker-simulator"
 CONFIG_FILE = "config.json"
@@ -113,7 +113,6 @@ def get_key():
 def select_with_arrows(options, title="", lang="es"):
     """Select an option using arrow keys"""
     selected = 0
-    text = get_text(lang)
     
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -136,6 +135,39 @@ def select_with_arrows(options, title="", lang="es"):
             selected = (selected - 1) % len(options)
         elif key == 'down':
             selected = (selected + 1) % len(options)
+        elif key == 'enter':
+            return selected
+        elif key == 'escape':
+            return -1
+
+def select_server_with_arrows(servers, title="", lang="es"):
+    """Select a server using arrow keys"""
+    selected = 0
+    
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        show_header()
+        
+        if title:
+            print(f"\n{Fore.CYAN}{title}{Style.RESET_ALL}")
+            print(f"{Fore.CYAN}{'═'*50}{Style.RESET_ALL}")
+        
+        for i, server in enumerate(servers):
+            hacked = "✅" if server['name'] in globals().get('hacker', {}).hacked_servers else "❌"
+            text = f"[{i+1}] {hacked} {server['name']} (★{server['difficulty']})"
+            if i == selected:
+                print(f"{Fore.GREEN}▶ {text}{Style.RESET_ALL}")
+            else:
+                print(f"  {text}")
+            print(f"    {Fore.WHITE}💡 {get_clue(server, lang)}{Style.RESET_ALL}")
+        
+        print(f"\n{Fore.YELLOW}↑ ↓ Navigate | Enter Select{Style.RESET_ALL}")
+        
+        key = get_key()
+        if key == 'up':
+            selected = (selected - 1) % len(servers)
+        elif key == 'down':
+            selected = (selected + 1) % len(servers)
         elif key == 'enter':
             return selected
         elif key == 'escape':
@@ -1234,106 +1266,103 @@ def settings_menu(hacker, lang="es"):
         print(f"\n{Fore.CYAN}{'═'*50}")
         print(f"{Fore.YELLOW}{text['settings']}")
         print(f"{'═'*50}{Style.RESET_ALL}")
-        print(f"[1] {text['change_theme']} (current: {hacker.current_theme})")
-        print(f"[2] {text['change_language']}")
-        print(f"[3] {Fore.RED}{text['delete_account']}{Style.RESET_ALL}")
-        print(f"[4] {text['back']}")
         
-        try:
-            choice = input("➡️  ").strip()
-            if choice == "4" or choice == "0":
-                return lang
-            elif choice == "1":
-                print(f"\n{Fore.CYAN}{text['themes']}{Style.RESET_ALL}")
-                themes = ["matrix", "cyberpunk", "classic", "dark"]
-                for i, t in enumerate(themes, 1):
-                    check = "✅" if hacker.current_theme == t else ""
-                    print(f"[{i}] {check} {t}")
-                try:
-                    t_choice = int(input("➡️  ").strip()) - 1
-                    if 0 <= t_choice < len(themes):
-                        hacker.current_theme = themes[t_choice]
-                        print(f"{Fore.GREEN}{text['theme_changed'].format(hacker.current_theme)}{Style.RESET_ALL}")
-                        time.sleep(1)
-                except:
-                    print(f"{Fore.RED}{text['invalid']}{Style.RESET_ALL}")
-                    time.sleep(1)
-            elif choice == "2":
-                print(f"\n{Fore.CYAN}🌍 Select language / Selecciona idioma:{Style.RESET_ALL}")
-                print("[1] 🇪🇸 Español")
-                print("[2] 🇬🇧 English")
-                l_choice = input("➡️  ").strip()
-                if l_choice == "1":
-                    save_config("es", hacker.name)
-                    print(f"{Fore.GREEN}{text['language_changed']}{Style.RESET_ALL}")
+        settings_options = [
+            f"{text['change_theme']} (current: {hacker.current_theme})",
+            text['change_language'],
+            f"{Fore.RED}{text['delete_account']}{Style.RESET_ALL}",
+            text['back']
+        ]
+        
+        selected = select_with_arrows(settings_options, "", lang)
+        
+        if selected == -1:
+            continue
+        
+        if selected == 0:  # Change theme
+            print(f"\n{Fore.CYAN}{text['themes']}{Style.RESET_ALL}")
+            themes = ["matrix", "cyberpunk", "classic", "dark"]
+            theme_options = [f"{t} {'✅' if t == hacker.current_theme else ''}" for t in themes]
+            theme_idx = select_with_arrows(theme_options, "", lang)
+            if theme_idx != -1 and 0 <= theme_idx < len(themes):
+                hacker.current_theme = themes[theme_idx]
+                print(f"{Fore.GREEN}{text['theme_changed'].format(hacker.current_theme)}{Style.RESET_ALL}")
+                time.sleep(1)
+        
+        elif selected == 1:  # Change language
+            print(f"\n{Fore.CYAN}🌍 Select language / Selecciona idioma:{Style.RESET_ALL}")
+            lang_options = ["🇪🇸 Español", "🇬🇧 English"]
+            lang_idx = select_with_arrows(lang_options, "", lang)
+            if lang_idx == 0:
+                save_config("es", hacker.name)
+                print(f"{Fore.GREEN}{text['language_changed']}{Style.RESET_ALL}")
+                time.sleep(2)
+                return "es"
+            elif lang_idx == 1:
+                save_config("en", hacker.name)
+                print(f"{Fore.GREEN}{text['language_changed']}{Style.RESET_ALL}")
+                time.sleep(2)
+                return "en"
+        
+        elif selected == 2:  # Delete account
+            print(f"\n{Fore.RED}{'═'*50}")
+            print(f"{Fore.YELLOW}⚠️ DELETE ACCOUNT ⚠️")
+            print(f"{'═'*50}{Style.RESET_ALL}")
+            print(f"{Fore.RED}{text['delete_warning']}{Style.RESET_ALL}")
+            confirm = input(f"\n{Fore.RED}{text['confirm_delete']}{Style.RESET_ALL}").strip().upper()
+            if confirm == "ELIMINAR" or confirm == "DELETE":
+                if hacker.delete_account():
+                    print(f"\n{Fore.RED}{text['deleted']}{Style.RESET_ALL}")
                     time.sleep(2)
-                    return "es"
-                elif l_choice == "2":
-                    save_config("en", hacker.name)
-                    print(f"{Fore.GREEN}{text['language_changed']}{Style.RESET_ALL}")
-                    time.sleep(2)
-                    return "en"
+                    return "deleted"
                 else:
-                    print(f"{Fore.RED}{text['invalid']}{Style.RESET_ALL}")
-                    time.sleep(1)
-            elif choice == "3":
-                print(f"\n{Fore.RED}{'═'*50}")
-                print(f"{Fore.YELLOW}⚠️ DELETE ACCOUNT ⚠️")
-                print(f"{'═'*50}{Style.RESET_ALL}")
-                print(f"{Fore.RED}{text['delete_warning']}{Style.RESET_ALL}")
-                confirm = input(f"\n{Fore.RED}{text['confirm_delete']}{Style.RESET_ALL}").strip().upper()
-                if confirm == "ELIMINAR" or confirm == "DELETE":
-                    if hacker.delete_account():
-                        print(f"\n{Fore.RED}{text['deleted']}{Style.RESET_ALL}")
-                        time.sleep(2)
-                        return "deleted"
-                    else:
-                        print(f"{Fore.RED}{text['error'].format('Could not delete')}{Style.RESET_ALL}")
-                        time.sleep(1)
-                else:
-                    print(f"{Fore.YELLOW}{text['delete_cancelled']}{Style.RESET_ALL}")
+                    print(f"{Fore.RED}{text['error'].format('Could not delete')}{Style.RESET_ALL}")
                     time.sleep(1)
             else:
-                print(f"{Fore.RED}{text['invalid']}{Style.RESET_ALL}")
+                print(f"{Fore.YELLOW}{text['delete_cancelled']}{Style.RESET_ALL}")
                 time.sleep(1)
-        except:
-            print(f"{Fore.RED}{text['invalid']}{Style.RESET_ALL}")
-            time.sleep(1)
+        
+        elif selected == 3:  # Back
+            return lang
 
 def training(hacker, lang="es"):
     text = get_text(lang)
     print(f"\n{Fore.CYAN}{'═'*50}")
     print(f"{text['training']}")
     print(f"{'═'*50}{Style.RESET_ALL}")
-    print(f"[1] {text['firewall']}")
-    print(f"[2] {text['cryptography']}")
-    print(f"[3] {text['sql']}")
-    print(f"[4] {text['puzzles']}")
-    try:
-        sub = input("➡️  ").strip()
-        diff = random.randint(1, 3)
-        success = False
-        if sub == "1":
-            success = MiniGames.firewall_memory(diff, 3, lang)
-        elif sub == "2":
-            success = MiniGames.caesar_cipher(diff, lang)
-        elif sub == "3":
-            success = MiniGames.sql_injection(diff, lang)
-        elif sub == "4":
-            success = MiniGames.logic_puzzle(diff, lang)
-        else:
-            print(f"{Fore.RED}{text['invalid']}{Style.RESET_ALL}")
-            time.sleep(1)
-            return
-        if success:
-            exp = diff * 3 + random.randint(1, 3)
-            hacker.gain_exp(exp)
-            print(f"{Fore.GREEN}📈 +{exp} EXP{Style.RESET_ALL}")
-        else:
-            print(f"{Fore.YELLOW}{text['keep_practicing']}{Style.RESET_ALL}")
-    except:
-        print(f"{Fore.RED}{text['invalid']}{Style.RESET_ALL}")
-        time.sleep(1)
+    
+    train_options = [
+        text['firewall'],
+        text['cryptography'],
+        text['sql'],
+        text['puzzles']
+    ]
+    
+    selected = select_with_arrows(train_options, "", lang)
+    
+    if selected == -1:
+        return
+    
+    diff = random.randint(1, 3)
+    success = False
+    
+    if selected == 0:
+        success = MiniGames.firewall_memory(diff, 3, lang)
+    elif selected == 1:
+        success = MiniGames.caesar_cipher(diff, lang)
+    elif selected == 2:
+        success = MiniGames.sql_injection(diff, lang)
+    elif selected == 3:
+        success = MiniGames.logic_puzzle(diff, lang)
+    
+    if success:
+        exp = diff * 3 + random.randint(1, 3)
+        hacker.gain_exp(exp)
+        print(f"{Fore.GREEN}📈 +{exp} EXP{Style.RESET_ALL}")
+    else:
+        print(f"{Fore.YELLOW}{text['keep_practicing']}{Style.RESET_ALL}")
+    
+    time.sleep(1)
 
 # ============================================
 # MAIN MENU WITH ARROW NAVIGATION
@@ -1365,19 +1394,14 @@ def main_menu(hacker, lang="es"):
         if selected == 0:  # Hack server
             print(f"\n{Fore.CYAN}{text['servers']}{Style.RESET_ALL}")
             available = [s for s in SERVERS if s['difficulty'] <= hacker.level + 1]
-            for i, s in enumerate(available, 1):
-                hacked = "✅" if s['name'] in hacker.hacked_servers else "❌"
-                print(f"[{i}] {hacked} {s['name']} (★{s['difficulty']})")
-                print(f"    {Fore.WHITE}{text['clue']}: {get_clue(s, lang)}{Style.RESET_ALL}")
-            print(f"\n{Fore.CYAN}{text['max_level'].format(hacker.level + 1)}{Style.RESET_ALL}")
-            try:
-                idx = int(input(f"{text['choose_server']}")) - 1
-                if 0 <= idx < len(available):
-                    hack_mission(hacker, available[idx], lang)
-                else:
-                    print(f"{Fore.RED}{text['invalid']}{Style.RESET_ALL}")
-            except:
-                print(f"{Fore.RED}{text['invalid']}{Style.RESET_ALL}")
+            
+            # Guardar hacker para usarlo en select_server_with_arrows
+            global hacker_ref
+            hacker_ref = hacker
+            
+            server_idx = select_server_with_arrows(available, "", lang)
+            if server_idx != -1 and 0 <= server_idx < len(available):
+                hack_mission(hacker, available[server_idx], lang)
             input(f"\n{Fore.CYAN}⏎ Enter...{Style.RESET_ALL}")
         
         elif selected == 1:  # Daily mission
@@ -1454,6 +1478,9 @@ def main():
         import traceback
         traceback.print_exc()
         input(f"{Fore.CYAN}⏎ Press Enter to exit...{Style.RESET_ALL}")
+
+# Variable global para usar en select_server_with_arrows
+hacker_ref = None
 
 if __name__ == "__main__":
     main()
