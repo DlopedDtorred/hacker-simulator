@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hacker Simulator 2077 – Hacking Game</title>
+    <title>Hacker Simulator 2077 – Open Source Hacking Game</title>
     <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
-        /* ============================================================
-           RESET & BASE
-           ============================================================ */
         * {
             margin: 0;
             padding: 0;
@@ -79,9 +76,6 @@
             max-width: 1200px;
         }
 
-        /* ============================================================
-           SCROLLBAR
-           ============================================================ */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -93,9 +87,6 @@
             border-radius: 10px;
         }
 
-        /* ============================================================
-           PROGRESS BAR
-           ============================================================ */
         #progress-bar {
             position: fixed;
             top: 0;
@@ -108,9 +99,6 @@
             box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
         }
 
-        /* ============================================================
-           HEADER / NAV
-           ============================================================ */
         header {
             width: 100%;
             padding: 16px 0;
@@ -228,9 +216,6 @@
             border-color: var(--green);
         }
 
-        /* ============================================================
-           HERO
-           ============================================================ */
         .hero {
             padding: 80px 0 60px;
             text-align: center;
@@ -337,11 +322,6 @@
             transform: scale(1.03);
         }
 
-        .btn-lg {
-            padding: 18px 50px;
-            font-size: 20px;
-        }
-
         .hero-stats {
             display: flex;
             justify-content: center;
@@ -368,9 +348,6 @@
             letter-spacing: 1px;
         }
 
-        /* ============================================================
-           SECTIONS
-           ============================================================ */
         .section {
             padding: 70px 0;
             border-top: 1px solid var(--border);
@@ -395,9 +372,6 @@
             font-size: 17px;
         }
 
-        /* ============================================================
-           FEATURES
-           ============================================================ */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -439,9 +413,6 @@
             color: var(--text-muted);
         }
 
-        /* ============================================================
-           HOW TO PLAY
-           ============================================================ */
         .steps-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -489,12 +460,126 @@
             color: var(--text-muted);
         }
 
-        /* ============================================================
-           DOWNLOAD
-           ============================================================ */
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .concept-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .concept-card:hover {
+            border-color: var(--green);
+            transform: translateY(-4px);
+        }
+
+        .concept-card .concept-icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .concept-card h4 {
+            color: var(--text-light);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .concept-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .guide-full-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            transition: var(--transition);
+        }
+
+        .guide-full-card:hover {
+            border-color: var(--green);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+
+        .guide-full-card .guide-icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .guide-full-card h4 {
+            color: var(--text-light);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .guide-full-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin: 6px 0 14px;
+        }
+
+        .guide-full-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 16px 0;
+        }
+
+        .guide-full-card ul li {
+            padding: 4px 0;
+            font-size: 14px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guide-full-card ul li i {
+            color: var(--green);
+            font-size: 12px;
+        }
+
+        .guide-full-card .btn-sm {
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+            background: var(--green);
+            color: #0a0a0a;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guide-full-card .btn-sm:hover {
+            background: #66ff88;
+            transform: scale(1.04);
+        }
+
         .download-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
             margin-top: 10px;
         }
@@ -576,200 +661,50 @@
             margin: 0 4px;
         }
 
-        /* ============================================================
-           INSTALLER BOX
-           ============================================================ */
-        .installer-box {
-            background: var(--bg-card);
-            border: 2px solid var(--green);
-            border-radius: var(--radius);
-            padding: 50px 40px;
-            text-align: center;
-            max-width: 750px;
-            margin: 0 auto;
-            transition: var(--transition);
-        }
-
-        .installer-box:hover {
-            box-shadow: 0 0 50px rgba(0, 255, 65, 0.06);
-        }
-
-        .installer-box .icon {
-            font-size: 56px;
-            display: block;
-            margin-bottom: 16px;
-        }
-
-        .installer-box h3 {
-            color: var(--text-light);
-            font-size: 26px;
-            margin-bottom: 8px;
-        }
-
-        .installer-box p {
-            color: var(--text-muted);
-            font-size: 15px;
-            margin-bottom: 24px;
-        }
-
-        .installer-box .btn-download {
-            background: var(--green);
-            color: #0a0a0a;
-            padding: 16px 44px;
-            border-radius: 40px;
-            font-size: 18px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .installer-box .btn-download:hover {
-            background: #66ff88;
-            transform: scale(1.03);
-        }
-
-        .installer-box .code {
-            background: var(--bg);
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-family: monospace;
-            font-size: 13px;
-            color: var(--green);
-            display: inline-block;
-            margin-top: 10px;
-        }
-
-        /* ============================================================
-           CONCEPTS
-           ============================================================ */
-        .concepts-grid {
+        .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
         }
 
-        .concept-card {
+        .testimonial-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 24px 20px;
-            text-align: center;
             transition: var(--transition);
         }
 
-        .concept-card:hover {
+        .testimonial-card:hover {
             border-color: var(--green);
-            transform: translateY(-4px);
         }
 
-        .concept-card .concept-icon {
-            font-size: 32px;
-            display: block;
+        .testimonial-card .stars {
+            color: #ffcc00;
+            font-size: 16px;
+            letter-spacing: 2px;
             margin-bottom: 10px;
         }
 
-        .concept-card h4 {
-            color: var(--text-light);
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .concept-card p {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        /* ============================================================
-           GUIDES
-           ============================================================ */
-        .guides-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
-
-        .guide-full-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 28px 24px;
-            transition: var(--transition);
-        }
-
-        .guide-full-card:hover {
-            border-color: var(--green);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow);
-        }
-
-        .guide-full-card .guide-icon {
-            font-size: 32px;
-            display: block;
+        .testimonial-card blockquote {
+            font-style: italic;
+            color: var(--text);
+            font-size: 15px;
             margin-bottom: 12px;
         }
 
-        .guide-full-card h4 {
+        .testimonial-card .author {
+            font-size: 14px;
+            font-weight: 600;
             color: var(--text-light);
-            font-size: 18px;
-            font-weight: 600;
         }
 
-        .guide-full-card p {
+        .testimonial-card .author span {
+            font-weight: 400;
             color: var(--text-muted);
-            font-size: 14px;
-            margin: 6px 0 14px;
-        }
-
-        .guide-full-card ul {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 16px 0;
-        }
-
-        .guide-full-card ul li {
-            padding: 4px 0;
-            font-size: 14px;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .guide-full-card ul li i {
-            color: var(--green);
-            font-size: 12px;
-        }
-
-        .guide-full-card .btn-sm {
-            padding: 8px 22px;
-            border-radius: 40px;
             font-size: 13px;
-            font-weight: 600;
-            background: var(--green);
-            color: #0a0a0a;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        .guide-full-card .btn-sm:hover {
-            background: #66ff88;
-            transform: scale(1.04);
-        }
-
-        /* ============================================================
-           ROADMAP
-           ============================================================ */
         .roadmap-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -825,56 +760,6 @@
             margin-top: 4px;
         }
 
-        /* ============================================================
-           TESTIMONIALS
-           ============================================================ */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 24px;
-        }
-
-        .testimonial-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px 20px;
-            transition: var(--transition);
-        }
-
-        .testimonial-card:hover {
-            border-color: var(--green);
-        }
-
-        .testimonial-card .stars {
-            color: #ffcc00;
-            font-size: 16px;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-
-        .testimonial-card blockquote {
-            font-style: italic;
-            color: var(--text);
-            font-size: 15px;
-            margin-bottom: 12px;
-        }
-
-        .testimonial-card .author {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-light);
-        }
-
-        .testimonial-card .author span {
-            font-weight: 400;
-            color: var(--text-muted);
-            font-size: 13px;
-        }
-
-        /* ============================================================
-           FAQ
-           ============================================================ */
         .faq-list {
             max-width: 800px;
             margin: 0 auto;
@@ -952,9 +837,6 @@
             color: var(--green);
         }
 
-        /* ============================================================
-           CONTRIBUTE
-           ============================================================ */
         .contribute-steps {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -1001,9 +883,6 @@
             color: var(--text-muted);
         }
 
-        /* ============================================================
-           FOOTER
-           ============================================================ */
         footer {
             width: 100%;
             padding: 40px 0 30px;
@@ -1039,9 +918,6 @@
             color: #ff4466;
         }
 
-        /* ============================================================
-           BACK TO TOP
-           ============================================================ */
         #back-to-top {
             position: fixed;
             bottom: 30px;
@@ -1071,9 +947,6 @@
             background: #66ff88;
         }
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -1105,13 +978,6 @@
             }
             .roadmap-grid {
                 grid-template-columns: 1fr 1fr;
-            }
-            .installer-box {
-                padding: 30px 20px;
-            }
-            .btn-lg {
-                padding: 14px 30px;
-                font-size: 17px;
             }
         }
 
@@ -1162,15 +1028,8 @@
                 height: 40px;
                 font-size: 16px;
             }
-            .installer-box .btn-download {
-                width: 100%;
-                justify-content: center;
-            }
         }
 
-        /* ============================================================
-           ANIMATIONS
-           ============================================================ */
         @keyframes fadeUp {
             from {
                 opacity: 0;
@@ -1236,7 +1095,7 @@
         ========================================================== -->
         <section class="hero">
             <span class="hero-badge">
-                ⚡ <span id="version-display">v10.0.0</span> · Ultimate Edition
+                ⚡ <span id="version-display">v10.0.5</span> · Ultimate Edition
             </span>
             <h1>
                 HACK THE<br />
@@ -1246,7 +1105,7 @@
                 Aprende hacking ético jugando en tu terminal<span class="cursor"></span>
             </div>
             <div class="hero-buttons">
-                <a href="#download" class="btn btn-primary btn-lg">
+                <a href="#download" class="btn btn-primary">
                     <i class="fas fa-download"></i> Download Now
                 </a>
                 <a href="https://github.com/DlopedDtorred/hacker-simulator" target="_blank" class="btn btn-secondary">
@@ -1508,47 +1367,27 @@
         </section>
 
         <!-- ==========================================================
-        DOWNLOAD (VERSIÓN UI + INSTALADOR)
+        DOWNLOAD
         ========================================================== -->
         <section class="section" id="download">
             <div class="section-header">
                 <h2>📦 Download</h2>
-                <p id="download-version-text">Latest version: <strong id="download-version">v10.0.0</strong></p>
+                <p id="download-version-text">Latest version: <strong id="download-version">v10.0.5</strong></p>
             </div>
-
-            <!-- INSTALADOR - DESTACADO -->
-            <div class="installer-box animate-on-scroll">
-                <span class="icon">🚀</span>
-                <h3>Instalador automático</h3>
-                <p>
-                    Descarga el instalador, haz doble clic y el juego se instalará automáticamente.
-                    Funciona en Linux, Windows y Mac.
-                </p>
-                <a href="https://github.com/DlopedDtorred/hacker-simulator/raw/main/installer.py" class="btn-download" download>
-                    <i class="fas fa-download"></i> Descargar Instalador
-                </a>
-                <br>
-                <span class="code">▶️ Haz doble clic para ejecutar</span>
-            </div>
-
-            <div style="text-align:center; margin: 40px 0 20px;">
-                <span style="color: var(--text-muted); font-size: 14px;">— o descarga manualmente —</span>
-            </div>
-
             <div class="download-grid">
                 <div class="download-card animate-on-scroll">
                     <span class="os-icon">🐍</span>
-                    <h4>UI Version (Python)</h4>
-                    <p>Interfaz gráfica con PyQt5</p>
-                    <a href="https://github.com/DlopedDtorred/hacker-simulator/raw/main/hacker_simulator_ui.py" class="btn-sm" download>
-                        <i class="fas fa-download"></i> Download .py
+                    <h4>Source Code</h4>
+                    <p>Python source (all platforms)</p>
+                    <a href="https://github.com/DlopedDtorred/hacker-simulator/archive/refs/heads/main.zip" class="btn-sm" download>
+                        <i class="fas fa-code"></i> Download ZIP
                     </a>
                     <span class="update-badge">Latest version</span>
                 </div>
                 <div class="download-card animate-on-scroll">
                     <span class="os-icon">🐧</span>
-                    <h4>Linux (Ejecutable)</h4>
-                    <p>Compilado para Linux</p>
+                    <h4>Linux</h4>
+                    <p>Executable for Linux</p>
                     <a href="https://github.com/DlopedDtorred/hacker-simulator/releases/latest/download/HackerSimulator2077-Linux" class="btn-sm" download>
                         <i class="fas fa-download"></i> Download
                     </a>
@@ -1556,9 +1395,18 @@
                 </div>
                 <div class="download-card animate-on-scroll">
                     <span class="os-icon">🪟</span>
-                    <h4>Windows (Ejecutable)</h4>
-                    <p>Compilado para Windows</p>
+                    <h4>Windows</h4>
+                    <p>Executable for Windows</p>
                     <a href="https://github.com/DlopedDtorred/hacker-simulator/releases/latest/download/HackerSimulator2077-Windows.exe" class="btn-sm" download>
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                    <span class="update-badge">Always latest</span>
+                </div>
+                <div class="download-card animate-on-scroll">
+                    <span class="os-icon">🍎</span>
+                    <h4>macOS</h4>
+                    <p>Executable for Mac</p>
+                    <a href="https://github.com/DlopedDtorred/hacker-simulator/releases/latest/download/HackerSimulator2077-Mac" class="btn-sm" download>
                         <i class="fas fa-download"></i> Download
                     </a>
                     <span class="update-badge">Always latest</span>
@@ -1641,13 +1489,6 @@
             <div class="faq-list">
                 <div class="faq-item">
                     <div class="faq-question">
-                        <span>¿Cómo instalo el juego?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">Descarga el instalador, haz doble clic y selecciona "Instalar". El juego se descargará e instalará automáticamente.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
                         <span>¿Cómo guardo mi partida?</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -1690,10 +1531,17 @@
                 </div>
                 <div class="faq-item">
                     <div class="faq-question">
-                        <span>¿Cómo desinstalo el juego?</span>
+                        <span>¿Qué hago si el juego no arranca?</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="faq-answer">Ejecuta el instalador y selecciona "Desinstalar".</div>
+                    <div class="faq-answer">Verifica que tienes Python 3.8+ instalado. Ejecuta <code>pip install colorama</code> y luego <code>python cyberdex.py</code>.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>¿Cómo elimino mi cuenta?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">Ve a Ajustes (<kbd>7</kbd>) → Eliminar cuenta (<kbd>3</kbd>) y confirma escribiendo <code>ELIMINAR</code>.</div>
                 </div>
             </div>
         </section>
@@ -1766,7 +1614,7 @@
                 <a href="https://github.com/DlopedDtorred" target="_blank">DlopedDtorred</a>
             </p>
             <p style="margin-top:12px; font-size:13px; color: var(--text-muted);">
-                🚀 Happy hacking! <span id="footer-version">v10.0.0</span>
+                🚀 Happy hacking! <span id="footer-version">v10.0.5</span>
             </p>
         </footer>
 
@@ -1776,9 +1624,7 @@
     SCRIPTS
     ========================================================== -->
     <script>
-        // ============================================================
-        // THEME TOGGLE
-        // ============================================================
+        // Theme Toggle
         function initTheme() {
             const saved = localStorage.getItem('hacker-theme') || 'dark';
             if (saved === 'light') {
@@ -1794,17 +1640,15 @@
             this.innerHTML = isLight ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         });
 
-        // ============================================================
-        // GET LATEST VERSION
-        // ============================================================
+        // Get Latest Version
         async function getLatestVersion() {
             try {
                 const response = await fetch('https://api.github.com/repos/DlopedDtorred/hacker-simulator/releases/latest');
                 if (!response.ok) throw new Error('Network response was not ok');
                 const data = await response.json();
-                return data.tag_name || 'v10.0.0';
+                return data.tag_name || 'v10.0.5';
             } catch (error) {
-                return 'v10.0.0';
+                return 'v10.0.5';
             }
         }
 
@@ -1820,9 +1664,7 @@
             }
         }
 
-        // ============================================================
-        // GET GITHUB STATS
-        // ============================================================
+        // Get GitHub Stats
         async function getGitHubStats() {
             try {
                 const repoRes = await fetch('https://api.github.com/repos/DlopedDtorred/hacker-simulator');
@@ -1847,9 +1689,7 @@
             }
         }
 
-        // ============================================================
-        // TYPING EFFECT
-        // ============================================================
+        // Typing Effect
         function initTyping() {
             const texts = [
                 'Aprende hacking ético jugando en tu terminal',
@@ -1888,9 +1728,7 @@
             type();
         }
 
-        // ============================================================
-        // SCROLL ANIMATIONS
-        // ============================================================
+        // Scroll Animations
         function initScrollAnimations() {
             const elements = document.querySelectorAll('.animate-on-scroll');
             const observer = new IntersectionObserver((entries) => {
@@ -1906,9 +1744,7 @@
             elements.forEach(el => observer.observe(el));
         }
 
-        // ============================================================
-        // PROGRESS BAR
-        // ============================================================
+        // Progress Bar
         function initProgressBar() {
             const bar = document.getElementById('progress-bar');
             window.addEventListener('scroll', () => {
@@ -1918,9 +1754,7 @@
             });
         }
 
-        // ============================================================
-        // BACK TO TOP
-        // ============================================================
+        // Back to Top
         function initBackToTop() {
             const btn = document.getElementById('back-to-top');
             window.addEventListener('scroll', () => {
@@ -1935,9 +1769,7 @@
             });
         }
 
-        // ============================================================
-        // FAQ ACCORDION
-        // ============================================================
+        // FAQ Accordion
         function initFAQ() {
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
@@ -1952,9 +1784,7 @@
             });
         }
 
-        // ============================================================
-        // SMOOTH SCROLL
-        // ============================================================
+        // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
@@ -1967,9 +1797,7 @@
             });
         });
 
-        // ============================================================
-        // INIT ALL
-        // ============================================================
+        // Init
         document.addEventListener('DOMContentLoaded', function() {
             initTheme();
             updateVersionDisplay();
