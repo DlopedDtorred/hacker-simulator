@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-HACKER SIMULATOR 2077 - ULTIMATE EDITION v10.0.2
+HACKER SIMULATOR 2077 - ULTIMATE EDITION v10.0.5
 ==================================================
 Terminal hacking game.
 """
@@ -23,7 +23,7 @@ from colorama import init, Fore, Back, Style
 init(autoreset=True, convert=True)
 os.system('cls' if os.name == 'nt' else 'clear')
 
-VERSION = "10.0.5"
+VERSION = "10.0.6"
 AUTHOR = "DlopedDtorred"
 GITHUB_URL = "https://github.com/DlopedDtorred/hacker-simulator"
 CONFIG_FILE = "config.json"
@@ -887,7 +887,7 @@ def show_header():
 {Fore.GREEN}║  {Fore.CYAN}██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██║  ██║ {Fore.GREEN}       ║
 {Fore.GREEN}║  {Fore.CYAN}╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ {Fore.GREEN}       ║
 {Fore.GREEN}║     {Fore.YELLOW}HACKER SIMULATOR 2077 - ULTIMATE EDITION v{VERSION}{Fore.GREEN} ║
-{Fore.GREEN}║     {Fore.WHITE}by {AUTHOR} {Fore.GREEN}| {Fore.CYAN}⭐ {GITHUB_URL}{Fore.GREEN}     ║
+{Fore.GREEN}║     {Fore.WHITE}by {AUTHOR} {Fore.GREEN}| {Fore.CYAN}⭐ {GITHUB_URL}{Fore.GREEN} ║
 {Fore.GREEN}╚══════════════════════════════════════════════════════════════════╝{Style.RESET_ALL}
 """)
 
